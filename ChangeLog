@@ -1,0 +1,26 @@
+TBT 0.4 - 9 Feb 2006
+	Removed dependency from STL
+	Added Linklist and Utils
+	Fix to compile on NetBSD
+	Fix to run on MIPS processor
+	Rendering options and some cleanup
+
+TypeWRotor 0.3 - 6 Feb 2006
+	CLI interface
+	Apple/OSX binaries (contributed by Pallotron)
+
+Time-Based-Text 0.2 - 5 Feb 2006
+	Modular rewrite in C++
+	code should be readable
+	console class (re)written (from FreeJ S-Lang interface)
+	renderers for .tbt and ASCII
+	initial support to export in JavaScript
+	problem: console behaviour needs fixes
+		
+Clickrec 0.1 - 29 Jan 2006
+	first implementation in C using a keylogger
+	problem: is not portable
+	
+ADOLF 0.0 - somewhere in 2005
+	Jaromil and Jodi meet again, we talk about Kevin Mitnick and Email
+	software, ASCII Art and Keylogging, fingering around.
