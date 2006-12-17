@@ -44,7 +44,7 @@ DEPS = tbt.o linklist.o jutils.o
 #%: %.cpp
 #	$(CXX) $(CXXFLAGS) -o $@ $< $(DEPS) $(LIBS)
 
-all: rectext playtext
+all: rectext playtext recmail
 
 depend:
 	mkdep $(CXXFLAGS) tbt.cpp \
@@ -55,6 +55,9 @@ rectext: rectext.o $(DEPS)
 
 playtext: $(DEPS) playtext.o
 	$(CPP) $(CXXFLAGS) -o playtext playtext.o $(DEPS) $(LIBS)
+
+recmail: recmail.o $(DEPS)
+	$(CPP) $(CXXFLAGS) -o recmail recmail.o $(DEPS) $(LIBS)
 
 tbtcheck: $(DEPS) tbtcheck.o
 	$(CPP) $(CXXFLAGS) -o tbtcheck tbtcheck.o $(DEPS) $(LIBS)

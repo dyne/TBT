@@ -465,7 +465,10 @@ int TBT::save_bin(char *filename) {
   FILE *fd;
 
   fd = fopen(filename, "w");
-  if(!fd) return false;
+  if(!fd) {
+    error("can't oper file %s for writing: %s", filename, strerror(errno));
+    return false;
+  }
   
   // max bytes for an entry here
   buf = malloc(512);

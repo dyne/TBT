@@ -1,29 +1,20 @@
 
-as of 6 february 2006:
+as of 18 december 2006:
 
-- cursor positioning with mouse
-
-- word wrap
-
-- grab from a console or run a shell inside
-
-- scrolling
-
-- colors
-
-- fancy edit modes, justify functions
+- grab from any application as a keylogger
 
 - integrate with mail clients (let's start with mutt)
+  mail editor using mutt with 'edit_headers' add Attach:
 
 - playback control (rewind, fast forward etc.)
+
+- more commandline tools
 
 - daemon mode, timed pipe input/output from sockets
 
 - protocol compression
 
 
-
-this project just started, u'r welcome to help!
 
 send remarks and patches to http://dyne.org/hackers_contact.php
 
