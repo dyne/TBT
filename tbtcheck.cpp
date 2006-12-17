@@ -56,9 +56,9 @@ int main(int argc, char **argv) {
       case KEY_DOWN:    sprintf(keyname,"DOWN");  break;
       case KEY_LEFT:    sprintf(keyname,"LEFT");  break;
       case KEY_RIGHT:   sprintf(keyname,"RIGHT"); break;
-      default: sprintf(keyname, "%c", stroke->key);
+      default: sprintf(keyname, "%c", (int)stroke->key);
     }
-    act("[ %s ] - %us %ums", keyname, stroke->sec, stroke->usec);
+    act("[ %s ] - %lu", keyname, (unsigned long)stroke->msec);
     
     
   }

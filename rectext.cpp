@@ -153,7 +153,6 @@ SLW_Text status;
  
 // Time Based Text object
 TBT tbt;
-TBTClock tbtclock;
 
 int main(int argc, char** argv)
 {
@@ -168,7 +167,7 @@ int main(int argc, char** argv)
   //  initialize the status line
   status.border = false;
   status.set_name("status box");
-  if(! con.place(&status, 0, con.h-1, con.w, con.h) ) {
+  if(! con.place(&status, 0, con.h-10, con.w, con.h) ) {
     error("error placing the status widget");
     exit(-1);
   }
@@ -204,12 +203,15 @@ int main(int argc, char** argv)
   // focus the text canvas
   con.focused = &txt;
  
-  // start the clock
-  //  tbtclock.start();
 
+  // start the TBT engine
+  if(! tbt.init() ) {
+    con.close();
+    exit(0);
+  }
   // write out to the status widget
   notice("TBT - console ready");
-
+  
   while(!quit) {
 
     key = con.getkey();

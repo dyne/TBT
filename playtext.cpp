@@ -140,7 +140,7 @@ int main(int argc, char **argv) {
   //  initialize the status line
   status.border = false;
   status.set_name("status box");
-  if(! con.place(&status, 0, con.h-1, con.w, con.h) ) {
+  if(! con.place(&status, 0, con.h-10, con.w, con.h) ) {
     error("error placing the status widget");
     exit(-1);
   }
@@ -158,6 +158,11 @@ int main(int argc, char **argv) {
   assert ( txt.init() );
   // focus the text console
   con.focused = &txt;
+
+  ///////////////////////
+  // start the TBT engine
+  tbt.init();
+
 
   bool quit = false;
 

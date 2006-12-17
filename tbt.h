@@ -47,8 +47,7 @@ class TBTEntry : public Entry {
   ~TBTEntry();
 
   uint64_t key;
-  uint32_t sec;
-  uint32_t usec;
+  uint64_t msec;
 
   /* parse from *buf and return true on success */
   bool parse_uint64(void *buf);
@@ -68,7 +67,7 @@ class TBTEntry : public Entry {
 class TBTClock {
  public:
   TBTClock();
-  virtual ~TBTClock();
+  ~TBTClock();
 
   int init();
 
@@ -76,23 +75,35 @@ class TBTClock {
 
   int start();
 
-  int close();
+  void run();
 
-  virtual void run();
+  int sleep(uint64_t sec);
 
   bool quit;
 
-  unsigned long sec;
-  unsigned long microsec;
-
+  uint64_t msec;
 
  private:
+
+  int tick();
 
   int rtcfd;
   unsigned long rtctime;
 
   pthread_t _thread;
   pthread_attr_t _attr;
+
+  pthread_mutex_t _mutex;
+  pthread_cond_t _cond;
+
+  void lock() { pthread_mutex_lock(&_mutex); };
+  void unlock() { pthread_mutex_unlock(&_mutex); };
+
+  /* MUTEX MUST BE LOCKED AND UNLOCKED WHILE USING WAIT */
+  void wait() { pthread_cond_wait(&_cond,&_mutex); };
+  void signal() { pthread_cond_signal(&_cond); };
+
+  bool sleeping;
 
  protected:
   // threading stuff
@@ -109,6 +120,8 @@ class TBT {
   TBT();
   ~TBT();
 
+  int init();
+
   void append(uint64_t key);
 
   void clear(); ///< deletes all keys and frees memory
@@ -124,15 +137,20 @@ class TBT {
 
   Linklist buffer;
 
+  TBTClock clock;
+
  private:
 
+  void compute_delta(TBTEntry *tbt);
 
-  // POSIX.1b time structures
-  struct timespec timestamp; // nanosleep (nanosec)
+  uint64_t now;
+  uint64_t past;
 
-  struct timeval now; // gettimeofday (microsec)
-  struct timeval past;
-  struct timeval delta;
+  bool rtc; // if /dev/rtc is present
+
+  // POSIX time structures
+  struct timespec psleep; // nanosleep (nanosec)
+  struct timeval gettime; // gettimeofday (microsec)
 
 };
 
