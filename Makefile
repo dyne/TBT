@@ -59,8 +59,8 @@ playtext: $(DEPS) playtext.o
 tbtcheck: $(DEPS) tbtcheck.o
 	$(CPP) $(CXXFLAGS) -o tbtcheck tbtcheck.o $(DEPS) $(LIBS)
 
-testclock: $(DEPS) testclock.o
-	$(CPP) $(CXXFLAGS) -o testclock testclock.o $(DEPS) $(LIBS)
+rtctest: $(DEPS) rtctest.o
+	$(CPP) $(CXXFLAGS) -o rtctest rtctest.o $(DEPS) $(LIBS)
 
 clean:
 	rm -rf *.o *~ rectext playtext

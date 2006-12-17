@@ -29,16 +29,16 @@ int main(int artc, char **argv) {
   
 
   for(c=0; c<10; c++) {
-    tbtclock.sleep(0,50);
-    act("%u check: %lu secs %lu microsecs", c, tbtclock.sec, tbtclock.msec);
+    tbtclock.sleep(500);
+    act("%u check: %lu microsecs", c, tbtclock.msec);
   }
 
   act("sleeping two seconds while the clock runs..");
   sleep(2);
 
   for(c=0; c<10; c++) {
-    tbtclock.sleep(0,100);
-    act("%u check: %lu secs %lu microsecs", c, tbtclock.sec, tbtclock.msec);
+    tbtclock.sleep(1000);
+    act("%u check: %lu microsecs", c, tbtclock.msec);
   }
 
   exit(1);
