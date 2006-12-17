@@ -149,7 +149,8 @@ int TBTClock::init() {
   // open RTC device
   rtcfd = ::open("/dev/rtc",O_RDONLY);
   if(rtcfd<0) {
-    error("couldn't open real time clock device: %s", strerror(errno));
+    warning("couldn't open real time clock device: %s", strerror(errno));
+    warning("reverting to POSIX.1 time handling");
     return 0;
   }
   /* set the alarm event to 1 second */

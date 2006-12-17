@@ -191,7 +191,7 @@ int main(int argc, char** argv)
   }
 
   // write out to the status widget
-  notice("TBT - console ready");
+  notice("TBT - console recording - press Ctrl-c when done ");
 
 
 

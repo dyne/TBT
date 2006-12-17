@@ -1,0 +1,34 @@
+
+The first integration provided for TBT is with Mutt
+http://www.mutt.org the Mail User Agent popular among
+text console users.
+
+= How to set up integration of TBT in Mutt 
+
+Include the following settings in your muttrc config:
+
+set editor = recmail
+set edit_headers = yes
+
+then include the following line in your mime.types
+(by default in user's directory as ~/.mime.types)
+
+application/x-tbt       tbt
+
+and finally include this line in your mailcap
+(by default in user's directory as ~/.mailcap)
+
+application/x-tbt; playtext %s; needsterminal
+
+
+Now if you have the programs recmail and playtext
+in your path you can record and play TBT mails.
+
+It is most comfortable to keep your favourite editor by default in
+mutt, and use TBT only when needed with the commandline command:
+
+mutt -e 'set editor = recmail; set edit_headers = yes'
+
+to compose your time based messages.
+
+

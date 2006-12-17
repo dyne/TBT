@@ -62,7 +62,7 @@ void cmdline(int argc, char **argv) {
     switch(res) {
 
     case 'h':
-      fprintf(stderr, "playtext:\t", argv[0]);
+      fprintf(stderr, "playtext:\t");
       fprintf(stderr, VERSION);
       fprintf(stderr, "%s", help);
       exit(0);

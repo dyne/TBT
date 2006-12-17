@@ -66,7 +66,7 @@ rtctest: $(DEPS) rtctest.o
 	$(CPP) $(CXXFLAGS) -o rtctest rtctest.o $(DEPS) $(LIBS)
 
 clean:
-	rm -rf *.o *~ rectext playtext
+	rm -rf *.o *~ rectext playtext recmail
 #%: %.c
 
 #	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
