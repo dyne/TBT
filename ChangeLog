@@ -1,3 +1,9 @@
+TBT 0.5 - 18 Dec 2006
+	Clock fine tuned to realtime low-latency
+	64bit format timecode
+        Threaded RTC timer, fallback to POSIX.1
+	Code Cleanup
+
 TBT 0.4 - 9 Feb 2006
 	Removed dependency from STL
 	Added Linklist and Utils
