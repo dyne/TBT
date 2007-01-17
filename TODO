@@ -1,18 +1,15 @@
 
-as of 18 december 2006:
+as of 10 january 2007:
 
-- grab from any application as a keylogger
+- grab from any graphical application as a X keylogger
 
-- integrate with mail clients (let's start with mutt)
-  mail editor using mutt with 'edit_headers' add Attach:
+- integrate with more mail clients
 
-- playback control (rewind, fast forward etc.)
+- playback control in console mode (rewind, fast forward etc.)
 
-- more commandline tools
+- daemon mode, timed pipe input/output through sockets
 
-- daemon mode, timed pipe input/output from sockets
-
-- protocol compression
+- binary .tbt protocol compression
 
 
 

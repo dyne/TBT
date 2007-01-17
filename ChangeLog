@@ -1,3 +1,8 @@
+TBT 0.6
+	Now building a single binary utility (aliased)
+	Commandline mode for piped input/output
+	User's manual page
+
 TBT 0.5 - 18 Dec 2006
 	Clock fine tuned to realtime low-latency
 	64bit format timecode

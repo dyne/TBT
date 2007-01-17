@@ -11,20 +11,21 @@ LINKER = ld
 
 
 # debugging flags:
-# CPPFLAGS = -pipe -Wall -ggdb -I.
+CXXFLAGS = -Wall -ggdb -I../slw -I. -I/usr/pkg/include -DHAVE_BSD
 
 # optimized flags:
-# CPPFLAGS = -pipe -Wall -O2 -fomit-frame-pointer -ffast-math
+# CXXFLAGS = -Wall -O2 -fomit-frame-pointer -ffast-math -I../slw -I. -I/usr/pkg/include -DHAVE_BSD
 
 # Darwin/OSX flags: uncomment all below and comment the rest
-# CPPFLAGS = -pipe -Wall -ggdb -I. -I/sw/include -L/sw/lib
+# CPPFLAGS = -pipe -Wall -ggdb -I../slw -I. -I/sw/include -L/sw/lib -DHAVE_BSD
 
 # flags to compile slang linking to dynamic system lib
-LIBS = -lslang -lpthread
+
+LIBS = -lslang -lpthread ../slw/libslw.a
 
 # flags to compile slang linking to dynamic libs on BSD
-CXXFLAGS = -Wall -ggdb -I../slw -I. -I/usr/pkg/include -DHAVE_BSD
-LIBS = -L/usr/pkg/lib -lpthread -lslang ../slw/libslw.a 
+
+#LIBS = -L/usr/pkg/lib -lpthread -lslang ../slw/libslw.a 
 
 # flags to include static slang library from the source
 # (need to provide the full path to your libslang.a)
@@ -35,7 +36,7 @@ LIBS = -L/usr/pkg/lib -lpthread -lslang ../slw/libslw.a
 
 # flags to compile with memodebugging
 
-DEPS = tbt.o linklist.o jutils.o
+DEPS = tbt.o linklist.o jutils.o rtclock.o
 
 
 # generic make rules
@@ -44,17 +45,16 @@ DEPS = tbt.o linklist.o jutils.o
 #%: %.cpp
 #	$(CXX) $(CXXFLAGS) -o $@ $< $(DEPS) $(LIBS)
 
-all: rectext playtext recmail
+all: tbt
 
 depend:
-	mkdep $(CXXFLAGS) tbt.cpp \
-	                  playtext.cpp rectext.cpp
+	mkdep $(CXXFLAGS) tbt.cpp cmdline.cpp
 
-rectext: rectext.o $(DEPS)
-	$(CPP) $(CXXFLAGS) -o rectext rectext.o $(DEPS) $(LIBS)
-
-playtext: $(DEPS) playtext.o
-	$(CPP) $(CXXFLAGS) -o playtext playtext.o $(DEPS) $(LIBS)
+tbt: cmdline.o $(DEPS)
+	$(CXX) $(CXXFLAGS) -o tbt cmdline.o $(DEPS) $(LIBS)
+	ln -sf tbt rectext
+	ln -sf tbt playtext
+	ln -sf tbt recmail
 
 recmail: recmail.o $(DEPS)
 	$(CPP) $(CXXFLAGS) -o recmail recmail.o $(DEPS) $(LIBS)
@@ -66,7 +66,7 @@ rtctest: $(DEPS) rtctest.o
 	$(CPP) $(CXXFLAGS) -o rtctest rtctest.o $(DEPS) $(LIBS)
 
 clean:
-	rm -rf *.o *~ rectext playtext recmail
+	rm -rf *.o *~ tbt
 #%: %.c
 
 #	$(CC) $(CFLAGS) -o $@ $< $(LIBS)

@@ -1,6 +1,6 @@
 /*  Time Based Text - Player reference implementation
  *
- *  (C) Copyright 2006 Denis Rojo <jaromil@dyne.org>
+ *  (C) Copyright 2006 - 2007 Denis Rojo <jaromil@dyne.org>
  *
  * This source code is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Public License as published 
@@ -33,13 +33,22 @@
 #include <tbt.h>
 
 #include <jutils.h>
-void set_status(SLangWidget *s);
 
+
+
+// Time Based Text object
+TBT tbt;
+
+
+////// commandline options stuff
+
+void set_status(SLangWidget *s);
 
 static const char *help =
 "Usage: playtext [options] [file]\n"
 "\n"
 "  -h   print this help\n"
+"  -c   playback in a text console\n"
 "  -v   version information\n"
 "  -D   debug verbosity level - default 1\n";
 // "  -w   word wrap on screen bounds\n"
@@ -49,7 +58,7 @@ static const char *short_options = "-hvD:";
 
 int debug;
 char filename[512];
-
+bool console = false;
 
 void cmdline(int argc, char **argv) {
   int res;
@@ -81,6 +90,10 @@ void cmdline(int argc, char **argv) {
       }
       break;
 
+    case 'c':
+      console = true;
+      break;
+
     case 1:
       {
 	FILE *fd;
@@ -97,28 +110,59 @@ void cmdline(int argc, char **argv) {
     }
   } while (res != -1);
 
-#ifdef HAVE_BSD
   for(;optind<argc;optind++)
     snprintf(filename, 511, "%s", argv[optind]);
-#endif
 
   if(!filename[0])
-    sprintf(filename, "/tmp/record.tbt");
+    sprintf(filename, "record.tbt");
 
   set_debug(debug);
 
 }
 
+//////////// end of commandline option stuff
 
 // our global console
-SLangConsole con;
+SLangConsole *con;
 
-// our widgets
-SLW_Text txt;
-SLW_Text status;
 
-// Time Based Text object
-TBT tbt;
+
+int play_console() {
+  
+  // our widgets
+  SLW_Text txt;
+  SLW_Text status;
+  
+  con = new SLangConsole();
+
+  // initialize the text console
+  if(! con->init() ) exit(-1);
+
+  //  initialize the status line
+  status.border = false;
+  status.set_name("status box");
+  if(! con->place(&status, 0, con->h-10, con->w, con->h) ) {
+    error("error placing the status widget");
+    return(-1);
+  }
+  assert ( status.init() );
+  
+  //  set the status widget *** only after placing it! ***
+  set_status(&status);
+ 
+  // place the text canvas
+  if(! con->place(&txt, 0, 0, con->w, con->h-1) ) {
+	  error("error placing the text widget");
+	  return(-1);
+  }
+  txt.set_name("player");
+  assert ( txt.init() );
+  // focus the text console
+  con->focused = &txt;
+  
+  return 1;
+}
+
 
 
 int main(int argc, char **argv) {
@@ -134,49 +178,37 @@ int main(int argc, char **argv) {
     exit(1);
   }
 
-  // initialize the text console
-  if(! con.init() ) exit(-1);
-
-  //  initialize the status line
-  status.border = false;
-  status.set_name("status box");
-  if(! con.place(&status, 0, con.h-10, con.w, con.h) ) {
-    error("error placing the status widget");
-    exit(-1);
-  }
-  assert ( status.init() );
-  
-  //  set the status widget *** only after placing it! ***
-  set_status(&status);
- 
-  // place the text canvas
-  if(! con.place(&txt, 0, 0, con.w, con.h-1) ) {
-	  error("error placing the text widget");
-	  exit(-1);
-  }
-  txt.set_name("player");
-  assert ( txt.init() );
-  // focus the text console
-  con.focused = &txt;
-
   ///////////////////////
   // start the TBT engine
   tbt.init();
 
 
-  bool quit = false;
+  // initialize the console if needed
+  if(console) play_console();
 
-  for(c=0; c<len && !quit; c++) {
-    // this is a blocking call
-    // tbt.getkey will wait N time before returning
+
+
+  // main playback loop
+  for(c=0; c<len && !tbt.quit; c++) {
+
+    // tbt.getkey is a blocking call
+    // will wait N time before returning
     key = tbt.getkey();
 
-    con.feed(key);
-    
-    if( ! con.refresh() ) quit = true;
+    if(console) {
+
+      con->feed(key);
+      if( ! con->refresh() ) tbt.quit = true;
+
+    } else {
+      
+      // print out on stdout
+      write(1, (void*)&key, 1);
+
+    }
+
   }
 
-  con.close();
-
+  if(console) con->close();
   exit(0);
 }

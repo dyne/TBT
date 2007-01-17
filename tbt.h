@@ -1,7 +1,7 @@
 /*  Time Based Text - Recorder
  *
- *  (C) Copyright 2006 Denis Rojo <jaromil@dyne.org>
- *                     Joan & Dirk <jodi@jodi.org>
+ *  (C) Copyright 2006 - 2007 Denis Rojo <jaromil@dyne.org>
+ *      Idea shared with Joan & Dirk <jodi@jodi.org>
  *
  * This source code is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Public License as published 
@@ -25,14 +25,16 @@
 
 #include <time.h>
 #include <inttypes.h>
-#include <sys/types.h>
-#include <sys/param.h>
+//#include <sys/types.h>
+//#include <sys/param.h>
 #include <sys/time.h>
-#include <pthread.h>
 
 #include <linklist.h>
 
-#define VERSION "v0.3 - by Jaromil & Jodi"
+#define VERSION "v0.6 - by Jaromil & Jodi"
+
+
+class RTClock; // ghost pointer for rtclock.h
 
 
 /*
@@ -59,60 +61,6 @@ class TBTEntry : public Entry {
 
 };
 
-/*
-  Clock timer abstraction
-  using RTC in Linux/BSD
-  multithreaded
- */
-class TBTClock {
- public:
-  TBTClock();
-  ~TBTClock();
-
-  int init();
-
-  int set_freq(unsigned long freq);
-
-  int start();
-
-  void run();
-
-  int sleep(uint64_t sec);
-
-  bool quit;
-
-  uint64_t msec;
-
- private:
-
-  int tick();
-
-  int rtcfd;
-  unsigned long rtctime;
-
-  pthread_t _thread;
-  pthread_attr_t _attr;
-
-  pthread_mutex_t _mutex;
-  pthread_cond_t _cond;
-
-  void lock() { pthread_mutex_lock(&_mutex); };
-  void unlock() { pthread_mutex_unlock(&_mutex); };
-
-  /* MUTEX MUST BE LOCKED AND UNLOCKED WHILE USING WAIT */
-  void wait() { pthread_cond_wait(&_cond,&_mutex); };
-  void signal() { pthread_cond_signal(&_cond); };
-
-  bool sleeping;
-
- protected:
-  // threading stuff
-  static void* kickoff(void *arg) {
-    ((TBTClock *) arg)->run();
-    return NULL;
-  };
-  
-};
 
 class TBT {
   
@@ -122,22 +70,39 @@ class TBT {
 
   int init();
 
-  void append(uint64_t key);
+  // input functions: time based append of keys into a tbt recording
 
-  void clear(); ///< deletes all keys and frees memory
+  void append(uint64_t key); ///< append a single key at the time this function is called
+
+  int fdappend(int filedes, int keysize); ///< append keys read from a file descriptor
+
+
+
+
+  // playback functions: time based feed of keys loaded
 
   uint64_t getkey(); ///< wait the time and returns the next entry
+
   int position; ///< incremented by getkey calls
 
-  int load(char *filename);
+
+
+  // loading functions: load a tbt recording for playback
+
+  int load(char *filename); ///< load a .tbt recorded file
+
+
+  void clear(); ///< deletes all current keys and frees memory  
 
   int save_bin(char *filename);
   int save_ascii(char *filename);
   int save_javascript(char *filename);
 
-  Linklist buffer;
+  Linklist *buffer;
 
-  TBTClock clock;
+  RTClock *clock;
+
+  bool quit;
 
  private:
 

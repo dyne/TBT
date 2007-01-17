@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
   for(c=1; c<len+1; c++) {
     // this is a blocking call
     // tbt.getkey will wait N time before returning
-    stroke =  (TBTEntry*) tbt.buffer[c];
+    stroke =  (TBTEntry*) tbt.buffer->pick(c);
     switch(stroke->key) {
       case KEY_ENTER:   sprintf(keyname,"ENTER"); break;
       case KEY_UP:      sprintf(keyname,"UP");    break;

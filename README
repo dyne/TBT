@@ -5,7 +5,7 @@
 	    888	     888    888	    888
 	   o888o    o888ooo888	   o888o
 
-		Time Based Text    v0.5
+		Time Based Text    v0.6
 
                http://tbt.dyne.org
 
@@ -28,34 +28,6 @@ applications.
 The implementation is written in thread-safe POSIX C++ and can be
 ported to most platforms.
 
-
-
-
-::::: TRY IT (for text terminal beginners)
-
-This is an Command Line Interface based program,
-still the following instructions are user friendly:
-
-- download from ftp://ftp.dyne.org/tbt/
-
-- unpack the tar.gz compressed archive
-
-- open a Terminal
-
-- type:
-$ cd tbt
-$ ./rectext
-
-= have phun with monkey typing and/or write your poetry
-
-- press Ctrl-c (the Control key and the C key at same time)
-
-- type:
-$ ./playtext
-
-= read yourself again while typing
-
-= see rectext -h for options on how to save .tbt files
 
 
 
@@ -113,7 +85,7 @@ any application using some h4x0r keylogging technique on different OS.
 
 ::::: DISCLAIMER
 
-TBT is Copyleft 2006 by Jaromil & Jodi
+TBT is Copyleft 2006 - 2007 by Jaromil & Jodi
 commissioned by the Impakt.nl festival
 
 This source code is free software; you can redistribute it and/or

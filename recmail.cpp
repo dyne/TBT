@@ -118,10 +118,8 @@ void cmdline(int argc, char **argv) {
     }
   } while (res != -1);
 
-#ifdef HAVE_BSD
   for(;optind<argc;optind++)
     snprintf(filename, 511, "%s", argv[optind]);
-#endif
 
   set_debug(debug);
 

@@ -1,0 +1,87 @@
+.\" Process this file with
+.\" groff -man -Tascii foo.1
+.\"
+.TH TBT 10 "January 2007" UNIX "User Manuals"
+.SH NAME
+TBT - Time Based Text
+.SH SYNOPSIS
+.B tbt [
+.I options
+.B ] [
+.I file
+.B ]
+
+.SH DESCRIPTION
+\fBTbt\fP is a commandline and console tool for time based recording
+and playback of keyboard strokes with a precision to the millisecond.
+
+When recording, keys are saved in the specified .tbt file (called
+record.tbt by default) which can be later used to playback the
+sequence typed.
+
+As a commandline tool it can record from standard input or playback to
+standard output (from and to a file or pipeline), so that it can be
+used in combination with other programs to reproduce a sequence of
+actions.
+
+As a console tool it offers a simple typing interface to record and
+playback text exactly as it is typed, including all corrections and
+hesitations, to be employed in e-mail and poetry communication for
+instance.
+
+It is \fBtbt\fP ability to keep the timing highly precise thru
+recording and playback, to provide a basic tool for synchronization of
+time based input and output.
+
+.SH OPTIONS
+.IP "-h"
+show commandline help
+.IP "-v"
+show version information
+.IP "-D [\fI num \fP]"
+set debug verbosity level to (1 to 3), default is 1
+.IP "-c"
+offer a console interface (S-Lang) for a simple terminal text editor,
+to interactively record (or playback) all operations performed in its
+making.
+.IP "-r"
+run to record all the input keys (this is the default)
+.IP "-p"
+run to playback all the keys in the .tbt file
+.IP "-m"
+activate mail composer capabilities for the console recording
+interface, for integration with mail user agents as mutt
+.IP "-s [\fI bin | ascii | javascript \fP]"
+choose the format in which to save the recorded file: by default
+binary is used and supported for playback by tbt, but more formats are
+provided for reproduction by other customized playback tools.
+
+
+.SH AUTHORS
+.nf
+Denis "Jaromil" Rojo - idea and coding
+<\fIhttp://rastasoft.org\fR>
+
+Joan & Dirk - idea
+<\fIhttp://jodi.org\fR>
+
+A full list of developers and contributors can be found in the AUTHOR
+file distributed with the source package.
+
+\fBFreeJ\fP development has been supported by the Impakt.nl festival
+
+This manual page was written and is mantained by Jaromil.
+.fi
+
+.SH COPYING
+Permission is granted to copy, distribute and/or modify this manual
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections. Permission is granted to make and distribute
+verbatim copies of this manual page provided the above copyright
+notice and this permission notice are preserved on all copies.
+
+.SH AVAILABILITY
+The most recent version of \fItbt\fR can be attained from its homepage
+at \fIhttp://tbt.dyne.org\fR and from the \fIftp.dyne.org\fR software
+repository.

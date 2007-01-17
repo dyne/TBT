@@ -1,6 +1,6 @@
-/*  Time Based Text - Recorder
+/*  Time Based Text - Commandline Recorder
  *
- *  (C) Copyright 2006 Denis Rojo <jaromil@dyne.org>
+ *  (C) Copyright 2006 - 2007 Denis Rojo <jaromil@dyne.org>
  *
  * This source code is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Public License as published 
@@ -39,14 +39,29 @@
 
 //////////////////////
 
+
+// Time Based Text
+#include <tbt.h>
+
+
+
 // S-Lang widgets
 #include <slw_console.h>
 #include <slw_text.h>
-// #include <slw_popup.h>
 
-#include <tbt.h> // Time Based Text
 
-#include <jutils.h> // my lovely utils
+// my lovely utils
+#include <jutils.h>
+
+
+
+// Time Based Text global object
+TBT tbt;
+
+
+
+///////////////// commandline stuff
+
 void set_status(SLangWidget *s);
 
 static const char *help =
@@ -55,11 +70,12 @@ static const char *help =
 "  -h   print this help\n"
 "  -v   version information\n"
 "  -D   debug verbosity level - default 1\n"
-"  -r   render format (bin|ascii|javascript)\n";
+"  -r   render format (bin|ascii|javascript)\n"
+"  -i   record keys from stdin (byte size)\n";
 // "  -w   word wrap on screen bounds\n"
 // "  -s   scrolling text\n"
 
-static const char *short_options = "-hvD:r:";
+static const char *short_options = "-hvD:r:i:";
 
 int debug;
 char filename[512];
@@ -69,6 +85,8 @@ char filename[512];
 #define ASCII      2
 #define JS         3
 int render = BIN;
+
+int stdinput = 0;
 
 void cmdline(int argc, char **argv) {
   int res;
@@ -114,6 +132,9 @@ void cmdline(int argc, char **argv) {
       }
       break;
 	      
+    case 'i':
+      stdinput = atoi(optarg);
+      break;
 
     case 1:
       {
@@ -131,130 +152,136 @@ void cmdline(int argc, char **argv) {
     }
   } while (res != -1);
 
-#ifdef HAVE_BSD
   for(;optind<argc;optind++)
     snprintf(filename, 511, "%s", argv[optind]);
-#endif
 
   if(!filename[0])
-    sprintf(filename, "/tmp/record.tbt");
+    sprintf(filename, "record.tbt");
 
   set_debug(debug);
 
 }
 
-// our global console
-SLangConsole con;
+///////////// end of commandline stuff
 
-// our widgets
-SLW_Text txt;
-SLW_Text status;
-//SLW_Popup popup;
- 
-// Time Based Text object
-TBT tbt;
 
-int main(int argc, char** argv)
-{
-  int key;
-  bool quit = false;
- 
-  cmdline(argc, argv);
+
+int record_console() {
+  // S-Lang console
+  SLangConsole con;
+  
+  // S-Lang widgets
+  SLW_Text txt;
+  SLW_Text status;
+
+  uint64_t key;
+
 
   // initialize the text console
-  if(! con.init() ) exit(-1);
-
+  if(! con.init() ) return(-1);
+  
   //  initialize the status line
   status.border = false;
   status.set_name("status box");
   if(! con.place(&status, 0, con.h-10, con.w, con.h) ) {
     error("error placing the status widget");
-    exit(-1);
+    return(-1);
   }
   assert ( status.init() );
   
   //  set the status widget *** only after placing it! ***
   set_status(&status);
   
-
-  // initialize the popup
-  /*  popup.set_name("popup");
-      popup.set_text("this is a test of a popup\n"
-      "it goes on multiple lines hopefully\n"
-      "without breaking the whole screen\n"
-      "the termination is a null, here we go.");
-      if(! con.place(&popup, 20, 1, con.w-10, con.h-30) ) {
-      error("error placing the popup widget");
-      exit(-1);
-      }
-      assert (popup.init() );
-  */
-  
-
   // initialize the text canvas
   txt.set_name("editor");
   // txt.border = true;
   if(! con.place(&txt, 0, 0, con.w, con.h-6) ) { //  con.w, con.h-20) ) {
-	  error("error placing the text widget");
-	  exit(-1);
+    error("error placing the text widget");
+    return(-1);
   }
   assert ( txt.init() );
-
+  
   // focus the text canvas
   con.focused = &txt;
- 
-
-  // start the TBT engine
-  if(! tbt.init() ) {
-    con.close();
-    exit(0);
-  }
+  
+  
   // write out to the status widget
   notice("TBT - console ready");
   
-  while(!quit) {
-
+  while(!tbt.quit) {
+    
     key = con.getkey();
-
+    
     if(key) {
-
+      
       // save the key and timestamp
       tbt.append(key);
-
+      
       // display the key
       con.feed(key);
-
-      }
+      
+    }
     
-    if( ! con.refresh() ) quit = true;
-
+    if( ! con.refresh() ) tbt.quit = true;
+    
     jsleep(0,10);
-
+    
   }
 
-  notice("Save and quit");
-
-  if( render == BIN ) {
-	  
-  	tbt.save_bin( filename );
-  	act("file %s rendered in binary format",filename);
-
-  } else if( render == ASCII ) {
-
-  	tbt.save_ascii( filename );
-  	act("file %s rendered in binary format",filename);
-
-  } else if( render == JS ) {
-
-  	tbt.save_javascript( filename );
-   	act("file %s rendered in binary format",filename);
- 
-  }
-
+  // cleanly close the console
   con.refresh();
-
+  
   jsleep(1,0);
   con.close();
+
+  return 1;
+}
+
+
+
+
+
+int main(int argc, char** argv)
+{
+ 
+  cmdline(argc, argv);
+
+  
+  // start the TBT engine
+  if(! tbt.init() )  exit(0);
+
+  
+  // check if recording from stdin
+  if(stdinput) {
+
+    // call the recorder for the stdin file descriptor
+    tbt.fdappend(0, stdinput);
+    
+  } else { // recording from s-lang console
+
+    record_console();
+    
+  }
+  
+  notice("Closing Time Based Recorder");
+    
+  if( render == BIN ) {
+    
+    tbt.save_bin( filename );
+    act("TBT file %s rendered in binary format",filename);
+    
+  } else if( render == ASCII ) {
+    
+    tbt.save_ascii( filename );
+    act("TBT file %s rendered in binary format",filename);
+    
+  } else if( render == JS ) {
+    
+    tbt.save_javascript( filename );
+    act("TBT file %s rendered in binary format",filename);
+    
+  }
+  
 
   exit(0);  
 }
