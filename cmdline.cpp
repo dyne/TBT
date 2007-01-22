@@ -74,7 +74,7 @@ static const char *help =
 "  -r   record   tbt  - option alias: rectext\n"
 "  -p   playback tbt  - option alias: playtext\n"
 "  -m   mail composer - option alias: recmail\n"
-"  -s   save format in [ bin | ascii | javascript ]\n";
+"  -s   save format in [ bin | ascii | html ]\n";
 
 static const char *short_options = "-hvD:crpms:";
 
@@ -96,7 +96,7 @@ int operation = REC;
 // rendering formats
 #define BIN        1
 #define ASCII      2
-#define JS         3
+#define HTML       3
 int render = BIN;
 
 
@@ -166,8 +166,8 @@ void cmdline(int argc, char **argv) {
 	      render = BIN;
       else if( strncasecmp(optarg, "ASCII", 5) ==0)
 	      render = ASCII;
-      else if( strncasecmp(optarg, "JAVASCRIPT", 10) ==0)
-	      render = JS;
+      else if( strncasecmp(optarg, "HTML", 10) ==0)
+	      render = HTML;
       else {
 	      error ("render format not recognized: %s", optarg);
 	      act ("using default binary format render");
@@ -417,9 +417,9 @@ int main(int argc, char** argv)
       act("TBT file %s rendered in ascii format",filename);
       break;
 
-    case JS:
-      tbt.save_javascript( filename );
-      act("TBT file %s rendered in javascript format",filename);
+    case HTML:
+      tbt.save_html( filename );
+      act("TBT file %s rendered in html format",filename);
       break;
 
     }

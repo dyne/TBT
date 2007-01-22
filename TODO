@@ -7,6 +7,8 @@ as of 10 january 2007:
 
 - playback control in console mode (rewind, fast forward etc.)
 
+- conversion between binary, ascii and html formats
+
 - daemon mode, timed pipe input/output through sockets
 
 - binary .tbt protocol compression

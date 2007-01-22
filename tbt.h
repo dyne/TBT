@@ -57,7 +57,7 @@ class TBTEntry : public Entry {
   /* render in *buf and returns size in bytes */
   int render_uint64(void *buf);
   int render_ascii(void *buf);
-  int render_javascript(void *buf);
+  int render_html(void *buf);
 
 };
 
@@ -96,7 +96,7 @@ class TBT {
 
   int save_bin(char *filename);
   int save_ascii(char *filename);
-  int save_javascript(char *filename);
+  int save_html(char *filename);
 
   Linklist *buffer;
 

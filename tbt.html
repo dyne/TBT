@@ -1,90 +1,6 @@
 <html><head>
 
-<script language="JavaScript">
-<!--
-// TBT javascript prototype: Jaromil 2007
-// reference javascript typewriter documentation: F. Permadi 2002
-// GNU GPL
-var TimeBasedText=[[13,977],[13,300],[13,600],[115,1360],[97,100],[110,100],[32,100],[109,180],[97,80],[114,200],[105,80],[110,220],[111,60],[32,140],[100,180],[105,100],[32,80],[98,280],[101,120],[110,240],[116,280],[105,100],[118,200],[111,120],[103,240],[108,80],[105,220],[111,80],[13,520],[13,320],[32,1940],[32,1080],[13,420]]
-
-var currentChar=0;
-var destination=" ";
-var text=" ";
-
-function tbtchar(num) {
-	// this functions returns only the char
-	// ignores all other special movement keys
-	var res = "";
-	return res;
-}
-
-function type()
-{
-	var dest = document.getElementById(destination);
-
-	if (dest)// && dest.innerHTML)
-		{
-
-			/* TODO: handle movement keys:
-				#define KEY_BACKSPACE 275
-				#define KEY_BACKSPACE_APPLE 127
-				#define KEY_BACKSPACE_SOMETIMES 272
-				#define KEY_UP 257
-				#define KEY_DOWN 258
-				#define KEY_LEFT 259
-				#define KEY_RIGHT 260
-				#define KEY_PAGE_UP 261
-				#define KEY_PAGE_DOWN 262
-				#define KEY_HOME 263
-				#define KEY_DELETE 275
-				#define KEY_TAB 9
-		 	   port the abstract_console from slw in js
-			*/
-
-	switch( TimeBasedText[currentChar][0] ) {
-	  case 13: // carriage return
-	    text += "<br>";
-	    break;
-	  case 32: // white space
-	    text += "&nbsp;";
-	    break;
-	  default:
-	    text += String.fromCharCode( TimeBasedText[currentChar][0] );
-	}
-	dest.innerHTML= text + "_";
-	// DOM compliant alternative:
-	//	var textNode=document.createTextNode(text);
-	//	dest.replaceChild(textNode, dest.childNodes[0]);
-
-
-
-	// go to the next entry
-	currentChar++;
-
-
-	if (currentChar>=TimeBasedText.length) {
-
-		// end of record, restart after 5 seconds
-		currentChar=0;
-		text="";
-		setTimeout("type()", 5000 + TimeBasedText[0][1]);
-
-	} else {
-
-		setTimeout("type()", TimeBasedText[currentChar][1] );
-
-	}
-    }
-}
-
-function startTyping(destinationParam)
-{
-	currentChar=0;
-	destination=destinationParam;
-	setTimeout("type()", TimeBasedText[currentChar][1] );
-}
-//-->  
-
+<script language="JavaScript" src="tbt-typewriter.js">
 </script>
 
 <title>Time Based Text - javascript prototype</title></head>
@@ -95,7 +11,9 @@ function startTyping(destinationParam)
 
 <script language="JavaScript">
 <!--
-javascript:startTyping("textDestination");
+var TimeBasedText=[[13,977],[13,300],[13,600],[115,1360],[97,100],[110,100],[32,100],[109,180],[97,80],[114,200],[105,80],[110,220],[111,60],[32,140],[100,180],[105,100],[32,80],[98,280],[101,120],[110,240],[116,280],[105,100],[118,200],[111,120],[103,240],[108,80],[105,220],[111,80],[13,520],[13,320],[32,1940],[32,1080],[13,420]]
+var tbt = new TBT();
+tbt.startTyping("textDestination", TimeBasedText);
 //-->
 </script>
 

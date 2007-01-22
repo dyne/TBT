@@ -80,7 +80,7 @@ int TBTEntry::render_ascii(void *buf) {
   return len;
 }
 
-int TBTEntry::render_javascript(void *buf) {
+int TBTEntry::render_html(void *buf) {
   int len;
   char tmp[512];
 
@@ -434,7 +434,7 @@ int TBT::save_ascii(char *filename) {
   return c;
 }
 
-int TBT::save_javascript(char *filename) {
+int TBT::save_html(char *filename) {
 
   int c, len;
 
@@ -444,7 +444,16 @@ int TBT::save_javascript(char *filename) {
 
   fd = fopen(filename, "w");
   if(!fd) return false;
-  
+
+  fputs("<html><head>\n"
+	"<script language=\"JavaScript\" src=\"tbt-typewriter.js\"></script>\n"
+	"<title>Time Based Text - javascript prototype</title></head>\n"
+	"<body text=\"#FFFFFF\" bgcolor=\"#000000\">\n"
+	"<div id=\"textDestination\">\n"
+	"</div>\n"
+	"<script language=\"JavaScript\">\n"
+	"<!--\n", fd);
+
   // start array
   fwrite("var TimeBasedText=[",sizeof(char),19,fd);
 
@@ -461,7 +470,7 @@ int TBT::save_javascript(char *filename) {
     if(c>0) // put a comma
       fwrite(",",sizeof(char),1,fd);
 
-    len = ent->render_javascript(buf);
+    len = ent->render_html(buf);
 
     fwrite(buf, len, 1, fd);
     
@@ -474,6 +483,11 @@ int TBT::save_javascript(char *filename) {
   // close array
   fwrite("]\n",sizeof(char),2,fd);
 
+  fputs("\n"
+	"var tbt = new TBT();\n"
+	"tbt.startTyping(\"textDestination\", TimeBasedText);\n"
+	"//--></script>\n"
+	"</body></html>\n\n", fd);
   fflush(fd);
   fclose(fd);
 
