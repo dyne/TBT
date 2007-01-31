@@ -1,6 +1,7 @@
-TBT 0.6
+TBT 0.6 - 31 Jan 2007
 	Now building a single binary utility (aliased)
 	Commandline mode for piped input/output
+	Html/javscript renderer
 	User's manual page
 
 TBT 0.5 - 18 Dec 2006

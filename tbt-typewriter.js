@@ -156,13 +156,12 @@ function feed()	{
 	    for(cr=0; cr < text.length; cr++)
 		delete text[cr];
 	    delete text;
-	    text = new Array();
-	    text[0] = new Array();
 
-	    setTimeout("feed()", 5000 + recording[0][1]);
+            // end of text
 	    
 	} else {
 	    
+           // RECURSION IS TIME  -jrml 31jan2007
 	    setTimeout("feed()", recording[currentChar][1] );
 	    
 	}
