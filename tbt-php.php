@@ -66,19 +66,19 @@ class TBT_JSRender {
 		}
 
 		$handle = fopen($filename, "rb");
-		$this->jsstr="[";
+		$this->jsstr = "[";
 		while(! feof($handle)) {
 			// the character value
-			$bin= fread($handle, 8);
-			$data=unpack("V1x",$bin);
-			$this->jsstr.="[".$data["x"].",";
+			$bin  = fread($handle, 8);
+			$data = @unpack("L1x", $bin);
+			$this->jsstr .= "[".$data["x"].",";
 			// the timeout value
-			$bin= fread($handle,8);
-			$data=unpack("V1x",$bin);
-			$this->jsstr.=$data["x"]."],";
+			$bin  = fread($handle,8);
+			$data = @unpack("L1x",$bin);
+			$this->jsstr .= $data["x"]."],";
 		}
-		$this->jsstr.="]";
-		str_replace("],","]",$this->jsstr);
+		$this->jsstr .= "]";
+		str_replace("],","]", $this->jsstr);
 		fclose($handle);
 
 		return 0;
