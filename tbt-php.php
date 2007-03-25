@@ -104,10 +104,49 @@ class TBT_JSRender {
 
 	}
 
+	// return the string to be used with the JS typewriter
 	function get_jsstr() {
 		return $this->jsstr;
 	}
 
+	// this method returns only the text of the tbt file
+	// any backspace is processed deleting the previous
+	// character
+	//
+	// a string like "palll^Hotrooo^H^Hn"
+	// will be returned as "pallotron"
+	//
+	function get_text() {
+		$array = split(",", $this->jsstr);
+		$array2 = array();
+		$string="";
+		$i=0;
+		foreach($array as $a) {
+			if( ($i + 1) % 2 != 0 ) {
+				$int = str_replace("[","",$a);
+				$array2[]=$int;
+			}
+			$i++;
+		}
+		for($i=0;$i<sizeof($array2);$i++) {
+			if($array2[$i] == 272) {
+				$tmp = array_slice($array2, 0, $i-1);
+				$tmp2 = array_slice($array2, $i+1);
+				$array2 = array_merge($tmp, $tmp2);
+				$i=0;
+			}
+		}
+		foreach($array2 as $b) {
+			if($b == 13) $string.="\n";
+			else $string.=chr($b);
+		}
+		return $string;
+	}
+
+	// this is a simple check to see if 
+	// the provided file is a tbt file
+	// it will simply check if the filesize
+	// is a multiple of 16 bytes (aka 128bits)
 	function is_tbtfile($filename) {
 		$size = filesize($filename);
 		if( $size % 16 != 0) return 0; 
