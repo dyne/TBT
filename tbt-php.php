@@ -45,21 +45,15 @@
 #
 # include_once("/path/to/tbt-php.php");
 # $TBT = new TBT_JSRender("/path/to/your/record.tbt");
-# if($TBT->is_error == TBT_NO_SUCH_FILE) {
-# 	print "File doesn't exist\n";
+# if($TBT->is_error) {
+# 	print $TBT->get_error()."\n";
 # 	die();
 # } 
-# if($TBT->is_error == TBT_FILE_NOT_VALID) {
-# 	print "Problably this is not a valid tbt file!\n";
-# 	print "File size isn't multiple of 16 bytes!\n";
-# 	die();
-# }
 # $string = $TBT->get_jsstr(); 
+# $txt = $TBT->get_text();
 #
 # now you can pass $string to the TBT javascript class
-
-define("TBT_NO_SUCH_FILE",   "-1");
-define("TBT_FILE_NOT_VALID", "-2");
+# $txt will contain only the text
 
 class TBT_JSRender {
 
@@ -72,18 +66,26 @@ class TBT_JSRender {
 	function TBT_JSRender($filename) {
 		
 		settype($msec,"integer");
+		$this->is_error=false;
 
 		if (! file_exists($filename)) {
-			$this->is_error=TBT_NO_SUCH_FILE;
-			return $this->is_error;
+			$this->is_error=true;
+			$this->error_msg="$filename: no such file or directory!";
+			return false;
 		}
 
 		if (! $this->is_tbtfile($filename)) {
-			$this->is_error=TBT_FILE_NOT_VALID;
-			return $this->is_error;
+			$this->is_error=true;
+			$this->error_msg="$filename: this is not a valid tbt file!";
+			return false;
 		}
 
 		$handle = fopen($filename, "rb");
+		if(!$handle) {
+			$this->is_error=true;
+			$this->error_msg="$filename: unable to open file!";
+			return false;
+		}
 		$this->jsstr = "[";
 		while(! feof($handle)) {
 			// the character value
@@ -100,7 +102,7 @@ class TBT_JSRender {
 		$this->jsstr  = str_replace(",,]","]", $this->jsstr);
 		fclose($handle);
 
-		return 0;
+		return true;
 
 	}
 
@@ -149,8 +151,12 @@ class TBT_JSRender {
 	// is a multiple of 16 bytes (aka 128bits)
 	function is_tbtfile($filename) {
 		$size = filesize($filename);
-		if( $size % 16 != 0) return 0; 
-		else return 1;
+		if( $size % 16 != 0) return false; 
+		else return true;
+	}
+
+	function get_error() {
+		return $this->error_msg;
 	}
 
 }	
