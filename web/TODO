@@ -1,1 +1,18 @@
-write me
+TODO
+====
+
+Everyone is free to code this task!
+
+* write the upload feature with catcpha capability
+
+* add a link to each tbt div named "reply to this tbt"
+  that open the upload window with the related_to hidden
+  field set to the proper id
+
+* migration from sql based data store to xml based one
+
+* better code stylish
+
+* installation instructions document
+
+* installation scripts (in php or shell? or both?)

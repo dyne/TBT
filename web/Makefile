@@ -1,1 +1,3 @@
-write me
+
+clean:
+	find . -name "*~" -exec rm {} \;
