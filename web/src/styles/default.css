@@ -1,0 +1,59 @@
+#menu {
+	position:absolute;
+	left:5px;
+	top:5px;
+	z-index:1;
+}
+.couriersmall{
+	font-family: "Andale Mono","Courier New", Courier, monospace, sans serif;
+	color: #FFFFFF;
+	font-size: 12px;
+}
+.andalemono,p {
+	font-family: "Andale Mono","Courier New", Courier, monospace, sans serif;
+	color: #FFFFFF;
+	font-size: 14px;
+}
+a:link {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+a:visited {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+a:hover {
+	text-decoration: underline;
+	color: #666666;
+}
+a:active {
+	text-decoration: none;
+	color: #666666;
+}
+
+.mainbody {
+	background-color: #999999; 
+	margin-left: 0px;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-image: url(../images/bg.gif);
+	background-repeat: repeat-x;
+}
+
+.popupbody{
+	background-color: #999999; 
+	margin-left: 0px;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+input {
+	height: 17px; 
+	color: #660000; 
+	background: #fee3ad; 
+	border: 1px solid #660000;
+	font-family: "Andale Mono","Courier New", Courier, monospace, sans serif;
+	font-size: 12px;
+}
