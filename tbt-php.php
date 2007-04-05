@@ -59,6 +59,7 @@ class TBT_JSRender {
 
 	var $jsstr;
 	var $is_error;
+	var $error_msg;
 
 	// constructor
 	// it loads a tbt file, parses it, and 
