@@ -42,11 +42,14 @@ a:active {
 }
 
 .popupbody{
-	background-color: #999999; 
-	margin-left: 0px;
+	background-color: #990000; 
+	margin-left: 15px;
 	margin-top: 15px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	font-family: "Andale Mono","Courier New", Courier, monospace, sans serif;
+	color: #FFFFFF;
+	font-size: 12px;
 }
 
 input {

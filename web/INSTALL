@@ -1,1 +1,7 @@
-write me
+write me better
+
+mkdir include/third_part/captcha/tmp
+mkdir upload
+chown -R apache:wheel include/third_part/captcha/tmp upload/
+chmod 770 include/third_part/captcha/tmp upload/
+chmod -R 660 include/third_part/captcha/tmp/* upload/*

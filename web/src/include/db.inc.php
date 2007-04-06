@@ -83,7 +83,7 @@
 		// - insert the information into the db
 		// - return the id of the created row into the db
 		//
-		function insert_tbt($filename,$name,$email,$city,$related_to) {
+		function insert_tbt($filename,$title,$name,$email,$city,$related_to) {
 
 			$TBT = new TBT_JSRender($filename);
 			if($TBT->is_error != 0) {
@@ -99,9 +99,10 @@
 				return false;
 			}
 			
-			$query = "INSERT INTO ".$this->table." (file,author,email,city,txt,reactio_to)".
+			$query = "INSERT INTO ".$this->table." (file,title,author,email,city,txt,reaction_to)".
 				" VALUES ('%s','%s','%s','%s','%s',%d)";
 			mysql_real_escape_string($filename);
+			mysql_real_escape_string($title);
 			mysql_real_escape_string($name);
 			mysql_real_escape_string($email);
 			mysql_real_escape_string($city);

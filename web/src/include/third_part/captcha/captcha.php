@@ -29,9 +29,7 @@ define("CAPTCHA_MAXSIZE", 4500);              // preferred image size
 define("CAPTCHA_COOKIE", "captcha_solved");   // to unlock captcha protection
 define("CAPTCHA_DATA_URLS", 0);               // RFC2397-URLs exclude MSIE users
 define("CAPTCHA_TEMP_DIR", dirname(__FILE__)."/tmp");
- define("CAPTCHA_BASE_URL", "http://$_SERVER[SERVER_NAME]:$_SERVER[SERVER_PORT]/" . substr(realpath(__FILE__), strlen($_SERVER["DOCUMENT_ROOT"])));
-#define("CAPTCHA_BASE_URL", "http://dyne.org/captcha.php");
-
+define("CAPTCHA_BASE_URL", "./include/third_part/captcha/captcha.php");
 
 /* static - (you could instantiate it, but...) */
 class captcha {
@@ -59,7 +57,7 @@ class captcha {
    /* yields <input> fields html string (no complete form), with captcha
       image already embedded as data:-URI
    */
-   function form($title="&rarr; retype that here", $more="<small>Are you human? ;)<br>Enter the correct letters!<br>Reload the page if this<br>graphic is too hard to read.</small>") {
+   function form($title="retype that here", $more="<small>Are you human? ;) Enter the correct letters!<br>Reload the page if this graphic is too hard to read.</small>") {
 
       #-- stop if user already verified
 //      if ($_COOKIE[CAPTCHA_COOKIE] == (int)(time()/1000000)) {
@@ -83,11 +81,18 @@ class captcha {
       #-- emit html form
       $html = 
         '<table border="0" summary="captcha input"><tr>'
-      . '<td><img name="captcha_image" id="captcha_image" src="' .$img_fn. '" height="60" width="200" alt="'.$alt. '" /></td>'
-      . '<td>'.$title. '<br/><input name="captcha_hash" type="hidden" value="'.$hash. '" />'
-      . '<input name="captcha_input" type="text" size="7" maxlength="16" style="height:46px; font-size:34px; font-weight:450;" />'
+      . '<td style="text-align:right"><img name="captcha_image" id="captcha_image" src="' .$img_fn. '" height="60" width="200" alt="'.$alt. '" /></td>'
+      . '</tr><tr>'
+      . '<td >'.$title. '<br/><input name="captcha_hash" type="hidden" value="'.$hash. '" />'
+      . '<input name="captcha_input" type="text" size="7" maxlength="16" style="height:46px; font-size:30px; font-weight:450;" /></td></tr><tr><td>'
       . '</td><td>'.$more.'</td>'
       . '</tr></table>';
+
+	  $html = '<img name="captcha_image" id="captcha_image" src="' .$img_fn. '" height="60" width="200" alt="'.$alt. '" />'
+	  . '<br/><br/>'.$title.' <input name="captcha_hash" type="hidden" value="'.$hash. '" />'
+	  . '<input name="captcha_input" type="text" size="7" maxlength="16" style="height:46px; font-size:30px; font-weight:450;" />'
+	  . '<br/><br/>'.$more;
+
       $html = "<div class=\"captcha\">$html</div>";
       return($html);
    }
