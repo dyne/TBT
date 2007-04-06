@@ -30,7 +30,9 @@
 </head>
 
 <?
-	include("include/third_part/captcha/captcha.php");
+	include_once("include/db.inc.php");
+	include_once("include/tbt-php.php");
+	include_once("include/third_part/captcha/captcha.php");
 	$action = $_GET['action'];
 	$relatedto = $_GET['related'];
 	if($relatedto == "") $relatedto=0;
@@ -157,8 +159,20 @@
 		$city = $_POST['city'];
 		$email = $_POST['email'];
 		$file = $_POST['filename'];
-		//TODO: process the upload
 ?> 
+	<div style="text-align:right">
+		<h2>Upload Result</h2>
+	</div>
+
+	<?=$msg?>
+	<br/>
+	<br/>
+
+	<p style="text-align:center">
+		<a href="#" onclick="window.location.goback();">Return back</a>
+		<br/>
+		<a href="#" onclick="closeThisReloadParent();">Close this window</a>
+	</p>
 <? endif; ?> 
 
 </body>
