@@ -154,11 +154,32 @@
 <? 
 	if($action=="insert"): 
 
-		$title  = $_POST['title'];
-		$author = $_POST['name'];
-		$city = $_POST['city'];
-		$email = $_POST['email'];
-		$file = $_POST['filename'];
+		$title  = strip_tags(trim($_POST['title']));
+		$author = strip_tags(trim($_POST['name']));
+		$city = strip_tags(trim($_POST['city']));
+		$email = strip_tags(trim($_POST['email']));
+		$rela = strip_tags(trim($_POST['related_to']));
+		$error = false;
+
+		if(!captcha::check()) {
+			$error = true;
+			$msg = "Error copying the captcha letters";
+		} else if(! is_uploaded_file($_FILES['filename']['tmp_name'])) {
+			$error = true;
+			$msg = "Error while uploading file";
+		} else {
+			$fname = basename($_FILES['filename']['tmp_name'])."-".time().".tbt";
+			if(! move_uploaded_file($_FILES['filename']['tmp_name'], $upload_dir."/".$fname)) {
+				$error = true;	
+				$msg = "Error while moving file into the upload directory. Please check the permission.";
+			} else {
+				$TBT_DB = new TBT_DB;
+				if(! $TBT_DB->insert_tbt($fname, $title, $author, $email, $city, $rela)) {
+					$error = true;
+					$msg = "DB: ".$TBT_DB->get_error();
+				}
+			}
+		}
 ?> 
 	<div style="text-align:right">
 		<h2>Upload Result</h2>

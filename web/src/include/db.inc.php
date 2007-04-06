@@ -84,30 +84,33 @@
 		// - return the id of the created row into the db
 		//
 		function insert_tbt($filename,$title,$name,$email,$city,$related_to) {
+			global $upload_dir;
 
-			$TBT = new TBT_JSRender($filename);
+			$TBT = new TBT_JSRender($upload_dir."/".$filename);
 			if($TBT->is_error != 0) {
 				$this->error_msg=$TBT->error_msg;
 				return false;
 			}
-			if(!is_integer($related_to)) {
+			if(!is_integer((int)$related_to)) {
 				$this->error_msg="related_to field must be an integer number!";
 				return false;
 			}
-			if(!$this->get_by_id($related_to)) {
-				$this->error_msg="There isn't any tbt file with the id: ".$related_to;
-				return false;
+			if($related_to>0) {
+				if(!$this->get_by_id($related_to)) {
+					$this->error_msg="There isn't any tbt file with the id: ".$related_to;
+					return false;
+				}
 			}
 			
+			$filename = mysql_real_escape_string($filename);
+			$title = mysql_real_escape_string($title);
+			$name = mysql_real_escape_string($name);
+			$email = mysql_real_escape_string($email);
+			$city = mysql_real_escape_string($city);
+			$txt = mysql_real_escape_string($TBT->get_text());
 			$query = "INSERT INTO ".$this->table." (file,title,author,email,city,txt,reaction_to)".
-				" VALUES ('%s','%s','%s','%s','%s',%d)";
-			mysql_real_escape_string($filename);
-			mysql_real_escape_string($title);
-			mysql_real_escape_string($name);
-			mysql_real_escape_string($email);
-			mysql_real_escape_string($city);
-			mysql_real_escape_string($TBT->get_text());
-			mysql_real_escape_string($related_to);
+				" VALUES ('$filename','$title','$name','$email','$city','".$txt."',$related_to)";
+			echo $query;
 
 			$result = mysql_query($query, $this->db_handler);
 			if(!$result) {
