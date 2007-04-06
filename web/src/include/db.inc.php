@@ -101,6 +101,58 @@
 		// delete also the corrispondent file
 		// from the filesystem
 		function delete_tbt($id) {
+
+			$row = $this->get_by_id($id);
+			if(!$row) {
+				return false;
+			}
+			$file = $upload_dir."/".$row['file'];
+			if(file_exists($file)) {
+				if(unlink($file)) return true;
+				else {
+					$this->error_msg="Cannot delete file $file. Please check ".
+						"permission and repeat";
+					return false;
+				}
+			}
+
+			mysql_real_escape_string($id);
+			$query = "DELETE FROM ".$this->table." WHERE id=$id";
+			$result = mysql_query($query, $this->db_handler);
+			if(!$result) {
+				$this->error_msg="Invalid query: ".mysql_error();
+				return false;
+			}
+			if(mysql_affected_rows($this->db_handler)==0) {
+				$this->error_msg="No entry with that id";
+				return false;
+			}
+			mysql_free_result($result);
+			return true;
+
+		}
+
+		// get tbts older then num days
+		function get_old_tbt($days) {
+
+			if(!is_integer($days)) {
+				$this->error_msg="get_old_tbt: parameter days must be an integer!";
+				return false;
+			}
+			$query = "SELECT * FROM ".$this->table." WHERE DATEDIFF(CURDATE(),datetime)>$days";
+			$result = mysql_query($query, $this->db_handler);
+			if(!$result) {
+				$this->error_msg="Invalid query: ".mysql_error();
+				return false;
+			}
+			if(mysql_num_rows($result)==0) {
+				$this->error_msg="No entries found matching your criteria!";
+				return false;
+			}
+			while($row[] = mysql_fetch_assoc($result));;
+			mysql_free_result($result);
+			return $row;
+
 		}
 
 		// get a multidimensional associative array with the last $num tbt's id

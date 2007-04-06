@@ -4,8 +4,13 @@ Main authors
 Coded by Angelo 'Pallotron' Failla <pallotron@freaknet.org>
 Webdesign by O.K. Parking - www.ok-parking.nl
 
+
+
 Third part module/libraries/hacks authors
 =========================================
 
-Bob Osola <bobosola@gmail.com>  - web/srcinclude/third_part/pngfix.js
+Bob Osola <bobosola@gmail.com>  - web/srcinclude/third_part/pngfix.js 
+                                  (public domain hack)
+
 Walter Zorn <walter2615@gmx.de> - web/src/include/third_part/wz_dragdrop.js
+                                  (LGPL license)

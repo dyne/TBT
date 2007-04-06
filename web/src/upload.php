@@ -14,21 +14,21 @@
 ?>
 <body style="background-color: #990000">
 <form name="upload" method="post" action="<?=$_SERVER['PHP_SELF']?>">
-<p>Upload your TBT<br />
+<p>Upload your TBT file<br />
 <br />
-Title:<br />
+TBT File Title:<br />
 <input type="text" name="title" />
 <br />
 <br />
-Name:<br />
+Author's Name:<br />
 <input type="text" name="name" />
 <br />
 <br />
-City:<br />
+Author's City:<br />
 <input type="text" name="city" />
 <br />
 <br />
-E-mail:<br />
+Author's E-mail:<br />
 <input type="text" name="email" />
 <br />
 <br />
@@ -36,18 +36,7 @@ File:<br />
 <input type="file" name="filename" />
 <br />
 <br />
-Reaction to:<br />  
-  <select name="select">
-    <option selected="selected">no</option>
-    <option>George</option>
-    <option>John</option>
-    <option>Paul</option>
-    <option>etc.</option>
-  </select>
-  <br />
-  <br />
-  <br />
-  <input type="submit" onclick="opener.location.reload();" name="Submit2" value="Submit" />
+<input type="submit" onclick="opener.location.reload();" name="submit" value="Submit" />
 </p>
 </form>
 </body>

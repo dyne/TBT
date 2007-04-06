@@ -137,8 +137,8 @@
 </script>
 
 <div style="position: absolute; width: 320px; top: 150px; left: 10px;"  id="tbt_0"></div>
-<div style="position: absolute; width: 320px; top: 150px; left: 350px;" id="tbt_1"></div>
-<div style="position: absolute; width: 320px; top: 150px; left: 690px;" id="tbt_2"></div>
+<div style="position: absolute; width: 320px; top: 150px; left: 340px;" id="tbt_1"></div>
+<div style="position: absolute; width: 320px; top: 150px; left: 670px;" id="tbt_2"></div>
 
 </body>
 </html>
