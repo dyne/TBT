@@ -55,32 +55,36 @@ function is_collision(i) {
 
 function print_divs() {
 
-	for(i=0; i<tbt_array.length; i++) {
+	try {	
+		for(i=0; i<tbt_array.length; i++) {
 
-		ran_y[i] = Math.floor(Math.random()*(max_y-min_y))+min_y
-		ran_x[i] = Math.floor(Math.random()*(max_x-min_x))+min_x
-		var str = '<div id="div_'+i+'" style="vertical-align: middle; background-color: #333; opacity: .5; '
-		if(msieversion()<7 && msieversion()!=0) str += 'filter:alpha(opacity=50);'
-		str += ' border: 1px solid; visibility: hidden; z-index: '+(i+1)+
-			'; position: absolute; left:'+ran_x[i]+'px; top:'+ran_y[i]+ 'px;"><img style="cursor:move;" src="images/hand.png"/>'+
-			'<span class="andalemono" onclick="playTBT(tbt_array['+i+']);"> <a href="#">'+tbt_array[i]['title']+'</a></span></div>'
-		document.getElementById("res").innerHTML += str
-		if(msieversion()<7 && msieversion()!=0) correctPNG()
-		width[i]  = document.getElementById("div_"+i).clientWidth
-		height[i] = document.getElementById("div_"+i).clientHeight
-		if(i>=1) {
-			while(is_collision(i)) {
-				ran_y[i] = Math.floor(Math.random()*(max_y-min_y))+min_y
-				ran_x[i] = Math.floor(Math.random()*(max_x-min_x))+min_x
+			ran_y[i] = Math.floor(Math.random()*(max_y-min_y))+min_y
+			ran_x[i] = Math.floor(Math.random()*(max_x-min_x))+min_x
+			var str = '<div id="div_'+i+'" style="vertical-align: middle; background-color: #333; opacity: .5; '
+			if(msieversion()<7 && msieversion()!=0) str += 'filter:alpha(opacity=50);'
+			str += ' border: 1px solid; visibility: hidden; z-index: '+(i+1)+
+				'; position: absolute; left:'+ran_x[i]+'px; top:'+ran_y[i]+ 'px;"><img style="cursor:move;" src="images/hand.png"/>'+
+				'<span class="andalemono" onclick="playTBT(tbt_array['+i+']);"> <a href="#">'+tbt_array[i]['title']+'</a></span></div>'
+			document.getElementById("res").innerHTML += str
+			if(msieversion()<7 && msieversion()!=0) correctPNG()
+			width[i]  = document.getElementById("div_"+i).clientWidth
+			height[i] = document.getElementById("div_"+i).clientHeight
+			if(i>=1) {
+				while(is_collision(i)) {
+					ran_y[i] = Math.floor(Math.random()*(max_y-min_y))+min_y
+					ran_x[i] = Math.floor(Math.random()*(max_x-min_x))+min_x
+				}
 			}
+			document.getElementById("div_"+i).style.left = ran_x[i]
+			document.getElementById("div_"+i).style.top  = ran_y[i]
+			document.getElementById("div_"+i).style.visibility = "visible"
+			if(i+1 == max_result) break;
+
 		}
-		document.getElementById("div_"+i).style.left = ran_x[i]
-		document.getElementById("div_"+i).style.top  = ran_y[i]
-		document.getElementById("div_"+i).style.visibility = "visible"
-		if(i+1 == max_result) break;
-
+	} catch(e) {
+		// do nothing
+		return;
 	}
-
 }
 
 function playTBT(tbt_array) {
