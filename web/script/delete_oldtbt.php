@@ -1,6 +1,44 @@
 #!/usr/bin/php -q
 <?
 
+/*  Time Based Text - management script
+ *
+ *  (C) Copyright 2006 - 2007  Angelo Failla <pallotron@freaknet.org>
+ *
+ * This source code is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Public License as published 
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ *
+ * This source code is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * Please refer to the GNU Public License for more details.
+ *
+ * You should have received a copy of the GNU Public License along with
+ * this source code; if not, write to:
+ * Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+# 
+# WHAT IS THIS
+# ============
+#
+# this is a management script you can use to perform some tasks:
+#
+# * delete the tbt file from db and filesystem older then X days
+#
+# more functionalities to come in future
+#
+# HOW TO USE
+# ==========
+#
+# from the cmdline: delete_oldtbt.php /path/to/tbt_webroot days
+# from the crontab scheduling execution time you want
+#
+# you must be sure that the user who exec this script has the permissions
+# to delete .tbt file into the upload directory
+
 function usage() {
 	print("usage: \n");
 	print("\n");

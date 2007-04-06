@@ -1,3 +1,23 @@
+/*  Time Based Text - web application
+ *
+ *  (C) Copyright 2006 - 2007  Angelo Failla <pallotron@freaknet.org>
+ *
+ * This source code is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Public License as published 
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ *
+ * This source code is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * Please refer to the GNU Public License for more details.
+ *
+ * You should have received a copy of the GNU Public License along with
+ * this source code; if not, write to:
+ * Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+
 // this is the about text showed on the site
 var about_tbt_text=[[73,408],[110,1],[102,0],[111,0],[114,1],[109,0],[97,0],[116,0],[105,0],[111,0],[110,1],[58,0],[13,0],[13,0],[84,1],[104,0],[105,0],[115,0],[32,0],[105,0],[115,1],[32,0],[97,0],[32,1],[110,0],[101,0],[116,0],[46,0],[97,1],[114,0],[116,0],[32,0],[105,0],[115,1],[32,0],[100,0],[101,0],[97,0],[100,2],[32,1],[99,0],[111,0],[108,0],[108,0],[97,1],[98,0],[111,0],[114,0],[97,0],[116,0],[105,1],[111,0],[110,0],[32,0],[98,0],[121,1],[58,0],[13,0],[74,0],[97,0],[114,0],[111,1],[109,0],[105,0],[108,0],[32,8],[38,0],[32,1],[74,0],[111,0],[100,0],[105,1],[13,0],[13,2],[119,1],[119,1],[119,0],[46,0],[100,0],[121,0],[110,1],[101,0],[46,0],[111,0],[114,0],[103,0],[13,1],[119,0],[119,0],[119,0],[46,0],[106,1],[111,0],[100,0],[105,0],[46,0],[111,0],[114,1],[103,0],[13,0],[119,0],[119,0],[119,1],[46,0],[105,0],[109,0],[112,0],[97,0],[107,1],[116,0],[46,0],[110,0],[108,0],[13,0],[13,1],[87,0],[101,0],[98,0],[100,0],[101,1],[115,0],[105,0],[103,0],[110,0],[32,0],[98,1],[121,0],[58,0],[13,0],[79,0],[46,1],[75,0],[46,0],[32,0],[80,0],[97,1],[114,0],[107,0],[105,0],[110,1],[103,0],[32,0],[47,0],[32,0],[119,0],[119,1],[119,0],[46,0],[111,0],[107,0],[45,1],[112,5],[97,0],[114,2],[107,1],[105,0],[110,0],[103,1],[46,0],[110,0],[108,0],[13,100]]
 
