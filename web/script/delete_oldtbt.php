@@ -80,7 +80,7 @@ if(!file_exists($tbt_web_docroot."/include/tbt-php.php")) {
 	exit(2);
 }
 
-if(!is_integer($days)) {
+if(!is_integer($days) && $days!="all") {
 	print("Error: the days argument must be an integer!\n");
 	exit(3);
 }

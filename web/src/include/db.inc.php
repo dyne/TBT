@@ -151,7 +151,6 @@
 				$this->error_msg="No entry with that id";
 				return false;
 			}
-			mysql_free_result($result);
 			return true;
 
 		}
