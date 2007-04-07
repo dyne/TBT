@@ -134,7 +134,13 @@ function playTBT(tbt_array) {
 	"' style='border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; padding: 5px 5px 5px 5px; background-color:"+
 	bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]+ ";' class='couriersmall'></div>"+
 	"<div style='border: 1px solid black; padding: 5px 5px 5px 5px; background-color:"+bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]+";'"+
-	"class='couriersmall'>Related TBT's: <br/>"+related_string+"</div>"
+	"class='couriersmall'>Related TBT's: <br/>"+related_string+"</div>"+
+	"<div style='border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;"+
+	"padding: 5px 5px 5px 5px; background-color:"+bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]+";'"+
+	"class='couriersmall'>"+
+	"<a href='#' onclick=\"MM_openBrWindow('upload.php?reactionto="+tbt_array['id']+"&amp;react_author="+tbt_array['author']+
+	"&amp;react_title="+tbt_array['title']+"','Upload','width=400,height=480')\">"+
+	"Reply to this TBT</a></div>"
 
 	var tbt = new TBT()
 	tbt.startTyping("tbttext_"+row_counter, tbt_array['tbt'])

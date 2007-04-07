@@ -54,7 +54,7 @@
 		<td align="left" valign="top" class="andalemono">
 			--<u>F</u>ILE /
 			<a href="http://tbt.dyne.org/?info=download">Download TBT software</a> / 
-			<span onClick="MM_openBrWindow('upload.php','Upload','width=350,height=450')"><a href="#">Upload your TBT</a></span> / 
+			<span onClick="MM_openBrWindow('upload.php','Upload','width=400,height=480')"><a href="#">Upload your TBT</a></span> / 
 			<u>S</u>EARCH : <form style="display: inline;" name="search" method="post" action="<?=$_SERVER['PHP_SELF'];?>?action=search">
 			<input type="text" name="search_pattern" value="<? if($_GET['action']!="") echo $_POST['search_pattern']; ?>"/></form> / 
 			<u>H</u>ELP / 

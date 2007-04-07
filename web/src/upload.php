@@ -34,8 +34,12 @@
 	include_once("include/tbt-php.php");
 	include_once("include/third_part/captcha/captcha.php");
 	$action = $_GET['action'];
-	$relatedto = $_GET['related'];
+	$relatedto = $_GET['reactionto'];
 	if($relatedto == "") $relatedto=0;
+	else {
+		$react_title = $_GET['react_title'];
+		$react_author = $_GET['react_author'];
+	}
 ?>
 
 <body class="popupbody">
@@ -127,6 +131,11 @@
 				<div style="text-align:right">
 					<h2>Upload your TBT file</h2>
 					<hr/>
+					<? if($relatedto != 0): ?>
+					In reaction to: "<i><?=$react_title?></i>" by <?=$react_author?>
+					<br/>
+					<br/>
+					<? endif;?>
 					TBT File Title:  <input type="text" name="title" />
 					<br/>
 					<br/>
@@ -190,9 +199,9 @@
 	<br/>
 
 	<p style="text-align:center">
-		<a href="#" onclick="window.location.goback();">Return back</a>
+		<span onclick="javascript:history.back();" style="cursor:hand">Return back</span>
 		<br/>
-		<a href="#" onclick="closeThisReloadParent();">Close this window</a>
+		<a href="#" onclick="closeThisReloadParent();"><u>Close this window</u></a>
 	</p>
 <? endif; ?> 
 

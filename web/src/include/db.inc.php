@@ -110,7 +110,6 @@
 			$txt = mysql_real_escape_string($TBT->get_text());
 			$query = "INSERT INTO ".$this->table." (file,title,author,email,city,txt,reaction_to)".
 				" VALUES ('$filename','$title','$name','$email','$city','".$txt."',$related_to)";
-			echo $query;
 
 			$result = mysql_query($query, $this->db_handler);
 			if(!$result) {
