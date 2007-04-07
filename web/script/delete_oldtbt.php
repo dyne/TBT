@@ -27,6 +27,7 @@
 # this is a management script you can use to perform some tasks:
 #
 # * delete the tbt file from db and filesystem older then X days
+# * empty the database and the filesystem
 #
 # more functionalities to come in future
 #
@@ -34,7 +35,7 @@
 # ==========
 #
 # from the cmdline: delete_oldtbt.php /path/to/tbt_webroot days
-# from the crontab scheduling execution time you want
+# from the crontab: scheduling execution time you want
 #
 # you must be sure that the user who exec this script has the permissions
 # to delete .tbt file into the upload directory
@@ -47,6 +48,7 @@ function usage() {
 	print("    - /path/to/tbt_webroot: it's the basedir of the tbt web application site\n");
 	print("    - days: the number of days. Tbts older than 'days' will be \n");
     print("            deleted from db and fs\n");
+    print("            if days = all the records will be cleaned\n");
 	print("\n");
 	exit(1);
 }
@@ -56,7 +58,11 @@ if($argc != 3) {
 }
 		
 $tbt_web_docroot = $argv[1];
-$days = (int)$argv[2];
+if($argv[2] == "all") {
+	$days = "all";
+} else {
+	$days = (int)$argv[2];
+}
 
 if(!file_exists($tbt_web_docroot)) {
 	print("Error: cannot find web root: $tbt_web_docroot\n");
@@ -83,7 +89,11 @@ include_once($tbt_web_docroot."/include/db.inc.php");
 include_once($tbt_web_docroot."/include/tbt-php.php");
 
 $TBT = new TBT_DB;
-$row = $TBT->get_old_tbt($days);
+if($days!="all") {
+	$row = $TBT->get_old_tbt($days);
+} else {
+	$row = $TBT->get_n("all");
+}
 
 function print_tbt($r) {
 	return "id: ".$r['id']." - ".$r['title']." - by ".$r['author']." <".$r['email'].">";
