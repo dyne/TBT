@@ -53,6 +53,8 @@ class TBTEntry : public Entry {
 
   /* parse from *buf and return true on success */
   bool parse_uint64(void *buf);
+  /* parse from an ascii line and return true on success */
+  bool parse_ascii(char *buf);
   
   /* render in *buf and returns size in bytes */
   int render_uint64(void *buf);
@@ -90,6 +92,9 @@ class TBT {
   // loading functions: load a tbt recording for playback
 
   int load(char *filename); ///< load a .tbt recorded file
+  //TODO:
+  // int load_html(char *filename);
+  int load_ascii(char *filename);
 
 
   void clear(); ///< deletes all current keys and frees memory  

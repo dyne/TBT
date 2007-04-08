@@ -5,10 +5,11 @@
 
 #include <tbt.h>
 #include <jutils.h>
+#include <rtclock.h>
 
 
 
-TBTClock tbtclock;
+RTClock tbtclock;
 
 int main(int artc, char **argv) {
 

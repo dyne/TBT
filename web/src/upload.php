@@ -30,6 +30,7 @@
 </head>
 
 <?
+	include_once("include/config.inc.php");
 	include_once("include/db.inc.php");
 	include_once("include/tbt-php.php");
 	include_once("include/third_part/captcha/captcha.php");

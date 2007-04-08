@@ -1,4 +1,15 @@
-write me better
+TODO: write me better!!!!!!!!!!
+
+INSTALL INSTRUCTION
+===================
+
+1.a download source from svn
+
+	svn co http://dev.dyne.org/rastasoft/tbt/trunk
+
+1.b download tar.gz package and extract it
+
+	wget ...
 
 mkdir include/third_part/captcha/tmp
 mkdir upload

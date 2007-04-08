@@ -37,7 +37,7 @@ TBT tbt;
 int main(int argc, char **argv) {
   int c, len;
 
-  len = tbt.load( argv[1] );
+  len = tbt.load_ascii( argv[1] );
   if(!len) {
     fprintf(stderr,"no entries found in file %s\n",argv[1]);
     exit(1);
@@ -51,7 +51,6 @@ int main(int argc, char **argv) {
     // tbt.getkey will wait N time before returning
     stroke =  (TBTEntry*) tbt.buffer->pick(c);
     switch(stroke->key) {
-      case KEY_BACKSPACE:   sprintf(keyname,"BACKSPACE"); break;
       case KEY_ENTER:   sprintf(keyname,"ENTER"); break;
       case KEY_UP:      sprintf(keyname,"UP");    break;
       case KEY_DOWN:    sprintf(keyname,"DOWN");  break;

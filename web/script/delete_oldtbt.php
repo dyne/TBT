@@ -85,6 +85,7 @@ if(!is_integer($days) && $days!="all") {
 	exit(3);
 }
 
+include_once($tbt_web_docroot."/include/config.inc.php");
 include_once($tbt_web_docroot."/include/db.inc.php");
 include_once($tbt_web_docroot."/include/tbt-php.php");
 
@@ -113,4 +114,5 @@ if($row != "") {
 }
 
 exit(0);
+
 ?>

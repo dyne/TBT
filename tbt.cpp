@@ -51,6 +51,39 @@ bool TBTEntry::parse_uint64(void *buf) {
   return true;
 }
 
+// pallotron: 08/04/2007
+// this method takes an ascii line (readed from an ascii file) and convert it
+// to the key,msec couple.
+// there's actually a problem with the backspace key... the S-Lang widget prints
+// ^P... without delete the previous char... the tbtchk_ascii.cpp test problem
+// print correctly the backspace value in my shell... :( 
+// TODO: fix this...
+bool TBTEntry::parse_ascii(char *buf) {
+
+  char *p;
+  int c = 0;
+
+  // problably the problem above is in this line...
+  key = buf[0];
+
+  // search for ':' char: has this sense?
+  // what happens in case of utf8 chars? of chars > 1 byte?
+  p = buf;
+  while(*p != '\0') {
+	  if(*p == ':') break;
+	  p++;
+	  c++;
+  }
+  // c counter contains the index of the ':' char
+  // the msec values is the string after the ':'
+  // so i point the p pointer to the next char...
+  // i use atoi to convert the string value to an integer
+  p = &buf[c+1];
+  msec = (unsigned long int)atoi(p);
+
+  return true;
+}
+
 
 int TBTEntry::render_uint64(void *buf) {
   int len; // length in bytes
@@ -350,7 +383,52 @@ int TBT::load(char *filename) {
   return c;
 }
 
+// pallotron: 08/04/2007
+// this method is the same of the load() method.
+// except that it reads from a pure ascii file
+// each line is passed to the parse_ascii method
+int TBT::load_ascii(char *filename) {
 
+  int c;
+
+  char ascii_line[512];
+
+  FILE *fd;
+
+  fd = fopen(filename, "r");
+  if(!fd) {
+    error("can't open ascii file: %s", strerror(errno));
+    return false;
+  }
+
+  clear();
+
+  TBTEntry *ent;
+
+  c = 0;
+  
+  act("loading ascii file %s", filename);
+
+  while( ! feof(fd) ) {
+
+    fgets(ascii_line, 512, fd);
+    
+    ent = new TBTEntry();
+
+    if( ! ent->parse_ascii(ascii_line) ) {
+      error("error in TBTEntry::parse_ascii");
+      continue;
+    }
+
+    buffer->append( ent );
+    c++;
+
+  }
+
+  position = 1;
+
+  return c;
+}
 
 int TBT::save_bin(char *filename) {
 

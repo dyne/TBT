@@ -17,9 +17,29 @@
  * You should have received a copy of the GNU Public License along with
  * this source code; if not, write to:
  * Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ * ==========================================================================
+ *
+ * This php web script is a web service used by the javascript ajax functions
+ * to retrieve information about tbts.
+ *
+ * Parameters
+ *
+ * action: 
+ *   * getbyid => return a single tbt
+ *   * related => return a list of tbts related to the provided id
+ *
+ * id:
+ *   it's the id number of the tbt
+ *
+ * Returns
+ *
+ * The web service returns an xml file, this is an example
+ * 
+ *
  */
 
-
+include_once("include/config.inc.php");
 include_once("include/db.inc.php");
 include_once("include/tbt-php.php");
 
@@ -61,8 +81,6 @@ switch ($action) {
 			$num = sizeof($row) - 1;
 		break;
 }
-
-
 
 header("Content-Type: text/xml");
 echo "<?xml version=\"1.0\"?>\n";

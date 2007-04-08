@@ -1,31 +1,5 @@
 <?
 
-/*  Time Based Text - web application
- *
- *  (C) Copyright 2006 - 2007  Angelo Failla <pallotron@freaknet.org>
- *
- * This source code is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Public License as published 
- * by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
- *
- * This source code is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * Please refer to the GNU Public License for more details.
- *
- * You should have received a copy of the GNU Public License along with
- * this source code; if not, write to:
- * Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
-
-	$db_host="localhost";
-	$db_user="tbt_site";
-	$db_name="tbt_site";
-	$db_pass=";.;tbt_s1t3!!!";
-	$db_table="tbt_files";
-	$upload_dir="upload/";
-
 	class TBT_DB {
 
 		var $db_handler;
@@ -38,6 +12,7 @@
 		// +-------------+-----------+------+-----+---------+----------------+
 		// | id          | int(11)   | NO   | PRI | NULL    | auto_increment | 
 		// | file        | char(255) | NO   |     |         |                | 
+		// | title       | char(255) | NO   | MUL |         |                | 
 		// | author      | char(255) | NO   | MUL |         |                | 
 		// | email       | char(255) | YES  |     | NULL    |                | 
 		// | city        | char(255) | YES  | MUL | NULL    |                | 
@@ -108,8 +83,8 @@
 			$email = mysql_real_escape_string($email);
 			$city = mysql_real_escape_string($city);
 			$txt = mysql_real_escape_string($TBT->get_text());
-			$query = "INSERT INTO ".$this->table." (file,title,author,email,city,txt,reaction_to)".
-				" VALUES ('$filename','$title','$name','$email','$city','".$txt."',$related_to)";
+			$query = "INSERT INTO ".$this->table." (file,title,author,email,city,txt,reaction_to,datetime)".
+				" VALUES ('$filename','$title','$name','$email','$city','".$txt."',$related_to, NOW())";
 
 			$result = mysql_query($query, $this->db_handler);
 			if(!$result) {

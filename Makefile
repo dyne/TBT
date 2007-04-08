@@ -11,7 +11,7 @@ LINKER = ld
 
 
 # debugging flags:
-CXXFLAGS = -Wall -ggdb -I../slw -I. -I/usr/pkg/include -DHAVE_BSD
+CXXFLAGS = -Wall -ggdb -I../../slw -I. -I/usr/pkg/include -DHAVE_BSD
 
 # optimized flags:
 # CXXFLAGS = -Wall -O2 -fomit-frame-pointer -ffast-math -I../slw -I. -I/usr/pkg/include -DHAVE_BSD
@@ -21,7 +21,7 @@ CXXFLAGS = -Wall -ggdb -I../slw -I. -I/usr/pkg/include -DHAVE_BSD
 
 # flags to compile slang linking to dynamic system lib
 
-LIBS = -lslang -lpthread ../slw/libslw.a
+LIBS = -lslang -lpthread ../../slw/libslw.a
 
 # flags to compile slang linking to dynamic libs on BSD
 
@@ -62,11 +62,17 @@ recmail: recmail.o $(DEPS)
 tbtcheck: $(DEPS) tbtcheck.o
 	$(CPP) $(CXXFLAGS) -o tbtcheck tbtcheck.o $(DEPS) $(LIBS)
 
+tbtcheck_ascii: $(DEPS) tbtcheck_ascii.o
+	$(CPP) $(CXXFLAGS) -o tbtcheck_ascii tbtcheck_ascii.o $(DEPS) $(LIBS)
+
 rtctest: $(DEPS) rtctest.o
 	$(CPP) $(CXXFLAGS) -o rtctest rtctest.o $(DEPS) $(LIBS)
 
 clean:
 	rm -rf *.o *~ tbt
+	rm -f record.tbt
+	find . -type l -exec rm -f {} \;
+	make -C web clean
 #%: %.c
 
 #	$(CC) $(CFLAGS) -o $@ $< $(LIBS)

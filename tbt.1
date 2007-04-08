@@ -1,87 +1,129 @@
-.\" Process this file with
-.\" groff -man -Tascii foo.1
-.\"
-.TH TBT 10 "January 2007" UNIX "User Manuals"
+.TH tbt 1 "April 8, 2007" "tbt"
+
 .SH NAME
-TBT - Time Based Text
+tbt \- Time Based Text
+
 .SH SYNOPSIS
-.B tbt [
-.I options
-.B ] [
-.I file
-.B ]
+.B tbt [options] [file]
 
 .SH DESCRIPTION
-\fBTbt\fP is a commandline and console tool for time based recording
-and playback of keyboard strokes with a precision to the millisecond.
+.B tbt - Time Based Text
 
-When recording, keys are saved in the specified .tbt file (called
-record.tbt by default) which can be later used to playback the
-sequence typed.
+To vehicle more human-input information in written text.
 
-As a commandline tool it can record from standard input or playback to
-standard output (from and to a file or pipeline), so that it can be
-used in combination with other programs to reproduce a sequence of
-actions.
+Record performance time of written text and vehicle it as additional information: saving and reproducing every single action during the composition of a text let us vehicle emphasis in written communication.
 
-As a console tool it offers a simple typing interface to record and
-playback text exactly as it is typed, including all corrections and
-hesitations, to be employed in e-mail and poetry communication for
-instance.
+As this simple concept, our implementation is also kept very minimalistic while we welcome programmers to embed it in communication applications, as in emails, blogs, visual poetry, slides and what not.
 
-It is \fBtbt\fP ability to keep the timing highly precise thru
-recording and playback, to provide a basic tool for synchronization of
-time based input and output.
+Beware this software is hacky, u need to love text. A manual page is provided and commandline formulas to be casted in a terminal.
+
+This software is written in thread-safe POSIX C++ and can be ported to most platforms, it provides a real-time recorder for serial timed data, recording 64bit tuples key/msec with low-latency. Included are programs providing a text console interface for the user to experiment with keyboard.
+
+A Web application written in PHP/MySQL and Ajax could be used to publish TBT written into the world wide web.
+
+.SH PROTOCOL
+
+In the .tbt format, text is saved with a timestamp for each letter:
+   _________ ___________ 
+  |  u-int  |   u-int   |
+  |  64bit  |   64bit   |    m-seconds = 1/1000 of a second
+   --------- -----------
+  |  char   | m-seconds |    char = ASCII or higher bit char code
+   --------- -----------
+  |    Total: 128bit    |
+   ---------------------
+
+However export to different formats is planned including generation of web-ready code in HTML and Javascript, a daemon to provide timed input thru a socket on the network (TCP/IP) and what not.
+
+Input is captured from the console, but can be extended to intercept any application using some h4x0r keylogging technique on different OS.
 
 .SH OPTIONS
-.IP "-h"
-show commandline help
-.IP "-v"
-show version information
-.IP "-D [\fI num \fP]"
-set debug verbosity level to (1 to 3), default is 1
-.IP "-c"
-offer a console interface (S-Lang) for a simple terminal text editor,
-to interactively record (or playback) all operations performed in its
-making.
-.IP "-r"
-run to record all the input keys (this is the default)
-.IP "-p"
-run to playback all the keys in the .tbt file
-.IP "-m"
-activate mail composer capabilities for the console recording
-interface, for integration with mail user agents as mutt
-.IP "-s [\fI bin | ascii | html \fP]"
-choose the format in which to save the recorded file: by default
-binary is used and supported for playback by tbt, but more formats are
-provided for reproduction by other customized playback tools.
 
+.B
+.IP "-h"
+Display a help text and quit
+.B
+.IP "-v"
+Display version and quit
+.B
+.IP "-D \fI<number>\fR"
+Set verbosity level, the default value is 1
+.B
+.IP "-c"
+Use the S-Lang console interface
+.B
+.IP "-r"
+record tbt - option alias: rectext
+.B
+.IP "-p"
+playback tbt - option alias: playtext
+.B
+.IP "-m"
+mail composer - option alias: recmail
+.B
+.IP "-s \fI<format_name>\fR"
+save format in [ bin | ascii | html ]. Default is bin.. Default is bin.
+
+The binary mode will store a binary file you can play with the playtext command.
+
+The html mode will produce a simple html page, in which your text will be played. For further information about the html mode please the the README.html file.
+
+The ascii mode produces pure ascii text file, one character per line, with the information about the key pressed, and the timestamp.
+
+.SH EXAMPLES
+
+.B
+.IP "Howto record a tbt in binary format"
+
+$ rectext -s bin mytext.tbt
+
+.B
+.IP "Howto play a tbt binary file"
+
+$ playtext mytext.tbt
+
+.B
+.IP "Howto record a tbt in ascii mode"
+
+$ rectext -s ascii mytext.txt
+
+.B
+.IP "Howto record a tbt in html mode"
+
+$ rectext -s html mytext.html
+
+.SH NOTES
+The first integration provided for TBT is with Mutt \fIhttp://www.mutt.org\fR the Mail User Agent popular among text console users.
+For further information please read the README.mutt file.
+
+.SH BUGS
+Everyone is encouraged to test this software and report bugs!
+Send remarks and patches to http://dyne.org/hackers_contact.php or get in touch with coders via irc.freenode.net channel #dyne
 
 .SH AUTHORS
-.nf
-Denis "Jaromil" Rojo
-<\fIhttp://rastasoft.org\fR>
+Ideated by Jaromil & Jodi
+.br
+commissioned by the Impakt.nl festival
 
-Joan & Dirk
-<\fIhttp://jodi.org\fR>
+POSIX C++ code: Denis 'Jaromil' Rojo <\fIjaromil@dyne.org\fR>
+.br
+PHP/Javascript code: Angelo 'pallotron' Failla <\fIpallotron@freaknet.org\fR>
+Webdesign: O.K. Parking - www.ok-parking.nl
 
-A full list of developers and contributors can be found in the AUTHOR
-file distributed with the source package.
-
-Development commissioned by the Impakt.nl festival
-
-Manual page and documentation by Jaromil.
-.fi
+Thanks to: Florian Cramer, Angelo 'Pallotron' Failla, Annet Dekker,
+Giacomo Verde, Roberto Castello, Andrea 'Alpt' Lo Pumo
 
 .SH COPYING
-Permission is granted to copy, distribute and/or modify this manual
-under the terms of the GNU Free Documentation License, Version 1.1 or
-any later version published by the Free Software Foundation; with no
-Invariant Sections. Permission is granted to make and distribute
-verbatim copies of this manual page provided the above copyright
-notice and this permission notice are preserved on all copies.
+Copyright (c) 2001-2006 Denis Roio <\fIjaromil@dyne.org\fR>
+.br
+Copyright (c) 2001-2007 Angelo Failla <\fIpallotron@freaknet.org\fR>
+
+Permission is granted to copy, distribute and/or modify this manual under the terms of the GNU Free Documentation License, Version 1.1 or any later version published by the Free Software Foundation. Permission is granted to make and distribute verbatim copies of this manual page provided the above copyright notice and this permission notice are preserved on all copies.
 
 .SH AVAILABILITY
-The most recent version of \fItbt\fR can be attained from its homepage
-at \fIhttp://tbt.dyne.org\fR and from the \fIftp.dyne.org\fR software
-repository.
+The most recent version of tbt sourcecode and up to date documentation is always available for download from \fIhttp://tbt.dyne.org\fR.
+
+.SH SEE ALSO
+
+* README.mutt
+* README.html

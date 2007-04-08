@@ -1,18 +1,18 @@
 TODO
 ====
 
-Everyone is free to code this task!
-
-* write the upload feature with catcpha capability
-
-* add a link to each tbt div named "reply to this tbt"
-  that open the upload window with the related_to hidden
-  field set to the proper id
+Everyone is free to code these tasks!
 
 * migration from sql based data store to xml based one
 
-* better code stylish
+* better code style
 
-* installation instructions document
+* installation instruction documents
 
 * installation scripts (in php or shell? or both?)
+
+* improved management script(s)
+
+Everyone is encouraged to test this software and report bugs!
+Send remarks and patches to http://dyne.org/hackers_contact.php 
+or get in touch with coders via irc.freenode.net channel #dyne
