@@ -76,9 +76,9 @@
 
 </div>
 
-<div style="position: absolute; width: 320px; top: 150px; left: 300px;">
+<!--<div style="position: absolute; width: 320px; top: 150px; left: 300px;">
 <img src="images/tbt-wheel.png" />
-</div>
+</div>-->
 
 <div id="res">
 </div>

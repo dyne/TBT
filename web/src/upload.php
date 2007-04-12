@@ -85,14 +85,7 @@
 			return false;
 		} else document.upload.city.style.background=""
 
-		if ((email == "") || (email == "undefined")) {
-			alert("Email field is mandatory.");
-			document.upload.email.style.background="#ff3333";
-			document.upload.email.focus();
-			return false;
-		} else document.upload.email.style.background=""
-
-		if (! filter.test(email)) {
+		if ((email != "") &&(email != "undefined") && (! filter.test(email))) {
 			alert("Email field is not valid.");
 			document.upload.email.style.background="#ff3333";
 			document.upload.email.focus();
