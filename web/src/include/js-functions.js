@@ -123,10 +123,14 @@ function playTBT(tbt_array) {
 		} else related_string = "nothing"
 	}
 
-	document.getElementById("tbt_"+row_counter).innerHTML = 
+	div_content = 
 	"<div style='border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 5px 5px 5px 5px; background-color:"+
 	bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]+";'"+
-	"class='couriersmall'><b>From: "+tbt_array['author']+" <br/>&lt;<a href=\"mailto:"+tbt_array['email']+"\">"+tbt_array['email']+"</a>&gt;<br/>"+
+	"class='couriersmall'><b>From: "+tbt_array['author']
+	if(tbt_array['email']!="" && tbt_array['email'] != "undefined") {	
+		div_content += "<br/>&lt;<a href=\"mailto:"+tbt_array['email']+"\">"+tbt_array['email']+"</a>&gt;"
+	}
+	div_content += "<br/>"+
 	"Title: "+tbt_array['title']+"<br/>"+
 	"Date/Time: "+tbt_array['datetime']+"<br/>"+
 	"City: "+tbt_array['city']+"<br/></b>"+
@@ -141,6 +145,8 @@ function playTBT(tbt_array) {
 	"<a href='#' onclick=\"MM_openBrWindow('upload.php?reactionto="+tbt_array['id']+"&amp;react_author="+tbt_array['author']+
 	"&amp;react_title="+tbt_array['title']+"','Upload','width=400,height=480')\">"+
 	"Reply to this TBT</a></div>"
+
+	document.getElementById("tbt_"+row_counter).innerHTML = div_content
 
 	var tbt = new TBT()
 	tbt.startTyping("tbttext_"+row_counter, tbt_array['tbt'])
