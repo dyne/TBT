@@ -60,26 +60,12 @@ bool TBTEntry::parse_uint64(void *buf) {
 // TODO: fix this...
 bool TBTEntry::parse_ascii(char *buf) {
 
-  char *p;
-  int c = 0;
+  unsigned char k = 0;
+  unsigned long int m = 0;
 
-  // problably the problem above is in this line...
-  key = buf[0];
-
-  // search for ':' char: has this sense?
-  // what happens in case of utf8 chars? of chars > 1 byte?
-  p = buf;
-  while(*p != '\0') {
-	  if(*p == ':') break;
-	  p++;
-	  c++;
-  }
-  // c counter contains the index of the ':' char
-  // the msec values is the string after the ':'
-  // so i point the p pointer to the next char...
-  // i use atoi to convert the string value to an integer
-  p = &buf[c+1];
-  msec = (unsigned long int)atoi(p);
+  sscanf(buf, "%c:%lu\n", &k, &m);
+  key = (uint64_t)k;
+  msec = (uint64_t)m;
 
   return true;
 }
