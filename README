@@ -5,7 +5,7 @@
 	    888	     888    888	    888
 	   o888o    o888ooo888	   o888o
 
-		Time Based Text    v0.6
+		Time Based Text    v0.7
 
                http://tbt.dyne.org
 
@@ -15,8 +15,8 @@
 
 Our objective here is to carry more information in written text.
 
-The solution we propose is: record performance time in text and
-vehicle it as additional information.
+The solution proposed: record performance time in text
+and vehicle it as additional information.
 
 Saving and reproducing every single action during the composition of a
 text let us vehicle emphasis in written communication.
@@ -56,6 +56,7 @@ requirements are:
 - ASCII Art, Poetry, Empathy
 - TeleText (the next generation)
 - Educational purposes
+- Multipurpose granular time based protocol
 
 
 
@@ -81,12 +82,22 @@ Input is captured from the console, but can be extended to intercept
 any application using some h4x0r keylogging technique on different OS.
 
 
+:::: TODO
+
+In case of a multipurpose protocol for tagging time based events of
+variable size and type, we should introduce the use of a header.
+This might also help distinguishing among different key code maps.
+With 0.7 development reached a sufficiently advanced status, following
+some more debugging it will be tagged as 1.0 - so basically the change
+of the protocol will be an aim for the development of TBT 2.0 .
+
 
 
 ::::: DISCLAIMER
 
 TBT is Copyleft 2006 - 2007 by Jaromil & Jodi
-commissioned by the Impakt.nl festival
+artwork commissioned by the Impakt.nl festival
+please refer to the included AUTHORS file for complete information.
 
 This source code is free software; you can redistribute it and/or
 modify it under the terms of the GNU Public License as published 

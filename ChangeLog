@@ -1,27 +1,30 @@
-TBT 0.6 - 31 Jan 2007
+TBT 0.7 - pallotron
+	New interactive website for TBT messaging (PHP)
+
+TBT 0.6 - 31 Jan 2007 - jaromil, alpt
 	Now building a single binary utility (aliased)
 	Commandline mode for piped input/output
 	Html/javscript renderer
 	User's manual page
 
-TBT 0.5 - 18 Dec 2006
+TBT 0.5 - 18 Dec 2006 - jaromil
 	Clock fine tuned to realtime low-latency
 	64bit format timecode
 	Threaded RTC timer, fallback to POSIX.1
 	Code Cleanup
 
-TBT 0.4 - 9 Feb 2006
+TBT 0.4 - 9 Feb 2006 - jaromil
 	Removed dependency from STL
 	Added Linklist and Utils
 	Fix to compile on NetBSD
 	Fix to run on MIPS processor
 	Rendering options and some cleanup
 
-TypeWRotor 0.3 - 6 Feb 2006
+TypeWRotor 0.3 - 6 Feb 2006 - jaromil, pallotron
 	CLI interface
-	Apple/OSX binaries (contributed by Pallotron)
+	Apple/OSX binaries
 
-Time-Based-Text 0.2 - 5 Feb 2006
+Time-Based-Text 0.2 - 5 Feb 2006 - jaromil
 	Modular rewrite in C++
 	code should be readable
 	console class (re)written (from FreeJ S-Lang interface)
@@ -29,7 +32,7 @@ Time-Based-Text 0.2 - 5 Feb 2006
 	initial support to export in JavaScript
 	problem: console behaviour needs fixes
 		
-Clickrec 0.1 - 29 Jan 2006
+Clickrec 0.1 - 29 Jan 2006 - jaromil, jodi
 	first implementation in C using a keylogger
 	problem: is not portable
 	
