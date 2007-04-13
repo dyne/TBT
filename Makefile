@@ -3,6 +3,9 @@
 # Just tweak the values below to fix your paths
 
 
+# adjust for your installation path
+PREFIX = /usr
+
 CPP = g++
 CXX = g++
 LINKER = ld
@@ -68,11 +71,19 @@ tbtcheck_ascii: $(DEPS) tbtcheck_ascii.o
 rtctest: $(DEPS) rtctest.o
 	$(CPP) $(CXXFLAGS) -o rtctest rtctest.o $(DEPS) $(LIBS)
 
+install: all
+	install tbt $(PREFIX)/bin
+	ln -sf $(PREFIX)/bin/tbt $(PREFIX)/bin/rectext
+	ln -sf $(PREFIX)/bin/tbt $(PREFIX)/bin/playtext
+	ln -sf $(PREFIX)/bin/tbt $(PREFIX)/bin/recmail
+	install tbt.1 $(PREFIX)/share/man/man1/
+	
 clean:
 	rm -rf *.o *~ tbt
 	rm -f record.tbt
 	find . -type l -exec rm -f {} \;
 	make -C web clean
+
 #%: %.c
 
 #	$(CC) $(CFLAGS) -o $@ $< $(LIBS)

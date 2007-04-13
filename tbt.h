@@ -25,13 +25,11 @@
 
 #include <time.h>
 #include <inttypes.h>
-//#include <sys/types.h>
-//#include <sys/param.h>
 #include <sys/time.h>
 
 #include <linklist.h>
 
-#define VERSION "v0.6 - by Jaromil & Jodi"
+#define VERSION "v0.7 - tbt.dyne.org"
 
 
 class RTClock; // ghost pointer for rtclock.h
