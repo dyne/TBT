@@ -28,7 +28,9 @@
 #include <tbt.h>
 #include <jutils.h>
 
+#ifdef linux
 #include <rtclock.h>
+#endif
 
 
 TBTEntry::TBTEntry() 
@@ -149,6 +151,7 @@ TBT::~TBT() {
 
 int TBT::init() {
 
+#ifdef linux
   // try /dev/rtc clock
   clock = new RTClock();
   if( clock->init() ) {
@@ -163,20 +166,18 @@ int TBT::init() {
     clock->set_freq( 1024 );
     
     // this launches the internal clock thread
-    if( ! clock->start() )
+    if( ! clock->start() ) {
       error("can't run real time clock at 1024HZ");
-    else
+      delete clock;
+      clock = NULL;
+    } else
       rtc = true;
     
   }
+#endif
   
   if(!rtc) { // use posix
     
-    if(clock) {
-      delete clock;
-      clock = NULL;
-    }
-
     if( gettimeofday(&gettime, NULL) <0 ) {
       error("error getting (posix) time: %s",strerror(errno));
       error("no timing source available, impossible to go further");
@@ -301,17 +302,16 @@ uint64_t TBT::getkey() {
 
   // this pauses execution by time delta in entry
   // here are implemented rtc and posix
-  if(rtc)
-
-    clock->sleep(ent->msec);
-
-  else {
+  if(!rtc) {
 
     psleep.tv_sec = ent->msec / 1000;
     psleep.tv_nsec = (ent->msec % 1000) * 1000000;
     nanosleep(&psleep, NULL);
 
   }
+#ifdef linux
+    else clock->sleep(ent->msec);
+#endif
 
   return ent->key;
 }
@@ -564,17 +564,17 @@ void TBT::compute_delta(TBTEntry *tbt) {
 
   // get the NOW
   // here is implemented rtc and posix
-  if(rtc)
+  if(!rtc) {
 
-    now = clock->msec;
-
-  else { // posix 1003.1-2001 gettimeofday
-
+    // posix 1003.1-2001 gettimeofday
     if( gettimeofday(&gettime, NULL) <0)
       error("error getting time: %s",strerror(errno));
     now = (gettime.tv_sec * 1000) + (gettime.tv_usec / 1000);
     
   }
+#ifdef linux
+    else now = clock->msec;
+#endif
 
   tbt->msec = now - past;
   // take care of unsigned

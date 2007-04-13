@@ -18,6 +18,8 @@
  *
  */
 
+#ifdef linux
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -227,3 +229,4 @@ int RTClock::sleep(uint64_t msec) {
   return 1;
 }
 
+#endif

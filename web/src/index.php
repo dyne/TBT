@@ -53,14 +53,15 @@
 	<tr>
 		<td align="left" valign="top" class="andalemono">
 			--<u>F</u>ILE /
-			<a href="http://tbt.dyne.org/?info=download">Download TBT software</a> / 
+			<a href="http://tbt.dyne.org/writeone.html">Write a TBT</a> / 
 			<span onClick="MM_openBrWindow('upload.php','Upload','width=400,height=480')"><a href="#">Upload your TBT</a></span> / 
 			<u>S</u>EARCH : <form style="display: inline;" name="search" method="post" action="<?=$_SERVER['PHP_SELF'];?>?action=search">
 			<input type="text" name="search_pattern" value="<? if($_GET['action']!="") echo $_POST['search_pattern']; ?>"/></form> / 
+			<a href="<?=$_SERVER['PHP_SELF'];?>">Show last 5 TBTs</a></span> /
 			<u>H</u>ELP / 
-			<span onClick="printMsg(about_tbt_text)"><a href="#">About TBT</a></span> / 
-			<span onClick="printMsg(info_tbt_text)"><a href="#">Info </a></span> /
-			<a href="<?=$_SERVER['PHP_SELF'];?>">Show last 5 tbts</a></span> /
+			<span onClick="printMsg(info_tbt_text)"><a href="#">Info</a></span> /
+			<a href="http://tbt.dyne.org/manual.html">Man</a> /
+			<span onClick="printMsg(about_tbt_text)"><a href="#">Credits</a></span>
 		</td>
 	</tr>
 	<tr>
@@ -70,7 +71,7 @@
 
 	<table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
 	<tr class="andalemono">
-		<td align="left" valign="top">--<a href="http://tbt.dyne.org/"><u>TIME BASED TEXT</u></a>--</td>
+		<td align="center" valign="top">--<a href="http://tbt.dyne.org/"><u>TIME BASED TEXT</u></a>--</td>
 	</tr>
 	</table>
 

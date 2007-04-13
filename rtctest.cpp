@@ -1,3 +1,8 @@
+#ifndef linux
+
+#error "rtctest can be compiled only on linux"
+
+#else
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,3 +49,5 @@ int main(int artc, char **argv) {
 
   exit(1);
 }
+
+#endif
