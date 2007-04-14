@@ -82,6 +82,7 @@ clean:
 	rm -rf *.o *~ tbt
 	rm -f record.tbt
 	find . -type l -exec rm -f {} \;
+	rm -f tbtcheck tbtcheck_ascii rtctest
 	make -C web clean
 
 #%: %.c
