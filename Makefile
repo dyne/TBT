@@ -48,7 +48,7 @@ DEPS = tbt.o linklist.o jutils.o rtclock.o
 #%: %.cpp
 #	$(CXX) $(CXXFLAGS) -o $@ $< $(DEPS) $(LIBS)
 
-all: tbt
+all: tbt tbtcheck tbtcheck_ascii rtctest
 
 depend:
 	mkdep $(CXXFLAGS) tbt.cpp cmdline.cpp
