@@ -158,9 +158,9 @@
 		function get_n($num) {
 
 			if($num == "" or $num == "all")
-				$query = "SELECT * FROM ".$this->table." ORDER BY id";
+				$query = "SELECT * FROM ".$this->table." ORDER BY id DESC";
 			else
-				$query = "SELECT * FROM ".$this->table." ORDER BY id LIMIT 0,$num";
+				$query = "SELECT * FROM ".$this->table." ORDER BY id LIMIT DESC 0,$num";
 			$result = mysql_query($query, $this->db_handler);
 			if(!$result) {
 				$this->error_msg="Invalid query: ".mysql_error();
