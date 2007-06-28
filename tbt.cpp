@@ -511,7 +511,7 @@ int TBT::save_html(char *filename) {
 
   fputs("<html><head>\n"
 	"<script language=\"JavaScript\" src=\"tbt-typewriter.js\"></script>\n"
-	"<title>Time Based Text - javascript prototype</title></head>\n"
+	"<title>Time Based Text - recorded with tbt.dyne.org</title></head>\n"
 	"<body text=\"#FFFFFF\" bgcolor=\"#000000\">\n"
 	"<div id=\"textDestination\">\n"
 	"</div>\n"

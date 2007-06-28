@@ -74,9 +74,10 @@ static const char *help =
 "  -r   record   tbt  - option alias: rectext\n"
 "  -p   playback tbt  - option alias: playtext\n"
 "  -m   mail composer - option alias: recmail\n"
-"  -s   save format in [ bin | ascii | html ]\n";
+"  -s   save format in [ bin | ascii | html ]\n"
+"  -x   convert binary tbt to html or ascii\n";
 
-static const char *short_options = "-hvD:crpms:";
+static const char *short_options = "-hvD:crpmsx:";
 
 int debug;
 char filename[512];
@@ -90,6 +91,7 @@ bool console = false;
 #define REC        1
 #define PLAY       2
 #define MAIL       3
+#define CONV       4
 int operation = REC;
 
 
@@ -175,7 +177,21 @@ void cmdline(int argc, char **argv) {
       }
       break;
 
-
+    case 'x':
+      operation = CONV;
+      if( strncasecmp(optarg, "BIN", 3) ==0)
+	render = BIN;
+      else if( strncasecmp(optarg, "ASCII", 5) ==0)
+	render = ASCII;
+      else if( strncasecmp(optarg, "HTML", 10) ==0)
+	render = HTML;
+      else {
+	error ("render format not recognized: %s", optarg);
+	act ("using default binary format render");
+	render = BIN;
+      }
+      break;
+      
     case 1:  snprintf(filename,511,"%s", optarg);
       
     default: break;
@@ -339,7 +355,7 @@ int main(int argc, char** argv)
 
 
   if(console) { // initialize the s-lang console
-  
+    
     con = new SLangConsole();
     
     // initialize the text console
@@ -347,26 +363,46 @@ int main(int argc, char** argv)
       error("cannot initialize S-Lang console on this terminal.");
       exit(0);
     }
-
+    
     txt    = new SLW_Text();
     status = new SLW_Text();
-
+    
     switch(operation) {
-
+      
     case REC:
       record_console();
+      
+      switch(render) {
+	
+      case BIN:
+	tbt.save_bin( filename );
+	act("TBT file %s rendered in binary format",filename);
+	break;
+	
+      case ASCII:
+	tbt.save_ascii( filename );
+	act("TBT file %s rendered in ascii format",filename);
+	break;
+	
+      case HTML:
+	tbt.save_html( filename );
+	act("TBT file %s rendered in html format",filename);
+	break;
+	
+      }
+      
       break;
-
+      
     case PLAY:
       play_console();
       break;
-
+      
     case MAIL:
       error("TODO recmail");
       break;
-
+      
     }
-
+    
     // cleanly close the console
     con->refresh();
     jsleep(1,0);
@@ -375,57 +411,80 @@ int main(int argc, char** argv)
 
   } else {
     ////////////// commandline operations
-
+    
     switch(operation){
-
+      
     case REC:
       // append from 0 (stdin) each 1 byte
       tbt.fdappend(0, 1);
+      
+      switch(render) {
+	
+      case BIN:
+	tbt.save_bin( filename );
+	act("TBT file %s rendered in binary format",filename);
+	break;
+	
+      case ASCII:
+	tbt.save_ascii( filename );
+	act("TBT file %s rendered in ascii format",filename);
+	break;
+	
+      case HTML:
+	tbt.save_html( filename );
+	act("TBT file %s rendered in html format",filename);
+	break;
+	
+      }
+      
       break;
-
+      
     case PLAY:
-
+      
       // main playback loop
       for(c=0; c<len && !tbt.quit; c++) {
 	// tbt.getkey is a blocking call
 	// will wait N time before returning
 	key = tbt.getkey();
-	  
+	
 	// print out on stdout
 	write(1, (void*)&key, 1);
       }
       break;
 
-    }
 
+
+
+    case CONV:
+      // convert to other formats
+      tbt.load(filename);
+      
+      switch(render) {
+	
+      case ASCII:
+	{
+	  char tmp[512];
+	  snprintf(tmp,511,"%s.asc",filename);	
+	  tbt.save_ascii( tmp );
+	  act("TBT file %s rendered in ascii format",tmp);
+	}
+	break;
+	
+      case HTML:
+	{
+	  char tmp[512];
+	  snprintf(tmp,511,"%s.html",filename);	
+	  tbt.save_html( tmp );
+	  act("TBT file %s rendered in html format",filename);
+	}
+	break;
+	
+      }
+    }
   }    
   
   notice("Closing Time Based Recorder");
-
-  if(operation == REC) {
-    // if we were recording, now save a file
-
-    switch(render) {
-
-    case BIN:
-      tbt.save_bin( filename );
-      act("TBT file %s rendered in binary format",filename);
-      break;
-      
-    case ASCII:
-      tbt.save_ascii( filename );
-      act("TBT file %s rendered in ascii format",filename);
-      break;
-
-    case HTML:
-      tbt.save_html( filename );
-      act("TBT file %s rendered in html format",filename);
-      break;
-
-    }
-
-    act("%u entries saved.", tbt.buffer->len());
-  }
+  act("%u entries streamed.", tbt.buffer->len());
 
   exit(0);  
 }
