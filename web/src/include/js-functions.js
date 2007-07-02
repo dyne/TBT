@@ -69,12 +69,14 @@ function print_divs() {
 			if(msieversion()<7 && msieversion()!=0) correctPNG()
 			width[i]  = document.getElementById("div_"+i).clientWidth
 			height[i] = document.getElementById("div_"+i).clientHeight
-			if(i>=1) {
+			// pallotron 2/7/07 - commented because it doesn't work well, I net to 
+			// find a better way to prevent collisions
+			/*if(i>=1) {
 				while(is_collision(i)) {
 					ran_y[i] = Math.floor(Math.random()*(max_y-min_y))+min_y
 					ran_x[i] = Math.floor(Math.random()*(max_x-min_x))+min_x
 				}
-			}
+			}*/
 			document.getElementById("div_"+i).style.left = ran_x[i]
 			document.getElementById("div_"+i).style.top  = ran_y[i]
 			document.getElementById("div_"+i).style.visibility = "visible"
