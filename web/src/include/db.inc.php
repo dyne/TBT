@@ -137,7 +137,7 @@
 				$this->error_msg="get_old_tbt: parameter days must be an integer!";
 				return false;
 			}
-			$query = "SELECT * FROM ".$this->table." WHERE DATEDIFF(CURDATE(),datetime)>$days";
+			$query = "SELECT * FROM ".$this->table." WHERE DATEDIFF(CURDATE(),datetime)>$days AND is_persistent<>1";
 			$result = mysql_query($query, $this->db_handler);
 			if(!$result) {
 				$this->error_msg="Invalid query: ".mysql_error();
@@ -159,9 +159,9 @@
 		function get_n($num) {
 
 			if($num == "" or $num == "all")
-				$query = "SELECT * FROM ".$this->table." WHERE is_persistent = 1 ORDER BY id DESC";
+				$query = "SELECT * FROM ".$this->table." ORDER BY id DESC";
 			else
-				$query = "SELECT * FROM ".$this->table." WHERE is_persistent = 1 ORDER BY id LIMIT DESC 0,$num";
+				$query = "SELECT * FROM ".$this->table." WHERE is_persistent = 1 ORDER BY id DESC LIMIT 0,$num";
 			$result = mysql_query($query, $this->db_handler);
 			if(!$result) {
 				$this->error_msg="Invalid query: ".mysql_error();
