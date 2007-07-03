@@ -7,19 +7,20 @@
 		var $error_msg;
 
 		// mysql> describe tbt_files;
-		// +-------------+-----------+------+-----+---------+----------------+
-		// | Field       | Type      | Null | Key | Default | Extra          |
-		// +-------------+-----------+------+-----+---------+----------------+
-		// | id          | int(11)   | NO   | PRI | NULL    | auto_increment | 
-		// | file        | char(255) | NO   |     |         |                | 
-		// | title       | char(255) | NO   | MUL |         |                | 
-		// | author      | char(255) | NO   | MUL |         |                | 
-		// | email       | char(255) | YES  |     | NULL    |                | 
-		// | city        | char(255) | YES  | MUL | NULL    |                | 
-		// | txt         | text      | NO   |     |         |                | 
-		// | reaction_to | int(11)   | YES  |     | NULL    |                | 
-		// | datetime    | datetime  | YES  |     | NULL    |                | 
-		// +-------------+-----------+------+-----+---------+----------------+
+		// +---------------+-----------+------+-----+---------+----------------+
+		// | Field         | Type      | Null | Key | Default | Extra          |
+		// +---------------+-----------+------+-----+---------+----------------+
+		// | id            | int(11)   | NO   | PRI | NULL    | auto_increment | 
+		// | file          | char(255) | NO   |     |         |                | 
+		// | title         | char(255) | NO   | MUL |         |                | 
+		// | author        | char(255) | NO   | MUL |         |                | 
+		// | email         | char(255) | YES  |     | NULL    |                | 
+		// | city          | char(255) | YES  | MUL | NULL    |                | 
+		// | txt           | text      | NO   |     |         |                | 
+		// | is_persistent | int(11)   | YES  |     | NULL    |                | 
+		// | reaction_to   | int(11)   | YES  |     | NULL    |                | 
+		// | datetime      | datetime  | YES  |     | NULL    |                | 
+		// +---------------+-----------+------+-----+---------+----------------+
 
 		// the class' constructor
 		function TBT_DB() {
@@ -158,9 +159,9 @@
 		function get_n($num) {
 
 			if($num == "" or $num == "all")
-				$query = "SELECT * FROM ".$this->table." ORDER BY id DESC";
+				$query = "SELECT * FROM ".$this->table." WHERE is_persistent = 1 ORDER BY id DESC";
 			else
-				$query = "SELECT * FROM ".$this->table." ORDER BY id LIMIT DESC 0,$num";
+				$query = "SELECT * FROM ".$this->table." WHERE is_persistent = 1 ORDER BY id LIMIT DESC 0,$num";
 			$result = mysql_query($query, $this->db_handler);
 			if(!$result) {
 				$this->error_msg="Invalid query: ".mysql_error();
