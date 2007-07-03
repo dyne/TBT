@@ -144,8 +144,8 @@ function playTBT(tbt_array) {
 	"<div style='border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black;"+
 	"padding: 5px 5px 5px 5px; background-color:"+bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]+";'"+
 	"class='couriersmall'>"+
-	"<a href='#' onclick=\"MM_openBrWindow('upload.php?reactionto="+tbt_array['id']+"&amp;react_author="+tbt_array['author']+
-	"&amp;react_title="+tbt_array['title']+"','Upload','width=400,height=480')\">"+
+	"<a href='#' onclick=\"MM_openBrWindow('upload.php?reactionto="+tbt_array['id']+"&amp;react_author="+escape(tbt_array['author'])+
+	"&amp;react_title="+escape(tbt_array['title'])+"','Upload','width=400,height=480')\">"+
 	"Reply to this TBT</a></div>"
 
 	document.getElementById("tbt_"+row_counter).innerHTML = div_content

@@ -38,8 +38,8 @@
 	$relatedto = $_GET['reactionto'];
 	if($relatedto == "") $relatedto=0;
 	else {
-		$react_title = $_GET['react_title'];
-		$react_author = $_GET['react_author'];
+		$react_title = stripslashes($_GET['react_title']);
+		$react_author = stripslashes($_GET['react_author']);
 	}
 ?>
 
