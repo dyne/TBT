@@ -49,6 +49,7 @@ function feed()	{
 	
 	// get the next char
 	switch( recording[currentChar][0] ) {
+	case 10:  // NEWLINE
 	case 13:  // RETURN
 	    cur_y++; row++;
 	    cur_x = 0; col = 0;
@@ -57,9 +58,10 @@ function feed()	{
 	    }
 	    break;
 
-	case 127: // BACKSPACE
-	case 272: // =
-	case 275: // =
+	case 8: // standard ASCII BACKSPACE
+	case 127: // other low level BACKSPACE codes
+	case 272: // (APPLE BACKSPACE)
+	case 275: // (SOMETIMES!?)
 
 	    if(col > 0) // delete if not at the beginning of line
 		text[row].splice(col-1,1);

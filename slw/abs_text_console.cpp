@@ -64,7 +64,7 @@ bool TextConsole::feed(int key) {
   
   switch(key) {
     
-    
+  case KEY_NEWLINE:
   case KEY_ENTER:
     
     r = new Row();
@@ -100,6 +100,7 @@ bool TextConsole::feed(int key) {
     refresh();
     break;
     
+  case KEY_BACKSPACE_ASCII:
   case KEY_BACKSPACE:
   case KEY_BACKSPACE_APPLE:
   case KEY_BACKSPACE_SOMETIMES:

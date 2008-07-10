@@ -44,11 +44,11 @@ int get_debug();
 class SLangWidget;
 void set_status(SLangWidget *s);
 
-void notice(char *format, ...);
-void func(char *format, ...);
-void error(char *format, ...);
-void act(char *format, ...);
-void warning(char *format, ...);
+void notice(const char *format, ...);
+void func(const char *format, ...);
+void error(const char *format, ...);
+void act(const char *format, ...);
+void warning(const char *format, ...);
 
 double dtime();
 

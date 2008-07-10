@@ -28,6 +28,8 @@
 #include <tbt.h>
 #include <jutils.h>
 
+#include <slw/keycodes.h>
+
 #ifdef linux
 #include <rtclock.h>
 #endif
@@ -53,13 +55,20 @@ bool TBTEntry::parse_uint64(void *buf) {
   return true;
 }
 
-// pallotron: 08/04/2007
-// this method takes an ascii line (readed from an ascii file) and convert it
-// to the key,msec couple.
-// there's actually a problem with the backspace key... the S-Lang widget prints
-// ^P... without delete the previous char... the tbtchk_ascii.cpp test problem
-// print correctly the backspace value in my shell... :( 
-// TODO: fix this...
+
+// the  following method  takes an  ascii line  (readed from  an ascii
+// file) and convert it to the key,msec couple.
+
+// there's  actually a problem  with the  backspace key...  the S-Lang
+// widget  prints  ^P...  without  delete  the  previous  char...  the
+// tbtchk_ascii.cpp test  problem print correctly  the backspace value
+// in my shell... :( - pallotron 08/04/2007
+
+// found out with caedes: standard ascii code for BS is 8
+// somehow s-lang reports different values when grabbing low level
+// kind of weird to see how many different values are on various platforms...
+// anyway we'll normalize all this to ASCII (dec 8) now. -jrml
+
 bool TBTEntry::parse_ascii(char *buf) {
 
   unsigned char k = 0;
@@ -218,7 +227,25 @@ void TBT::append(uint64_t key) {
   // the NOW is WHEN this operation is executed
   compute_delta( ent );
 
-  ent->key  = (uint64_t)key;
+  // normalize ambiguous keycodes
+  switch( key ) {
+
+  case KEY_BACKSPACE_ASCII:
+  case KEY_BACKSPACE:
+  case KEY_BACKSPACE_APPLE:
+  case KEY_BACKSPACE_SOMETIMES:
+    ent->key = (uint64_t)KEY_BACKSPACE_ASCII;
+    break;
+    
+  case KEY_NEWLINE:
+  case KEY_ENTER:
+    ent->key  = (uint64_t)KEY_ENTER;
+    break;
+
+  default:
+    ent->key = (uint64_t)key;
+
+  }
 
   buffer->append(ent);
 }

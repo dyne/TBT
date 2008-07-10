@@ -1,0 +1,13 @@
+*.o
+*.a
+tbt
+tbtcheck
+tbtcheck_ascii
+playtext
+recmail
+record.tbt
+rectext
+rtctest
+testkey
+
+

@@ -54,7 +54,7 @@ static int getkey_handler() {
   if(SLang_input_pending(0))
     //    return SLang_getkey();
     ch = SLang_getkey();
-  //  if(ch) func("SLang_getkey in getkey_handler detected char %u",ch);
+    if(ch) func("SLang_getkey in getkey_handler detected char %u",ch);
   return ch;
 }
 

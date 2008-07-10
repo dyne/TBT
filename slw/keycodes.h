@@ -12,11 +12,16 @@
 
 #define CHAR_BLANK 0x20
 
+#define KEY_NEWLINE 10
 #define KEY_ENTER 13
+
 #define KEY_SPACE 32
+
+#define KEY_BACKSPACE_ASCII 8
 #define KEY_BACKSPACE 275
 #define KEY_BACKSPACE_APPLE 127 
 #define KEY_BACKSPACE_SOMETIMES 272
+
 #define KEY_UP 257
 #define KEY_DOWN 258
 #define KEY_LEFT 259
