@@ -1,6 +1,6 @@
 /*  Time Based Text - Commandline Player and Recorder
  *
- *  (C) Copyright 2006 - 2007 Denis Rojo <jaromil@dyne.org>
+ *  (C) Copyright 2006 - 2008 Denis Roio <jaromil@dyne.org>
  *
  * This source code is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Public License as published 
@@ -75,9 +75,12 @@ static const char *help =
 "  -p   playback tbt  - option alias: playtext\n"
 "  -m   mail composer - option alias: recmail\n"
 "  -s   save format in [ bin | ascii | html ]\n"
-"  -x   convert binary tbt to html or ascii\n";
+#ifdef linux
+"  -t   timing mode [ posix | rtc ]\n"
+#endif
+"  -x   convert .tbt file to [ html | ascii]\n";
 
-static const char *short_options = "-hvD:crpmsx:";
+static const char *short_options = "-hvD:crpms:t:x:";
 
 int debug;
 char filename[512];
@@ -86,6 +89,10 @@ char filename[512];
 // act as commandline tool by default
 bool console = false;
 
+// timing modes
+#define POSIX 1
+#define RTC   2
+int timing = POSIX;
 
 // operation modes
 #define REC        1
@@ -161,6 +168,13 @@ void cmdline(int argc, char **argv) {
 
     case 'm':
       operation = MAIL;
+      break;
+
+    case 't':
+      if(strncasecmp(optarg, "rtc", 3) ==0)
+	timing = RTC;
+      else
+	timing = POSIX;
       break;
 
     case 's':
@@ -338,6 +352,9 @@ int main(int argc, char** argv)
 
   cmdline(argc, argv);
   
+  if(timing == RTC)
+    tbt.rtc = true;
+
   // start the TBT engine
   if(! tbt.init() )  exit(0);
 

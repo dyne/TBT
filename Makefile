@@ -14,7 +14,7 @@ LINKER = ld
 
 
 # debugging flags:
-CXXFLAGS = -Wall -ggdb -I../../slw -I. -I/usr/pkg/include -DHAVE_BSD
+CXXFLAGS = -Wall -ggdb -Islw -I. -I/usr/pkg/include -DHAVE_BSD
 
 # optimized flags:
 # CXXFLAGS = -Wall -O2 -fomit-frame-pointer -ffast-math -I../slw -I. -I/usr/pkg/include -DHAVE_BSD
@@ -24,7 +24,7 @@ CXXFLAGS = -Wall -ggdb -I../../slw -I. -I/usr/pkg/include -DHAVE_BSD
 
 # flags to compile slang linking to dynamic system lib
 
-LIBS = -lslang -lpthread ../../slw/libslw.a
+LIBS = -lslang -lpthread slw/libslw.a
 
 # flags to compile slang linking to dynamic libs on BSD
 
@@ -48,10 +48,13 @@ DEPS = tbt.o linklist.o jutils.o rtclock.o
 #%: %.cpp
 #	$(CXX) $(CXXFLAGS) -o $@ $< $(DEPS) $(LIBS)
 
-all: tbt tbtcheck tbtcheck_ascii rtctest
+all: slw tbt tbtcheck tbtcheck_ascii rtctest
 
 depend:
 	mkdep $(CXXFLAGS) tbt.cpp cmdline.cpp
+
+slw: slw/slw.o
+	make -C slw
 
 tbt: cmdline.o $(DEPS)
 	$(CXX) $(CXXFLAGS) -o tbt cmdline.o $(DEPS) $(LIBS)
@@ -84,6 +87,7 @@ clean:
 	find . -type l -exec rm -f {} \;
 	rm -f tbtcheck tbtcheck_ascii rtctest
 	make -C web clean
+	make -C slw clean
 
 #%: %.c
 

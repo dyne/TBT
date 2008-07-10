@@ -103,9 +103,11 @@ class TBT {
 
   Linklist *buffer;
 
+  bool rtc; // if /dev/rtc is present
   RTClock *clock;
 
   bool quit;
+
 
  private:
 
@@ -114,7 +116,7 @@ class TBT {
   uint64_t now;
   uint64_t past;
 
-  bool rtc; // if /dev/rtc is present
+
 
   // POSIX time structures
   struct timespec psleep; // nanosleep (nanosec)

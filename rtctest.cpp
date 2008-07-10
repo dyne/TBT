@@ -39,7 +39,7 @@ int main(int artc, char **argv) {
     act("%u check: %lu microsecs", c, tbtclock.msec);
   }
 
-  act("sleeping two seconds while the clock runs..");
+  act("sleeping three seconds while the clock runs..");
   sleep(2);
 
   for(c=0; c<10; c++) {

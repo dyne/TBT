@@ -152,27 +152,30 @@ TBT::~TBT() {
 int TBT::init() {
 
 #ifdef linux
-  // try /dev/rtc clock
-  clock = new RTClock();
-  if( clock->init() ) {
-    notice("real time clock device is present");
+  if(rtc) { // realtime clock use requested
+    rtc = false; // let's check now
 
-    
-    // set the frequency to 1024 HZ
-    // so 1 second we have 1024 ticks (what we call microsec)
-    // it is very hard to match machine time with human time, indeed
-    // if you care about *real* precision, then this is the riddle:
-    // /dev/rtc allows to set as frequencies only powers of two.
-    clock->set_freq( 1024 );
-    
-    // this launches the internal clock thread
-    if( ! clock->start() ) {
-      error("can't run real time clock at 1024HZ");
-      delete clock;
-      clock = NULL;
-    } else
-      rtc = true;
-    
+    // try /dev/rtc clock
+    clock = new RTClock();
+    if( clock->init() ) {
+      notice("real time clock device is present");
+      
+      
+      // set the frequency to 1024 HZ
+      // so 1 second we have 1024 ticks (what we call microsec)
+      // it is very hard to match machine time with human time, indeed
+      // if you care about *real* precision, then this is the riddle:
+      // /dev/rtc allows to set as frequencies only powers of two.
+      clock->set_freq( 1024 );
+      
+      // this launches the internal clock thread
+      if( ! clock->start() ) {
+	error("no permission to run real time clock at 1024HZ");
+	delete clock;
+	clock = NULL;
+      } else
+	rtc = true;
+    }
   }
 #endif
   
