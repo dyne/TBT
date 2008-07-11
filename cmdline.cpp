@@ -78,7 +78,7 @@ static const char *help =
 #ifdef linux
 "  -t   timing mode [ posix | rtc ]\n"
 #endif
-"  -x   convert .tbt file to [ html | ascii]\n";
+"  -x   convert .tbt file to [ bin | html | ascii]\n";
 
 static const char *short_options = "-hvD:crpms:t:x:";
 
@@ -495,7 +495,11 @@ int main(int argc, char** argv)
 	  act("TBT file %s rendered in html format",filename);
 	}
 	break;
-	
+      case BIN:
+	  char tmp[512];
+	  snprintf(tmp,511,"%s.tbt",filename);	
+	  tbt.save_bin( tmp );
+	  act("TBT file %s rendered in binary format",filename);
       }
     }
   }    

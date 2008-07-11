@@ -29,7 +29,7 @@
 
 #include <linklist.h>
 
-#define VERSION "v0.7 - tbt.dyne.org"
+#define VERSION "v0.8 - tbt.dyne.org"
 
 
 class RTClock; // ghost pointer for rtclock.h
