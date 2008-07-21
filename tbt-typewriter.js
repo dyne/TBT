@@ -95,6 +95,7 @@ function feed()	{
 	    break;
 
 	default:
+		if (!text[row]) text[row] = new Array();
 	    text[row].splice(col,0,recording[currentChar][0]);
 	    cur_x++; col++;
 	    break;
