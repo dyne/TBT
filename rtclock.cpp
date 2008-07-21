@@ -26,6 +26,8 @@
 #include <errno.h>
 #include <string>
 
+#include <string.h>
+#include <errno.h>
 
 #ifdef linux
 /* we try to use the realtime linux clock on /dev/rtc */

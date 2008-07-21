@@ -12,6 +12,8 @@
 #include <jutils.h>
 #include <rtclock.h>
 
+#include <string.h>
+#include <errno.h>
 
 
 RTClock tbtclock;

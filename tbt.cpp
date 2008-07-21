@@ -27,6 +27,8 @@
 
 #include <tbt.h>
 #include <jutils.h>
+#include <string.h>
+#include <errno.h>
 
 #include <slw/keycodes.h>
 
