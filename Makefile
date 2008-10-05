@@ -22,6 +22,9 @@ CXXFLAGS = -Wall -ggdb -Islw -I. -I/usr/pkg/include -DHAVE_BSD
 # Darwin/OSX flags: uncomment all below and comment the rest
 # CPPFLAGS = -pipe -Wall -ggdb -I../slw -I. -I/sw/include -L/sw/lib -DHAVE_BSD
 
+# fix different paths for slang headers in various distros
+CXXFLAGS += -I/usr/include/slang 
+
 # flags to compile slang linking to dynamic system lib
 
 LIBS = -lslang -lpthread slw/libslw.a

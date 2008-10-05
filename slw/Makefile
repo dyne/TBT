@@ -17,6 +17,9 @@ CXXFLAGS = -pipe -Wall -ggdb -I.
 # Darwin/OSX flags: uncomment all below and comment the rest
 # CXXFLAGS = -pipe -Wall -ggdb -I. -I/sw/include -L/sw/lib
 
+# fix different paths for slang headers in various distros
+CXXFLAGS += -I/usr/include/slang -I..
+
 # flags to compile slang linking to dynamic system lib
 LIBS = -lslang
 
@@ -31,7 +34,7 @@ LIBS = -lslang
 #CXXFLAGS = -Wall -ggdb -I. -I$(SLANGPATH)/src
 #LIBS = $(SLANGPATH)/src/objs/libslang.a -ltermcap
 
-DEPS = slw_console.o slw.o slw_popup.o abs_text_console.o slw_text.o linklist.o jutils.o
+DEPS = slw_console.o slw.o slw_popup.o abs_text_console.o slw_text.o ../linklist.o ../jutils.o
 
 # generic make rules
 #%.o: %.cpp

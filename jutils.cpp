@@ -26,7 +26,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <string.h>
-
+#include <errno.h>
 
 #include <jutils.h>
 #include <slw.h>
@@ -65,7 +65,7 @@ void set_status(SLangWidget *s) {
 //  console = c;
 //}
 
-void notice(char *format, ...) {
+void notice(const char *format, ...) {
   va_list arg;
   va_start(arg, format);
 
@@ -79,7 +79,7 @@ void notice(char *format, ...) {
   va_end(arg);
 }
 
-void func(char *format, ...) {
+void func(const char *format, ...) {
   if(verbosity>=FUNC) {
     va_list arg;
     va_start(arg, format);
@@ -95,7 +95,7 @@ void func(char *format, ...) {
   }
 }
 
-void error(char *format, ...) {
+void error(const char *format, ...) {
   va_list arg;
   va_start(arg, format);
   
@@ -109,7 +109,7 @@ void error(char *format, ...) {
   va_end(arg);
 }
 
-void act(char *format, ...) {
+void act(const char *format, ...) {
   va_list arg;
   va_start(arg, format);
   
@@ -123,7 +123,7 @@ void act(char *format, ...) {
   va_end(arg);
 }
 
-void warning(char *format, ...) {
+void warning(const char *format, ...) {
   if(verbosity>=WARN) {
     va_list arg;
     va_start(arg, format);

@@ -363,13 +363,13 @@ int main(int argc, char** argv)
     perror ("Couldn't install SIGINT handler"); exit(0); }
 
   // if playing, load the recording
-  if(operation == PLAY) 
+  if(operation == PLAY) {
     if( ! tbt.load( filename ) ) {
       error("no entries found in file %s",filename);
       exit(1);
     } else
       len = tbt.buffer->len();
-
+  }
 
   if(console) { // initialize the s-lang console
     

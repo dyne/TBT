@@ -85,7 +85,7 @@ class Entry {
   Entry();
   ~Entry();
 
-  void set_name(char *nn);
+  void set_name(const char *nn);
   
   Entry *next;
   Entry *prev;

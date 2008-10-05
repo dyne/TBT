@@ -311,7 +311,7 @@ Entry::~Entry() {
   if(data) free(data);
 }
 
-void Entry::set_name(char *nn) {
+void Entry::set_name(const char *nn) {
   strncpy(name,nn,255);
 }
 
