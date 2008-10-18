@@ -14,7 +14,7 @@ LINKER = ld
 
 
 # debugging flags:
-CXXFLAGS = -Wall -ggdb -Islw -I. -I/usr/pkg/include -DHAVE_BSD
+CXXFLAGS = -Wall -ggdb -pg -Islw -I. -I/usr/pkg/include -DHAVE_BSD
 
 # optimized flags:
 # CXXFLAGS = -Wall -O2 -fomit-frame-pointer -ffast-math -I../slw -I. -I/usr/pkg/include -DHAVE_BSD

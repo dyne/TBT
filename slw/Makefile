@@ -9,7 +9,7 @@ CXX = g++
 LINKER = ld
 
 # debugging flags:
-CXXFLAGS = -pipe -Wall -ggdb -I.
+CXXFLAGS = -pipe -Wall -ggdb -pg -I.
 
 # optimized flags:
 # CXXFLAGS = -pipe -Wall -O2 -fomit-frame-pointer -ffast-math

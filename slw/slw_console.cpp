@@ -51,10 +51,10 @@ static void sigint_handler (int sig) {
 /* non blocking getkey */
 static int getkey_handler() {
   unsigned int ch = 0;
-  if(SLang_input_pending(0))
-    //    return SLang_getkey();
+  if(SLang_input_pending(1))
+  //    return SLang_getkey();
     ch = SLang_getkey();
-    if(ch) func("SLang_getkey in getkey_handler detected char %u",ch);
+  if(ch) func("getkey_handler detected char %u",ch);
   return ch;
 }
 
@@ -84,7 +84,7 @@ bool SLangConsole::init() {
 
   SLsmg_init_smg(); // screen manager
 
-//  SLutf8_enable(1); // enable UTF8 character set
+  //  SLutf8_enable(1); // enable UTF8 character set
 //  this is a mess ...
   screen_size_changed = false;
 
@@ -209,7 +209,7 @@ bool SLangConsole::refresh() {
   if(focused && !keyboard_quit)
 	  if(focused->cursor) {
   //                SLtt_set_cursor_visibility(1);
-		  focused->gotoxy( focused->cur_x, focused->cur_y);
+	    focused->gotoxy( focused->cur_x, focused->cur_y);
           } // else
             //    SLtt_set_cursor_visibility(0);
 
