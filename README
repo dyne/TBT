@@ -5,7 +5,7 @@
 	    888	     888    888	    888
 	   o888o    o888ooo888	   o888o
 
-		Time Based Text    v0.7
+		Time Based Text    v0.8
 
                http://tbt.dyne.org
 
@@ -25,10 +25,9 @@ As this simple concept, our implementation is also kept very
 minimalistic while we welcome programmers to embed it in communication
 applications.
 
-The implementation is written in thread-safe POSIX C++ and can be
-ported to most platforms.
-
-
+The basic implementation  is written in thread-safe POSIX  C++ and can
+be  ported  to  most  platforms.  It  is  also  included  a  graphical
+implementation in python-GTK. Please refer to the manual.
 
 
 
@@ -58,6 +57,10 @@ requirements are:
 - Educational purposes
 - Multipurpose granular time based protocol
 
+TBT will be used in an on-site installation for art exhibition
+SPEAKING OUT LOUD - hosted by the Netherlands Media Art Institute 
+in November 2008, Amsterdam - Montevideo - Time Based Arts
+http://transition.turbulence.org/blog/2008/10/07/speaking-out-loud-amsterdam/
 
 
 ::::: PROTOCOL
@@ -84,31 +87,33 @@ any application using some h4x0r keylogging technique on different OS.
 
 :::: TODO
 
-In case of a multipurpose protocol for tagging time based events of
-variable size and type, we should introduce the use of a header.
-This might also help distinguishing among different key code maps.
-With 0.7 development reached a sufficiently advanced status, following
-some more debugging it will be tagged as 1.0 - so basically the change
-of the protocol will be an aim for the development of TBT 2.0 .
+In case  of a multipurpose protocol  for tagging time  based events of
+variable size and type, we should introduce the use of a header.  This
+might also  help distinguishing among  different key code  maps.  With
+0.7 development reached a sufficiently advanced status, following some
+more debugging it  will be tagged as 1.0 - so  basically the change of
+the protocol will be an aim for the development of TBT 2.0 .
 
 
 
 ::::: DISCLAIMER
 
-TBT is Copyleft 2006 - 2007 by Jaromil & Jodi
+TBT is Copyleft 2006 - 2008 by Jaromil & Jodi
+
 artwork commissioned by the Impakt.nl festival
+
 please refer to the included AUTHORS file for complete information.
 
-This source code is free software; you can redistribute it and/or
-modify it under the terms of the GNU Public License as published 
-by the Free Software Foundation; either version 2 of the License,
-or (at your option) any later version.
+This  source code  is free  software; you  can redistribute  it and/or
+modify it  under the terms of  the GNU Public License  as published by
+the Free Software Foundation; either  version 2 of the License, or (at
+your option) any later version.
 
-This source code is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-Please refer to the GNU Public License for more details.
+This source  code is distributed in  the hope that it  will be useful,
+but  WITHOUT  ANY  WARRANTY;  without  even the  implied  warranty  of
+MERCHANTABILITY or FITNESS FOR  A PARTICULAR PURPOSE.  Please refer to
+the GNU Public License for more details.
 
-You should have received a copy of the GNU Public License along with
-this source code; if not, write to:
-Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+You should have  received a copy of the GNU  Public License along with
+this source  code; if not,  write to: Free Software  Foundation, Inc.,
+675 Mass Ave, Cambridge, MA 02139, USA.

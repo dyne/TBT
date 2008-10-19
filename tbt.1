@@ -62,13 +62,29 @@ playback tbt - option alias: playtext
 mail composer - option alias: recmail
 .B
 .IP "-s \fI<format_name>\fR"
-save format in [ bin | ascii | html ]. Default is bin.. Default is bin.
+save format in [ bin | ascii | html ]. Default is bin.
 
-The binary mode will store a binary file you can play with the playtext command.
+The \fIbin\fR  mode will  store a  binary file you  can play  with the
+playtext command.
 
-The html mode will produce a simple html page, in which your text will be played. For further information about the html mode please the the README.html file.
+The \fIhtml\fR  mode will  produce a simple  html page, in  which your
+text  will be  played. For  further  information about  the html  mode
+please the the README.html file.
 
-The ascii mode produces pure ascii text file, one character per line, with the information about the key pressed, and the timestamp.
+The \fIascii\fR mode produces pure  ascii text file, one character per
+line, with the information about the key pressed, and the timestamp.
+
+.B
+.IP "-t \fI<timing mode>\fR"
+method used to calculate time: [ posix | rtc ]. Default is posix.
+
+So far a few methods are implemented, posix should be the most compatible,
+rtc works only with Linux kernel and requires suid authority.
+
+.B
+.IP "-x \fI<format_name>\fR"
+convert a binary .tbt file to another format [ bin | html | ascii] (see -s)
+
 
 .SH EXAMPLES
 
@@ -101,28 +117,37 @@ Everyone is encouraged to test this software and report bugs!
 Send remarks and patches to http://dyne.org/hackers_contact.php or get in touch with coders via irc.freenode.net channel #dyne
 
 .SH AUTHORS
-Time Based Text software by Denis J. Rojo - jaromil.dyne.org
+Time Based Text software by Denis Roio - http://jaromil.dyne.org
 .br
-Concept ideated with the contribution of Jodi - www.jodi.org
+Concept ideated with the contribution of Jodi - http://www.jodi.org
 .br
 PHP/Javascript code by Angelo Failla - pallotron freaknet.org
 .br
-Webdesign by O.K. Parking - www.ok-parking.nl
+Webdesign by O.K. Parking - http://www.ok-parking.nl
+.br
+Python-GTK graphical interface by Pablo Martines - caedes sindominio.net
 .br
 More code and suggestions by Andrea Lo Pumo - alpt freaknet.org
 .br
-Development supported by Impakt - www.impakt.nl
+Development supported by Impakt - http://www.impakt.nl
 .br
 Thanks to: Florian Cramer, Annet Dekker, Paul Hendriks
 
 .SH COPYING
 
-This manual is Copyleft (c) 2007 Denis Rojo <\fIjaromil@dyne.org\fR>
+This manual is Copyleft (c) 2007-2008 Denis Rojo <\fIjaromil@dyne.org\fR>
 
-Permission is granted to copy, distribute and/or modify this manual under the terms of the GNU Free Documentation License, Version 1.1 or any later version published by the Free Software Foundation. Permission is granted to make and distribute verbatim copies of this manual page provided the above copyright notice and this permission notice are preserved on all copies.
+Permission is  granted to copy,  distribute and/or modify  this manual
+under the terms of the  GNU Free Documentation License, Version 1.1 or
+any    later    version     published    by    the    Free    Software
+Foundation.  Permission is  granted  to make  and distribute  verbatim
+copies of  this manual  page provided the  above copyright  notice and
+this permission notice are preserved on all copies.
 
 .SH AVAILABILITY
-The most recent version of tbt sourcecode and up to date documentation is always available for download from \fIhttp://tbt.dyne.org\fR.
+
+The most recent version of tbt sourcecode and up to date documentation
+is always available for download from \fIhttp://tbt.dyne.org\fR.
 
 .SH SEE ALSO
 

@@ -1,3 +1,10 @@
+TBT 0.8 - 20 Oct 2008 - caedes, jaromil
+	New Python-GTK graphical user interface
+	Timing mode now defaults to posix
+	TBT file format conversion
+	Fixed the 100% cpu usage on some distros
+	Documentation updates
+
 TBT 0.7 - pallotron
 	New interactive website for TBT messaging (PHP)
 
