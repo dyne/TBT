@@ -1,0 +1,240 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of tbt</TITLE>
+</HEAD><BODY>
+<H1>tbt</H1>
+Section: User Commands  (1)<BR>Updated: April 13, 2007<BR><A HREF="#index">Index</A>
+<A HREF="http://localhost/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+tbt - Time Based Text
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>tbt [options] [file]</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>tbt - Time Based Text</B>
+
+<P>
+To vehicle more human-input information in written text.
+<P>
+Record performance time of written text and vehicle it as additional information: saving and reproducing every single action during the composition of a text let us vehicle emphasis in written communication.
+<P>
+As this simple concept, our implementation is also kept very minimalistic while we welcome programmers to embed it in communication applications, as in emails, blogs, visual poetry, slides and what not.
+<P>
+Beware this software is hacky, u need to love text. A manual page is provided and commandline formulas to be casted in a terminal.
+<P>
+This software is written in thread-safe POSIX C++ and can be ported to most platforms, it provides a real-time recorder for serial timed data, recording 64bit tuples key/msec with low-latency. Included are programs providing a text console interface for the user to experiment with keyboard.
+<P>
+A Web application written in PHP/MySQL and Ajax could be used to publish TBT written into the world wide web.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>PROTOCOL</H2>
+
+<P>
+In the .tbt format, text is saved with a timestamp for each letter:
+<pre>
+     _________ ___________ 
+    |  u-int  |   u-int   |
+    |  64bit  |   64bit   |    m-seconds = 1/1000 of a second
+     --------- -----------
+    |  char   | m-seconds |    char = ASCII or higher bit char code
+     --------- -----------
+    |    Total: 128bit    |
+     ---------------------
+</pre>
+<P>
+However export to different formats is planned including generation of web-ready code in HTML and Javascript, a daemon to provide timed input thru a socket on the network (TCP/IP) and what not.
+<P>
+Input is captured from the console, but can be extended to intercept any application using some h4x0r keylogging technique on different OS.
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<P>
+<B><DL COMPACT>
+<DT>-h<DD>
+</B>
+
+Display a help text and quit
+<B><DT>-v<DD>
+</B>
+
+Display version and quit
+<B><DT>-D </B><I>&lt;number&gt;</I><DD>
+
+
+Set verbosity level, the default value is 1
+<B><DT>-c<DD>
+</B>
+
+Use the S-Lang console interface
+<B><DT>-r<DD>
+</B>
+
+record tbt - option alias: rectext
+<B><DT>-p<DD>
+</B>
+
+playback tbt - option alias: playtext
+<B><DT>-m<DD>
+</B>
+
+mail composer - option alias: recmail
+<B><DT>-s </B><I>&lt;format_name&gt;</I><DD>
+
+
+save format in [ bin | ascii | html ]. Default is bin.
+<P>
+The <I>bin</I>  mode will  store a  binary file you  can play  with the
+playtext command.
+<P>
+The <I>html</I>  mode will  produce a simple  html page, in  which your
+text  will be  played. For  further  information about  the html  mode
+please the the README.html file.
+<P>
+The <I>ascii</I> mode produces pure  ascii text file, one character per
+line, with the information about the key pressed, and the timestamp.
+<P>
+<B><DT>-t </B><I>&lt;timing mode&gt;</I><DD>
+
+
+method used to calculate time: [ posix | rtc ]. Default is posix.
+<P>
+So far a few methods are implemented, posix should be the most compatible,
+rtc works only with Linux kernel and requires suid authority.
+<P>
+<B><DT>-x </B><I>&lt;format_name&gt;</I><DD>
+
+
+convert a binary .tbt file to another format [ bin | html | ascii] (see -s)
+<P>
+<P>
+</DL>
+<A NAME="lbAG">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<P>
+<B><DL COMPACT>
+<DT>Howto record a tbt in binary format<DD>
+</B>
+
+<P>
+$ rectext -s bin mytext.tbt
+<P>
+<B><DT>Howto play a tbt binary file<DD>
+</B>
+
+<P>
+$ playtext mytext.tbt
+<P>
+<B><DT>Howto record a tbt in ascii mode<DD>
+</B>
+
+<P>
+$ rectext -s ascii mytext.txt
+<P>
+<B><DT>Howto record a tbt in html mode<DD>
+</B>
+
+<P>
+$ rectext -s html mytext.html
+<P>
+</DL>
+<A NAME="lbAH">&nbsp;</A>
+<H2>NOTES</H2>
+
+The first integration provided for TBT is with Mutt <I><A HREF="http://www.mutt.org">http://www.mutt.org</A></I> the Mail User Agent popular among text console users.
+For further information please read the README.mutt file.
+<P>
+<A NAME="lbAI">&nbsp;</A>
+<H2>BUGS</H2>
+
+Everyone is encouraged to test this software and report bugs!
+Send remarks and patches to <A HREF="http://dyne.org/hackers_contact.php">http://dyne.org/hackers_contact.php</A> or get in touch with coders via irc.freenode.net channel #dyne
+<P>
+<A NAME="lbAJ">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+Time Based Text software by Denis Roio - <A HREF="http://jaromil.dyne.org">http://jaromil.dyne.org</A>
+<BR>
+
+Concept ideated with the contribution of Jodi - <A HREF="http://www.jodi.org">http://www.jodi.org</A>
+<BR>
+
+PHP/Javascript code by Angelo Failla - pallotron freaknet.org
+<BR>
+
+Webdesign by O.K. Parking - <A HREF="http://www.ok-parking.nl">http://www.ok-parking.nl</A>
+<BR>
+
+Python-GTK graphical interface by Pablo Martines - caedes sindominio.net
+<BR>
+
+More code and suggestions by Andrea Lo Pumo - alpt freaknet.org
+<BR>
+
+Development supported by Impakt - <A HREF="http://www.impakt.nl">http://www.impakt.nl</A>
+<BR>
+
+Thanks to: Florian Cramer, Annet Dekker, Paul Hendriks
+<P>
+<A NAME="lbAK">&nbsp;</A>
+<H2>COPYING</H2>
+
+<P>
+This manual is Copyleft (c) 2007-2008 Denis Rojo &lt;<I><A HREF="mailto:jaromil@dyne.org">jaromil@dyne.org</A></I>&gt;
+<P>
+Permission is  granted to copy,  distribute and/or modify  this manual
+under the terms of the  GNU Free Documentation License, Version 1.1 or
+any    later    version     published    by    the    Free    Software
+Foundation.  Permission is  granted  to make  and distribute  verbatim
+copies of  this manual  page provided the  above copyright  notice and
+this permission notice are preserved on all copies.
+<P>
+<A NAME="lbAL">&nbsp;</A>
+<H2>AVAILABILITY</H2>
+
+<P>
+The most recent version of tbt sourcecode and up to date documentation
+is always available for download from <I><A HREF="http://tbt.dyne.org">http://tbt.dyne.org</A></I>.
+<P>
+<A NAME="lbAM">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<P>
+* README.mutt
+* README.html
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">PROTOCOL</A><DD>
+<DT><A HREF="#lbAF">OPTIONS</A><DD>
+<DT><A HREF="#lbAG">EXAMPLES</A><DD>
+<DT><A HREF="#lbAH">NOTES</A><DD>
+<DT><A HREF="#lbAI">BUGS</A><DD>
+<DT><A HREF="#lbAJ">AUTHORS</A><DD>
+<DT><A HREF="#lbAK">COPYING</A><DD>
+<DT><A HREF="#lbAL">AVAILABILITY</A><DD>
+<DT><A HREF="#lbAM">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 22:40:02 GMT, October 19, 2008
+</BODY>
+</HTML>
