@@ -50,7 +50,7 @@ def file_new(*args):
     set_write_mode()
     text_buffer.set_text("")
     last_time = time.time()
-    f = open("/tmp/.output.tbt","wb")
+    f = open("record.tbt","wb")
 
 def do_open_file(widget,filesel):
     global file
@@ -75,12 +75,12 @@ def do_save():
     global f
     # write from /tmp/.output.tbt to currfile
     f.close()
-    a = open("/tmp/.output.tbt","rb")
+    a = open("record.tbt","rb")
     b = open(currfile,"w")
     b.write(a.read())
     b.close()
     a.close()
-    f = open("/tmp/.output.txt","wab")
+    f = open("record.txt","wab")
     post("file saved: "+currfile)
 
 def do_save_file(w,filesel):
@@ -251,7 +251,9 @@ text_buffer.connect("insert-text",insert_text)
 text_buffer.connect("delete-range",delete_range)
 text_buffer.connect("notify",cursor_position)
 
-file = "/tmp/.output.tbt"
+# default output file
+file = "record.tbt"
+
 if len(sys.argv)>1 and sys.argv[-1].endswith("tbt"):
     file = sys.argv[-1]
 
