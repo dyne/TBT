@@ -178,11 +178,11 @@ void cmdline(int argc, char **argv) {
       break;
 
     case 's':
-      if( strncasecmp(optarg, "BIN", 3) ==0)
+      if( strcasecmp(optarg, "BIN") ==0)
 	      render = BIN;
-      else if( strncasecmp(optarg, "ASCII", 5) ==0)
+      else if( strcasecmp(optarg, "ASCII") ==0)
 	      render = ASCII;
-      else if( strncasecmp(optarg, "HTML", 10) ==0)
+      else if( strcasecmp(optarg, "HTML") ==0)
 	      render = HTML;
       else {
 	      error ("render format not recognized: %s", optarg);
@@ -193,11 +193,11 @@ void cmdline(int argc, char **argv) {
 
     case 'x':
       operation = CONV;
-      if( strncasecmp(optarg, "BIN", 3) ==0)
+      if( strcasecmp(optarg, "BIN") ==0)
 	render = BIN;
-      else if( strncasecmp(optarg, "ASCII", 5) ==0)
+      else if( strcasecmp(optarg, "ASCII") ==0)
 	render = ASCII;
-      else if( strncasecmp(optarg, "HTML", 10) ==0)
+      else if( strcasecmp(optarg, "HTML") ==0)
 	render = HTML;
       else {
 	error ("render format not recognized: %s", optarg);
