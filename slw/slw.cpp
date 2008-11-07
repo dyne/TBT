@@ -187,7 +187,7 @@ void SLangWidget::blank_row(int y) {
 
 void SLangWidget::blank() {
   register int c;
-  for(c=h;c>0;c--) {
+  for(c=h;c>=0;c--) {
     SLsmg_gotorc( c+orig_y,orig_x);
     SLsmg_write_nchars( blankrow, w);
   }
