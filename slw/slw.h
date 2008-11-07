@@ -86,7 +86,12 @@ class SLangWidget : public Entry {
 
   void blank();
   ///< blank the whole row in a widget
-  
+
+  void set_color(int col);
+  /// colors are from 1 to 7, +10 highlight, +20 reverse, +30 highlight and reverse
+
+  int color;
+
   //		bool putrow(CHAR *str, int y);
   ///< draw a whole row at given height
   

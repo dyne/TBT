@@ -51,6 +51,8 @@ SLangWidget::SLangWidget()
   
   // maximum lenght for a row
   max_row = 512;
+
+  color = 1; // white on black
   
   
   // generate a blank row for line blanking
@@ -109,6 +111,8 @@ bool SLangWidget::putch(CHAR ch, int x, int y) {
     warning("putch called with invalid coords");
     return false;
   }
+
+  SLsmg_set_color(color);
    
   SLsmg_gotorc( y + orig_y, x + orig_x );
   SLsmg_write_char(ch);
@@ -166,9 +170,12 @@ int SLangWidget::putnch(CHAR *str, int x, int y, int nchars) {
   } else // line fits in width
     len = nchars;
   
+  SLsmg_set_color(color);
+
   SLsmg_gotorc( y+orig_y, x+orig_x );
+
   SLsmg_write_nchars( str, len );
-  
+
   return nwrap;
 }
 
@@ -178,6 +185,8 @@ void SLangWidget::blank_row(int y) {
     warning("blank_row failed: y=%u",y);
     return;
   }
+
+  SLsmg_set_color(color);
   
   SLsmg_gotorc( y+orig_y, orig_x );
   
@@ -187,6 +196,7 @@ void SLangWidget::blank_row(int y) {
 
 void SLangWidget::blank() {
   register int c;
+  SLsmg_set_color(color);
   for(c=h;c>=0;c--) {
     SLsmg_gotorc( c+orig_y,orig_x);
     SLsmg_write_nchars( blankrow, w);
@@ -214,3 +224,42 @@ bool SLangWidget::check(int x, int y) {
   return true;
 }
 
+void SLangWidget::set_color(int col) {
+  // check if color is valid
+  switch(col) {
+  case 1:
+  case 2:
+  case 3:
+  case 4:
+  case 5:
+  case 6:
+  case 7:
+  case 11:
+  case 12:
+  case 13:
+  case 14:
+  case 15:
+  case 16:
+  case 17:
+  case 21:
+  case 22:
+  case 23:
+  case 24:
+  case 25:
+  case 26:
+  case 27:
+  case 31:
+  case 32:
+  case 33:
+  case 34:
+  case 35:
+  case 36:
+  case 37:
+    func("color of widget %s set to %u",name, col);
+    color = col;
+    break;
+  default:
+    warning("invalid color %u selected for widget %s", col, name);
+    break;
+  }
+}

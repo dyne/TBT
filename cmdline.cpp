@@ -234,12 +234,14 @@ SLW_Text     *status;
 int record_console() {
 
   // initialize the text console
-  if(! con->init() ) return(-1);
+  assert( con->init() );
   
   //  initialize the status line
   status->border = false;
+  status->set_color(21);
   status->set_name("status box");
-  if(! con->place(status, 0, con->h-10, con->w, con->h) ) {
+
+  if(! con->place(status, 0, con->h-1, con->w, con->h) ) {
     error("error placing the status widget");
     return(-1);
   }
@@ -251,7 +253,7 @@ int record_console() {
   // initialize the text canvas
   txt->set_name("editor");
   // txt->border = true;
-  if(! con->place(txt, 0, 0, con->w, con->h-6) ) { //  con->w, con->h-20) ) {
+  if(! con->place(txt, 0, 0, con->w, con->h-2) ) { //  con->w, con->h-20) ) {
     error("error placing the text widget");
     return(-1);
   }

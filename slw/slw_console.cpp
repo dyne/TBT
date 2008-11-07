@@ -72,7 +72,7 @@ SLangConsole::~SLangConsole() { close(); }
 
 bool SLangConsole::init() {
 
-  //  setenv("TERM","xterm-color",0); 
+  setenv("TERM","xterm-color",0); 
   SLtt_get_terminfo();
 
   if( -1 == SLkp_init() ) { // keyboard interface
@@ -100,8 +100,52 @@ bool SLangConsole::init() {
   // SLtt_Use_Ansi_Colors = 0;
   // SLtt_Term_Cannot_Scroll = 0;
 
+  // set sizes of the whole console
   w = SLtt_Screen_Cols;
   h = SLtt_Screen_Rows;
+
+  /* setup colors with the palette scheme:
+     n = normal;
+     n+10 = highlight;
+     n+20 = reverse normal;
+     n+30 = reverse highlight; */
+
+  // crazy casting for crazy slang
+  SLtt_set_color(1,NULL,(char *)"lightgray",(char *)"black");
+  SLtt_set_color(11,NULL,(char *)"white",(char *)"black");
+  SLtt_set_color(21,NULL,(char *)"black",(char *)"lightgray");
+  SLtt_set_color(31,NULL,(char *)"black",(char *)"white");
+  
+  SLtt_set_color(2,NULL,(char *)"red",(char *)"black");
+  SLtt_set_color(12,NULL,(char *)"brightred",(char *)"black");
+  SLtt_set_color(22,NULL,(char *)"black",(char *)"red");
+  SLtt_set_color(32,NULL,(char *)"black",(char *)"brightred");
+  
+  SLtt_set_color(3,NULL,(char *)"green",(char *)"black");
+  SLtt_set_color(13,NULL,(char *)"brightgreen",(char *)"black");
+  SLtt_set_color(23,NULL,(char *)"black",(char *)"green");
+  SLtt_set_color(33,NULL,(char *)"black",(char *)"brightgreen");
+  
+  SLtt_set_color(4,NULL,(char *)"brown",(char *)"black");
+  SLtt_set_color(14,NULL,(char *)"yellow",(char *)"black");
+  SLtt_set_color(24,NULL,(char *)"black",(char *)"brown");
+  SLtt_set_color(34,NULL,(char *)"black",(char *)"yellow");
+  
+  SLtt_set_color(5,NULL,(char *)"blue",(char *)"black");
+  SLtt_set_color(15,NULL,(char *)"brightblue",(char *)"black");
+  SLtt_set_color(25,NULL,(char *)"black",(char *)"blue");
+  SLtt_set_color(35,NULL,(char *)"black",(char *)"brightblue");
+  
+  SLtt_set_color(6,NULL,(char *)"magenta",(char *)"black");
+  SLtt_set_color(16,NULL,(char *)"brightmagenta",(char *)"black");
+  SLtt_set_color(26,NULL,(char *)"black",(char *)"magenta");
+  SLtt_set_color(36,NULL,(char *)"black",(char *)"brightmagenta");
+  
+  SLtt_set_color(7,NULL,(char *)"cyan",(char *)"black");
+  SLtt_set_color(17,NULL,(char *)"brightcyan",(char *)"black");
+  SLtt_set_color(27,NULL,(char *)"black",(char *)"cyan");
+  SLtt_set_color(37,NULL,(char *)"black",(char *)"brightcyan");
+  
 
   
   refresh();
@@ -201,8 +245,10 @@ bool SLangConsole::refresh() {
     SLangWidget *wid;
     wid = (SLangWidget*) widgets.begin();
     while(wid) {
-	    wid->refresh();
-	    wid = (SLangWidget*) wid->next;
+
+      wid->refresh();
+      wid = (SLangWidget*) wid->next;
+
     }
   }
 
