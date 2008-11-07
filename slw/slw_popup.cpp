@@ -81,7 +81,7 @@ bool SLW_Popup::refresh() {
 		
 		blank_row(hc);
 
-		for( lc=0; tc < len; tc++, lc++, end++ ) {
+		for( lc=0; tc < len-2; tc++, lc++, end++ ) {
 
 			if( *end == '\n' ) // there is a newline
 				break;
@@ -106,7 +106,7 @@ bool SLW_Popup::refresh() {
 	return true;
 }
 
-bool SLW_Popup::set_text(char *text) {
+bool SLW_Popup::set_text(const char *text) {
 	// set a NULL terminated text for the dialog
 	int c, num;
 
@@ -119,15 +119,15 @@ bool SLW_Popup::set_text(char *text) {
 
 	if(txt) free(txt);
 
-	txt = (char*) malloc( num + 10 );
+	txt = (char*) malloc( num );
 
 	memcpy(txt, text, num);
 
 	len = c;
 
 	// safety bound
-	txt[len+1] = '\0';
-	txt[len+2] = '\0';
+	//	txt[len+1] = '\0';
+	//	txt[len+2] = '\0';
 
 
 	return true;

@@ -57,3 +57,5 @@
 
 #define KEY_PLUS 43
 #define KEY_MINUS 45
+
+#define KEY_ESC 0xffff // ESC (in linux, TODO: test other OS)

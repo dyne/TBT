@@ -48,7 +48,7 @@
 // S-Lang widgets
 #include <slw_console.h>
 #include <slw_text.h>
-
+#include <slw_popup.h>
 
 // my lovely utils
 #include <jutils.h>
@@ -84,6 +84,7 @@ static const char *short_options = "-hvD:crps:t:x:";
 
 int debug;
 char filename[512];
+char convert[512];
 
 
 // act as commandline tool by default
@@ -232,19 +233,38 @@ SLW_Text     *txt;
 SLW_Text     *status;
 
 int record_console() {
-
   // initialize the text console
   assert( con->init() );
+
+  // give a welcome popup before starting recording
+  SLW_Popup *info;
+  info = new SLW_Popup();
+  info->border = false;
+  info->set_color(1);
+  info->set_name("welcome popup");
+  info->set_text("Welcome to Time Based Text\n"
+		 "press [ENTER] to start recording\n"
+		 "press [ESC] when finished.");
+  con->place(info,
+	     (con->w/2) - 20, (con->h/2) - 5,
+	     (con->w/2) + 20, (con->h/2) + 5);
+  assert( info->init() );
+  con->focused = info;
+  key = 0;
+  while( con->refresh() ) {
+    key = con->getkey();
+    if(key == KEY_ENTER) break;
+    if(key == KEY_ESC) return 0;
+  }
+  delete(info);
   
   //  initialize the status line
   status->border = false;
   status->set_color(21);
   status->set_name("status box");
 
-  if(! con->place(status, 0, con->h-1, con->w, con->h) ) {
-    error("error placing the status widget");
-    return(-1);
-  }
+  con->place(status, 0, con->h-1, con->w, con->h);
+
   assert ( status->init() );
   
   //  set the status widget *** only after placing it! ***
@@ -252,6 +272,7 @@ int record_console() {
   
   // initialize the text canvas
   txt->set_name("editor");
+  txt->cursor = true;
   // txt->border = true;
   if(! con->place(txt, 0, 0, con->w, con->h-2) ) { //  con->w, con->h-20) ) {
     error("error placing the text widget");
@@ -261,7 +282,7 @@ int record_console() {
   
   // focus the text canvas
   con->focused = txt;
-  
+  txt->blank();
   
   // write out to the status widget
   notice("TBT - console ready");
@@ -269,7 +290,9 @@ int record_console() {
   while(!tbt.quit) {
     
     key = con->getkey();
-    
+
+    if(key == KEY_ESC) break;
+
     if(key) {
       
       // save the key and timestamp
@@ -383,23 +406,20 @@ int main(int argc, char** argv)
     switch(operation) {
       
     case REC:
-      record_console();
+      if( !record_console() ) break;
       
       switch(render) {
 	
       case BIN:
 	tbt.save_bin( filename );
-	act("TBT file %s rendered in binary format",filename);
 	break;
 	
       case ASCII:
 	tbt.save_ascii( filename );
-	act("TBT file %s rendered in ascii format",filename);
 	break;
 	
       case HTML:
 	tbt.save_html( filename );
-	act("TBT file %s rendered in html format",filename);
 	break;
 	
       }
@@ -416,6 +436,11 @@ int main(int argc, char** argv)
     con->refresh();
     jsleep(1,0);
     con->close();
+    set_status(NULL);
+
+    if(operation == REC)
+      notice("TBT file %s rendered in %s format", filename,
+	  (render==BIN)?"binary":(render==ASCII)?"ascii":(render==HTML)?"html":"unknown");
 
 
   } else {
@@ -472,31 +497,36 @@ int main(int argc, char** argv)
 	
       case ASCII:
 	{
-	  char tmp[512];
-	  snprintf(tmp,511,"%s.asc",filename);	
-	  tbt.save_ascii( tmp );
-	  act("TBT file %s rendered in ascii format",tmp);
+
+	  snprintf(convert, 511, "%s.asc",filename);	
+	  tbt.save_ascii( convert );
+	  
 	}
 	break;
 	
       case HTML:
 	{
-	  char tmp[512];
-	  snprintf(tmp,511,"%s.html",filename);	
-	  tbt.save_html( tmp );
-	  act("TBT file %s rendered in html format",filename);
+	  snprintf(convert, 511,"%s.html",filename);	
+	  tbt.save_html( convert );
 	}
 	break;
       case BIN:
-	  char tmp[512];
-	  snprintf(tmp,511,"%s.tbt",filename);	
-	  tbt.save_bin( tmp );
-	  act("TBT file %s rendered in binary format",filename);
+	  snprintf(convert, 511,"%s.tbt",filename);	
+	  tbt.save_bin( convert );
       }
     }
   }    
-  
-  notice("Closing Time Based Recorder");
+
+  if( (operation==REC) | (operation==CONV) )
+    notice("TBT file %s %s to %s format",
+	   (operation==REC)?filename:convert,
+	   (operation==REC)?"recorded":
+	   (operation==CONV)?"converted":"***",
+	   (render==BIN)?"binary":
+	   (render==ASCII)?"ascii":
+	   (render==HTML)?"html":"unknown");
+    
+  act("exiting TBT");
   act("%u entries streamed.", tbt.buffer->len());
 
   exit(0);  

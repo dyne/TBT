@@ -254,10 +254,10 @@ bool SLangConsole::refresh() {
 
   if(focused && !keyboard_quit)
 	  if(focused->cursor) {
-  //                SLtt_set_cursor_visibility(1);
+	    SLtt_set_cursor_visibility(1);
 	    focused->gotoxy( focused->cur_x, focused->cur_y);
-          } // else
-            //    SLtt_set_cursor_visibility(0);
+          } else
+	    SLtt_set_cursor_visibility(0);
 
  
   SLsmg_refresh();

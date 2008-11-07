@@ -37,7 +37,8 @@ class SLW_Popup : public SLangWidget {
 		bool refresh();
 		////////////////////////
 
-		bool set_text(char *text);
+		bool set_text(const char *text);
+
 	private:
 		char *txt;
 		int len;
