@@ -66,22 +66,26 @@ TBT tbt;
 void set_status(SLangWidget *s);
 
 static const char *help =
-"Synopsis: tbt -(r|p) [options] [file]\n"
+"Synopsis: tbt <command> [options] [file]\n"
 "Commands:\n"
 "  -r   record\n"
 "  -p   playback\n"
-"Options:\n"
+"  -x   convert\n"
+"  -v   print version\n"
 "  -h   print this help\n"
-"  -v   version information\n"
-"  -D   debug verbosity level - default 1\n"
-"  -c   console interface mode (S-Lang)\n"
+"Options:\n"
+"  -c   console interface mode\n"
 "  -s   save format in [ bin | ascii | html ]\n"
 #ifdef linux
 "  -t   timing mode    [ posix | rtc ]\n"
 #endif
-"  -x   convert tbt to [ bin | html | ascii]\n";
+"  -D   debug verbosity level (1-3)\n";
 
-static const char *short_options = "-hvD:crps:t:x:";
+
+
+
+
+static const char *short_options = "-hvD:crpxs:t:";
 
 int debug;
 char filename[512];
@@ -166,6 +170,10 @@ void cmdline(int argc, char **argv) {
       operation = PLAY;
       break;
 
+    case 'x':
+      operation = CONV;
+      break;
+
     case 't':
       if(strncasecmp(optarg, "rtc", 3) ==0)
 	timing = RTC;
@@ -187,20 +195,6 @@ void cmdline(int argc, char **argv) {
       }
       break;
 
-    case 'x':
-      operation = CONV;
-      if( strcasecmp(optarg, "BIN") ==0)
-	render = BIN;
-      else if( strcasecmp(optarg, "ASCII") ==0)
-	render = ASCII;
-      else if( strcasecmp(optarg, "HTML") ==0)
-	render = HTML;
-      else {
-	error ("render format not recognized: %s", optarg);
-	act ("using default binary format render");
-	render = BIN;
-      }
-      break;
       
     case 1:  snprintf(filename,511,"%s", optarg);
       

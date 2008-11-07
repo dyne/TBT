@@ -60,13 +60,28 @@ The main functionalities are exclusive (use one or the other):
 
 .B
 .IP "-r"
-Record a Time Based Text
+Record a Time Based Text (use \f-s\fR to select format)
 .B
 .IP "-p"
 Playback a Time Based Text
 .B
-.IP "-x \fI<format_name>\fR"
-convert TBT file to format [ bin | html | ascii ]
+.IP "-x"
+Convert a Time Based Text (use \f-s\fR to select format)
+.B
+.IP "-v"
+Display version and quit
+.B
+.IP "-h"
+Display a help text and quit
+
+
+.SH OPTIONS
+
+The following switches are optional:
+
+.B
+.IP "-s \fI<format_name>\fR"
+save format in [ bin | ascii | html ]. Default is bin (see -x command)
 
 The \fIbin\fR  mode will  store a  binary file you  can play  with the
 playtext command.
@@ -80,31 +95,13 @@ README.html file.
 The \fIascii\fR mode produces pure  ascii text file, one character per
 line, with the information about the key pressed, and the timestamp.
 
-
 .B
-.IP "-h"
-Display a help text and quit
-.B
-.IP "-v"
-Display version and quit
-
-
-.SH OPTIONS
-
-The following switches are optional:
+.IP "-c"
+Use the S-Lang console interface
 
 .B
 .IP "-D \fI<number>\fR"
 Set verbosity level, the default value is 1
-.B
-.IP "-c"
-Use the S-Lang console interface
-.B
-.IP "-m"
-mail composer - option alias: recmail
-.B
-.IP "-s \fI<format_name>\fR"
-save format in [ bin | ascii | html ]. Default is bin (see -x command)
 
 .B
 .IP "-t \fI<timing mode>\fR"
