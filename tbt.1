@@ -1,25 +1,32 @@
-.TH tbt 1 "April 13, 2007" "tbt"
+.TH tbt 1 "November 7, 2008" "tbt"
 
 .SH NAME
-tbt \- Time Based Text
+TBT \- Time Based Text
 
 .SH SYNOPSIS
 .B tbt [options] [file]
 
 .SH DESCRIPTION
-.B tbt - Time Based Text
 
-To vehicle more human-input information in written text.
+This software  is written to  vehicle more human-input  information in
+written text.
 
-Record performance time of written text and vehicle it as additional information: saving and reproducing every single action during the composition of a text let us vehicle emphasis in written communication.
+We  record  performance  time  of  written  text  and  vehicle  it  as
+additional  information: saving  and reproducing  every  single action
+during the  composition of a text  let us vehicle  emphasis in written
+communication.
 
-As this simple concept, our implementation is also kept very minimalistic while we welcome programmers to embed it in communication applications, as in emails, blogs, visual poetry, slides and what not.
+As  this  simple  concept,   our  implementation  is  also  kept  very
+minimalistic while we welcome programmers to embed it in communication
+applications, as in emails, blogs, visual poetry, slides and what not.
 
-Beware this software is hacky, u need to love text. A manual page is provided and commandline formulas to be casted in a terminal.
+Beware this software is minimalistic, you need to love text.
 
-This software is written in thread-safe POSIX C++ and can be ported to most platforms, it provides a real-time recorder for serial timed data, recording 64bit tuples key/msec with low-latency. Included are programs providing a text console interface for the user to experiment with keyboard.
-
-A Web application written in PHP/MySQL and Ajax could be used to publish TBT written into the world wide web.
+This manual will  follow documenting the TBT protocol  and usage, with
+commandline  formulas to  be casted  in a  terminal.  Included  in the
+sourcecode is also a website  written in PHP/MySQL/Ajax to publish TBT
+written into the  world wide web, as well  a Python-GTK graphical user
+interface.
 
 .SH PROTOCOL
 
@@ -33,9 +40,19 @@ In the .tbt format, text is saved with a timestamp for each letter:
   |    Total: 128bit    |
    ---------------------
 
-However export to different formats is planned including generation of web-ready code in HTML and Javascript, a daemon to provide timed input thru a socket on the network (TCP/IP) and what not.
+This software is written in thread-safe POSIX C++ and can be ported to
+most  platforms, it  provides a  real-time recorder  for  serial timed
+data, recording  64bit tuples key/msec with  low-latency. Included are
+programs providing a text console interface for the user to experiment
+with keyboard.
 
-Input is captured from the console, but can be extended to intercept any application using some h4x0r keylogging technique on different OS.
+Input is captured  from the console, but can  be extended to intercept
+any application using some h4x0r keylogging technique on different OS.
+
+Export  functionality  to  different  formats is  provided,  including
+generation of web-ready code in HTML and Javascript.
+
+
 
 .SH COMMANDS
 
@@ -120,13 +137,13 @@ $ tbt -c -r -s ascii mytext.txt
 
 $ tbt -c -r -s html mytext.html
 
-.SH NOTES
-The first integration provided for TBT is with Mutt \fIhttp://www.mutt.org\fR the Mail User Agent popular among text console users.
-For further information please read the README.mutt file.
-
 .SH BUGS
 Everyone is encouraged to test this software and report bugs!
-Send remarks and patches to http://dyne.org/hackers_contact.php or get in touch with coders via irc.freenode.net channel #dyne
+
+Please use the web page http://bugs.dyne.org
+
+Get  in   touch  with  developers   via  mail  using  this   web  page
+http://dyne.org/hackers_contact.php or via chat on http://irc.dyne.org
 
 .SH AUTHORS
 Time Based Text software by Denis Roio - http://jaromil.dyne.org
@@ -147,7 +164,7 @@ Thanks to: Florian Cramer, Annet Dekker, Paul Hendriks
 
 .SH COPYING
 
-This manual is Copyleft (c) 2007-2008 Denis Rojo <\fIjaromil@dyne.org\fR>
+This manual is Copyleft (c) 2007-2008 Denis Roio <\fIjaromil@dyne.org\fR>
 
 Permission is  granted to copy,  distribute and/or modify  this manual
 under the terms of the  GNU Free Documentation License, Version 1.1 or
