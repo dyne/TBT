@@ -1,6 +1,6 @@
 /*  Time Based Text
  *
- *  (C) Copyright 2006 - 2007  Denis Rojo <jaromil@dyne.org>
+ *  (C) Copyright 2006 - 2008  Denis Roio <jaromil@dyne.org>
  *      Idea shared with Joan & Dirk <jodi@jodi.org>
  *
  * This source code is free software; you can redistribute it and/or

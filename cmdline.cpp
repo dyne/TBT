@@ -101,11 +101,10 @@ bool console = false;
 int timing = POSIX;
 
 // operation modes
+int operation = 0x0;
 #define REC        1
 #define PLAY       2
-
 #define CONV       4
-int operation = REC;
 
 
 // rendering formats
@@ -280,7 +279,7 @@ int record_console() {
   txt->blank();
   
   // write out to the status widget
-  notice("TBT - console ready");
+  notice("TBT recording, press [ESC] when finished");
   
   while(!tbt.quit) {
     
@@ -365,7 +364,12 @@ int main(int argc, char** argv)
 {
 
   cmdline(argc, argv);
-  
+
+  if(!operation) {
+    error("no operation specified, use -h for help on usage.");
+    exit(0);
+  }
+
   if(timing == RTC)
     tbt.rtc = true;
 
