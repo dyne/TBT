@@ -74,9 +74,6 @@ class TBT {
 
   void append(uint64_t key); ///< append a single key at the time this function is called
 
-  int fdappend(int filedes, int keysize); ///< append keys read from a file descriptor
-
-
 
 
   // playback functions: time based feed of keys loaded

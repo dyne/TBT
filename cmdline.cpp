@@ -22,6 +22,7 @@
 //// system includes
 #include <stdio.h>
 #include <stdlib.h>
+#include <termios.h>
 #include <time.h>
 #include <errno.h>
 #include <string.h>
@@ -449,24 +450,42 @@ int main(int argc, char** argv)
     switch(operation){
       
     case REC:
-      // append from 0 (stdin) each 1 byte
-      tbt.fdappend(0, 1);
-      
+
+      {
+	// OMFG
+	struct termios stty;
+	tcgetattr(0,&stty);
+	stty.c_lflag ^= ICANON|ECHO;
+	stty.c_cc[VTIME] = 100; // 10 seconds minute timeout 
+	stty.c_cc[VMIN] = 0;
+	tcsetattr(0,TCSANOW,&stty);
+
+	while(!tbt.quit) {
+	  
+	  read(0,(void*)&key,1);
+
+	  tbt.append((int64_t)key);
+
+	  write(1, (void*)&key, 1);	  
+
+	}
+
+	stty.c_lflag |= ICANON|ECHO;
+	tcsetattr(0,TCSANOW,&stty);
+      }
+
       switch(render) {
 	
       case BIN:
 	tbt.save_bin( filename );
-	act("TBT file %s rendered in binary format",filename);
 	break;
 	
       case ASCII:
 	tbt.save_ascii( filename );
-	act("TBT file %s rendered in ascii format",filename);
 	break;
 	
       case HTML:
 	tbt.save_html( filename );
-	act("TBT file %s rendered in html format",filename);
 	break;
 	
       }
@@ -480,7 +499,7 @@ int main(int argc, char** argv)
 	// tbt.getkey is a blocking call
 	// will wait N time before returning
 	key = tbt.getkey();
-	
+
 	// print out on stdout
 	write(1, (void*)&key, 1);
       }
