@@ -65,22 +65,22 @@ TBT tbt;
 void set_status(SLangWidget *s);
 
 static const char *help =
-"Usage: tbt [options] [file]\n"
-"\n"
+"Synopsis: tbt -(r|p) [options] [file]\n"
+"Commands:\n"
+"  -r   record\n"
+"  -p   playback\n"
+"Options:\n"
 "  -h   print this help\n"
 "  -v   version information\n"
 "  -D   debug verbosity level - default 1\n"
 "  -c   console interface mode (S-Lang)\n"
-"  -r   record   tbt  - option alias: rectext\n"
-"  -p   playback tbt  - option alias: playtext\n"
-"  -m   mail composer - option alias: recmail\n"
 "  -s   save format in [ bin | ascii | html ]\n"
 #ifdef linux
-"  -t   timing mode [ posix | rtc ]\n"
+"  -t   timing mode    [ posix | rtc ]\n"
 #endif
-"  -x   convert .tbt file to [ bin | html | ascii]\n";
+"  -x   convert tbt to [ bin | html | ascii]\n";
 
-static const char *short_options = "-hvD:crpms:t:x:";
+static const char *short_options = "-hvD:crps:t:x:";
 
 int debug;
 char filename[512];
@@ -97,7 +97,7 @@ int timing = POSIX;
 // operation modes
 #define REC        1
 #define PLAY       2
-#define MAIL       3
+
 #define CONV       4
 int operation = REC;
 
@@ -129,8 +129,6 @@ void cmdline(int argc, char **argv) {
     operation = REC;
   else if ( strstr(argv[0],"playtext") )
     operation = PLAY;
-  else if ( strstr(argv[0],"recmail") )
-    operation = MAIL;
 
 
   do {
@@ -164,10 +162,6 @@ void cmdline(int argc, char **argv) {
 
     case 'p':
       operation = PLAY;
-      break;
-
-    case 'm':
-      operation = MAIL;
       break;
 
     case 't':
@@ -412,10 +406,6 @@ int main(int argc, char** argv)
       
     case PLAY:
       play_console();
-      break;
-      
-    case MAIL:
-      error("TODO recmail");
       break;
       
     }

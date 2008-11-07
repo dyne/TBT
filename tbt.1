@@ -37,7 +37,32 @@ However export to different formats is planned including generation of web-ready
 
 Input is captured from the console, but can be extended to intercept any application using some h4x0r keylogging technique on different OS.
 
-.SH OPTIONS
+.SH COMMANDS
+
+The main functionalities are exclusive (use one or the other):
+
+.B
+.IP "-r"
+Record a Time Based Text
+.B
+.IP "-p"
+Playback a Time Based Text
+.B
+.IP "-x \fI<format_name>\fR"
+convert TBT file to format [ bin | html | ascii ]
+
+The \fIbin\fR  mode will  store a  binary file you  can play  with the
+playtext command.
+
+The \fIhtml\fR  mode will  produce a simple  html page, in  which your
+text    will    be    played.     The    distributed    script    file
+\fItbt-typewriter.js\fR should be present in the same directory of the
+html file. For further information  about the html mode please the the
+README.html file.
+
+The \fIascii\fR mode produces pure  ascii text file, one character per
+line, with the information about the key pressed, and the timestamp.
+
 
 .B
 .IP "-h"
@@ -45,6 +70,12 @@ Display a help text and quit
 .B
 .IP "-v"
 Display version and quit
+
+
+.SH OPTIONS
+
+The following switches are optional:
+
 .B
 .IP "-D \fI<number>\fR"
 Set verbosity level, the default value is 1
@@ -52,27 +83,11 @@ Set verbosity level, the default value is 1
 .IP "-c"
 Use the S-Lang console interface
 .B
-.IP "-r"
-record tbt - option alias: rectext
-.B
-.IP "-p"
-playback tbt - option alias: playtext
-.B
 .IP "-m"
 mail composer - option alias: recmail
 .B
 .IP "-s \fI<format_name>\fR"
-save format in [ bin | ascii | html ]. Default is bin.
-
-The \fIbin\fR  mode will  store a  binary file you  can play  with the
-playtext command.
-
-The \fIhtml\fR  mode will  produce a simple  html page, in  which your
-text  will be  played. For  further  information about  the html  mode
-please the the README.html file.
-
-The \fIascii\fR mode produces pure  ascii text file, one character per
-line, with the information about the key pressed, and the timestamp.
+save format in [ bin | ascii | html ]. Default is bin (see -x command)
 
 .B
 .IP "-t \fI<timing mode>\fR"
@@ -81,9 +96,6 @@ method used to calculate time: [ posix | rtc ]. Default is posix.
 So far a few methods are implemented, posix should be the most compatible,
 rtc works only with Linux kernel and requires suid authority.
 
-.B
-.IP "-x \fI<format_name>\fR"
-convert a binary .tbt file to another format [ bin | html | ascii] (see -s)
 
 
 .SH EXAMPLES
@@ -91,22 +103,22 @@ convert a binary .tbt file to another format [ bin | html | ascii] (see -s)
 .B
 .IP "Howto record a tbt in binary format"
 
-$ rectext -s bin mytext.tbt
+$ tbt -c -r mytext.tbt
 
 .B
 .IP "Howto play a tbt binary file"
 
-$ playtext mytext.tbt
+$ tbt -c -p mytext.tbt
 
 .B
 .IP "Howto record a tbt in ascii mode"
 
-$ rectext -s ascii mytext.txt
+$ tbt -c -r -s ascii mytext.txt
 
 .B
 .IP "Howto record a tbt in html mode"
 
-$ rectext -s html mytext.html
+$ tbt -c -r -s html mytext.html
 
 .SH NOTES
 The first integration provided for TBT is with Mutt \fIhttp://www.mutt.org\fR the Mail User Agent popular among text console users.
@@ -125,7 +137,7 @@ PHP/Javascript code by Angelo Failla - pallotron freaknet.org
 .br
 Webdesign by O.K. Parking - http://www.ok-parking.nl
 .br
-Python-GTK graphical interface by Pablo Martines - caedes sindominio.net
+Python-GTK GUI by Pablo Martines - caedes sindominio.net
 .br
 More code and suggestions by Andrea Lo Pumo - alpt freaknet.org
 .br

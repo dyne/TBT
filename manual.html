@@ -41,27 +41,53 @@ A Web application written in PHP/MySQL and Ajax could be used to publish TBT wri
 
 <P>
 In the .tbt format, text is saved with a timestamp for each letter:
-<pre>
-     _________ ___________ 
-    |  u-int  |   u-int   |
-    |  64bit  |   64bit   |    m-seconds = 1/1000 of a second
-     --------- -----------
-    |  char   | m-seconds |    char = ASCII or higher bit char code
-     --------- -----------
-    |    Total: 128bit    |
-     ---------------------
-</pre>
+<BR>&nbsp;&nbsp;&nbsp;_________&nbsp;___________&nbsp;
+<BR>&nbsp;&nbsp;|&nbsp;&nbsp;u-int&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;u-int&nbsp;&nbsp;&nbsp;|
+<BR>&nbsp;&nbsp;|&nbsp;&nbsp;64bit&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;64bit&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;m-seconds&nbsp;=&nbsp;1/1000&nbsp;of&nbsp;a&nbsp;second
+<BR>&nbsp;&nbsp;&nbsp;---------&nbsp;-----------
+<BR>&nbsp;&nbsp;|&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;|&nbsp;m-seconds&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;=&nbsp;ASCII&nbsp;or&nbsp;higher&nbsp;bit&nbsp;char&nbsp;code
+<BR>&nbsp;&nbsp;&nbsp;---------&nbsp;-----------
+<BR>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Total:&nbsp;128bit&nbsp;&nbsp;&nbsp;&nbsp;|
+<BR>&nbsp;&nbsp;&nbsp;---------------------
 <P>
 However export to different formats is planned including generation of web-ready code in HTML and Javascript, a daemon to provide timed input thru a socket on the network (TCP/IP) and what not.
 <P>
 Input is captured from the console, but can be extended to intercept any application using some h4x0r keylogging technique on different OS.
 <P>
 <A NAME="lbAF">&nbsp;</A>
-<H2>OPTIONS</H2>
+<H2>COMMANDS</H2>
 
 <P>
+The main functionalities are exclusive (use one or the other):
+<P>
 <B><DL COMPACT>
-<DT>-h<DD>
+<DT>-r<DD>
+</B>
+
+Record a Time Based Text
+<B><DT>-p<DD>
+</B>
+
+Playback a Time Based Text
+<B><DT>-x </B><I>&lt;format_name&gt;</I><DD>
+
+
+convert TBT file to format [ bin | html | ascii ]
+<P>
+The <I>bin</I>  mode will  store a  binary file you  can play  with the
+playtext command.
+<P>
+The <I>html</I>  mode will  produce a simple  html page, in  which your
+text    will    be    played.     The    distributed    script    file
+<I>tbt-typewriter.js</I> should be present in the same directory of the
+html file. For further information  about the html mode please the the
+README.html file.
+<P>
+The <I>ascii</I> mode produces pure  ascii text file, one character per
+line, with the information about the key pressed, and the timestamp.
+<P>
+<P>
+<B><DT>-h<DD>
 </B>
 
 Display a help text and quit
@@ -69,7 +95,17 @@ Display a help text and quit
 </B>
 
 Display version and quit
-<B><DT>-D </B><I>&lt;number&gt;</I><DD>
+<P>
+<P>
+</DL>
+<A NAME="lbAG">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<P>
+The following switches are optional:
+<P>
+<B><DL COMPACT>
+<DT>-D </B><I>&lt;number&gt;</I><DD>
 
 
 Set verbosity level, the default value is 1
@@ -77,14 +113,6 @@ Set verbosity level, the default value is 1
 </B>
 
 Use the S-Lang console interface
-<B><DT>-r<DD>
-</B>
-
-record tbt - option alias: rectext
-<B><DT>-p<DD>
-</B>
-
-playback tbt - option alias: playtext
 <B><DT>-m<DD>
 </B>
 
@@ -92,17 +120,7 @@ mail composer - option alias: recmail
 <B><DT>-s </B><I>&lt;format_name&gt;</I><DD>
 
 
-save format in [ bin | ascii | html ]. Default is bin.
-<P>
-The <I>bin</I>  mode will  store a  binary file you  can play  with the
-playtext command.
-<P>
-The <I>html</I>  mode will  produce a simple  html page, in  which your
-text  will be  played. For  further  information about  the html  mode
-please the the README.html file.
-<P>
-The <I>ascii</I> mode produces pure  ascii text file, one character per
-line, with the information about the key pressed, and the timestamp.
+save format in [ bin | ascii | html ]. Default is bin (see -x command)
 <P>
 <B><DT>-t </B><I>&lt;timing mode&gt;</I><DD>
 
@@ -112,14 +130,10 @@ method used to calculate time: [ posix | rtc ]. Default is posix.
 So far a few methods are implemented, posix should be the most compatible,
 rtc works only with Linux kernel and requires suid authority.
 <P>
-<B><DT>-x </B><I>&lt;format_name&gt;</I><DD>
-
-
-convert a binary .tbt file to another format [ bin | html | ascii] (see -s)
 <P>
 <P>
 </DL>
-<A NAME="lbAG">&nbsp;</A>
+<A NAME="lbAH">&nbsp;</A>
 <H2>EXAMPLES</H2>
 
 <P>
@@ -128,40 +142,40 @@ convert a binary .tbt file to another format [ bin | html | ascii] (see -s)
 </B>
 
 <P>
-$ rectext -s bin mytext.tbt
+$ tbt -c -r mytext.tbt
 <P>
 <B><DT>Howto play a tbt binary file<DD>
 </B>
 
 <P>
-$ playtext mytext.tbt
+$ tbt -c -p mytext.tbt
 <P>
 <B><DT>Howto record a tbt in ascii mode<DD>
 </B>
 
 <P>
-$ rectext -s ascii mytext.txt
+$ tbt -c -r -s ascii mytext.txt
 <P>
 <B><DT>Howto record a tbt in html mode<DD>
 </B>
 
 <P>
-$ rectext -s html mytext.html
+$ tbt -c -r -s html mytext.html
 <P>
 </DL>
-<A NAME="lbAH">&nbsp;</A>
+<A NAME="lbAI">&nbsp;</A>
 <H2>NOTES</H2>
 
 The first integration provided for TBT is with Mutt <I><A HREF="http://www.mutt.org">http://www.mutt.org</A></I> the Mail User Agent popular among text console users.
 For further information please read the README.mutt file.
 <P>
-<A NAME="lbAI">&nbsp;</A>
+<A NAME="lbAJ">&nbsp;</A>
 <H2>BUGS</H2>
 
 Everyone is encouraged to test this software and report bugs!
 Send remarks and patches to <A HREF="http://dyne.org/hackers_contact.php">http://dyne.org/hackers_contact.php</A> or get in touch with coders via irc.freenode.net channel #dyne
 <P>
-<A NAME="lbAJ">&nbsp;</A>
+<A NAME="lbAK">&nbsp;</A>
 <H2>AUTHORS</H2>
 
 Time Based Text software by Denis Roio - <A HREF="http://jaromil.dyne.org">http://jaromil.dyne.org</A>
@@ -176,7 +190,7 @@ PHP/Javascript code by Angelo Failla - pallotron freaknet.org
 Webdesign by O.K. Parking - <A HREF="http://www.ok-parking.nl">http://www.ok-parking.nl</A>
 <BR>
 
-Python-GTK graphical interface by Pablo Martines - caedes sindominio.net
+Python-GTK GUI by Pablo Martines - caedes sindominio.net
 <BR>
 
 More code and suggestions by Andrea Lo Pumo - alpt freaknet.org
@@ -187,7 +201,7 @@ Development supported by Impakt - <A HREF="http://www.impakt.nl">http://www.impa
 
 Thanks to: Florian Cramer, Annet Dekker, Paul Hendriks
 <P>
-<A NAME="lbAK">&nbsp;</A>
+<A NAME="lbAL">&nbsp;</A>
 <H2>COPYING</H2>
 
 <P>
@@ -200,14 +214,14 @@ Foundation.  Permission is  granted  to make  and distribute  verbatim
 copies of  this manual  page provided the  above copyright  notice and
 this permission notice are preserved on all copies.
 <P>
-<A NAME="lbAL">&nbsp;</A>
+<A NAME="lbAM">&nbsp;</A>
 <H2>AVAILABILITY</H2>
 
 <P>
 The most recent version of tbt sourcecode and up to date documentation
 is always available for download from <I><A HREF="http://tbt.dyne.org">http://tbt.dyne.org</A></I>.
 <P>
-<A NAME="lbAM">&nbsp;</A>
+<A NAME="lbAN">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
 <P>
@@ -222,19 +236,20 @@ is always available for download from <I><A HREF="http://tbt.dyne.org">http://tb
 <DT><A HREF="#lbAC">SYNOPSIS</A><DD>
 <DT><A HREF="#lbAD">DESCRIPTION</A><DD>
 <DT><A HREF="#lbAE">PROTOCOL</A><DD>
-<DT><A HREF="#lbAF">OPTIONS</A><DD>
-<DT><A HREF="#lbAG">EXAMPLES</A><DD>
-<DT><A HREF="#lbAH">NOTES</A><DD>
-<DT><A HREF="#lbAI">BUGS</A><DD>
-<DT><A HREF="#lbAJ">AUTHORS</A><DD>
-<DT><A HREF="#lbAK">COPYING</A><DD>
-<DT><A HREF="#lbAL">AVAILABILITY</A><DD>
-<DT><A HREF="#lbAM">SEE ALSO</A><DD>
+<DT><A HREF="#lbAF">COMMANDS</A><DD>
+<DT><A HREF="#lbAG">OPTIONS</A><DD>
+<DT><A HREF="#lbAH">EXAMPLES</A><DD>
+<DT><A HREF="#lbAI">NOTES</A><DD>
+<DT><A HREF="#lbAJ">BUGS</A><DD>
+<DT><A HREF="#lbAK">AUTHORS</A><DD>
+<DT><A HREF="#lbAL">COPYING</A><DD>
+<DT><A HREF="#lbAM">AVAILABILITY</A><DD>
+<DT><A HREF="#lbAN">SEE ALSO</A><DD>
 </DL>
 <HR>
 This document was created by
 <A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 22:40:02 GMT, October 19, 2008
+Time: 20:36:20 GMT, November 04, 2008
 </BODY>
 </HTML>
