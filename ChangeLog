@@ -1,3 +1,10 @@
+TBT 0.9 - 7 Nov 2008 - jaromil
+	Fixed recording from <stdin>
+	Better organised command line switches
+	Usability improvements in console mode
+	License upgraded to GNU GPL version 3
+	Documentation updates
+	
 TBT 0.8 - 20 Oct 2008 - caedes, jaromil
 	New Python-GTK graphical user interface
 	Timing mode now defaults to posix
