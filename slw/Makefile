@@ -12,7 +12,7 @@ LINKER = ld
 # CXXFLAGS = -pipe -Wall -ggdb -pg -I.
 
 # optimized flags:
-CXXFLAGS = -pipe -Wall -O2 -fomit-frame-pointer -ffast-math
+CXXFLAGS = -pipe -Wall -O2 -fomit-frame-pointer -ffast-math -I.
 
 # Darwin/OSX flags: uncomment all below and comment the rest
 # CXXFLAGS = -pipe -Wall -ggdb -I. -I/sw/include -L/sw/lib
