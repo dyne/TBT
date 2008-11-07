@@ -5,7 +5,7 @@
 	    888	     888    888	    888
 	   o888o    o888ooo888	   o888o
 
-		Time Based Text    v0.8
+		Time Based Text    v0.9
 
                http://tbt.dyne.org
 
@@ -15,34 +15,34 @@
 
 Our objective here is to carry more information in written text.
 
-The solution proposed: record performance time in text
-and vehicle it as additional information.
+The solution proposed: record performance  time in text and vehicle it
+as additional information.
 
 Saving and reproducing every single action during the composition of a
 text let us vehicle emphasis in written communication.
 
-As this simple concept, our implementation is also kept very
+As  this  simple  concept,   our  implementation  is  also  kept  very
 minimalistic while we welcome programmers to embed it in communication
 applications.
 
 The basic implementation  is written in thread-safe POSIX  C++ and can
-be  ported  to  most  platforms.  It  is  also  included  a  graphical
-implementation in python-GTK. Please refer to the manual.
+be  ported  to  most  platforms.   It is  also  included  a  graphical
+implementation  in python-GTK.  Please refer  to the  manual  for more
+information.
 
 
 
 ::::: COMPILE THE SOURCE
 
-If you have a sane GNU/GCC compile environment[*] cd into the
+If  you  have  a  sane  GNU/GCC compile  environment[*]  cd  into  the
 sourcecode directory and type:
 
 $ make
 
 requirements are:
 
-- C++ compiler
-- C++ Standard Template Library
-- S-Lang libraries (text console handling)
+- C++ compiler (g++)
+- S-Lang libraries (text console handling) (libslang2-dev or so)
 
 [*] GNU/Linux, BSD, Apple/OSX with XCode, CygWin with GCC
 
@@ -76,13 +76,11 @@ In the .tbt format, text is saved with a timestamp for each letter:
     |    Total: 128bit    |
      ---------------------
 
-
-However export to different formats is planned including generation of
-web-ready code in HTML and Javascript, a daemon to provide timed input
-thru a socket on the network (TCP/IP) and what not.
-
-Input is captured from the console, but can be extended to intercept
+Input is captured  from the console, but can  be extended to intercept
 any application using some h4x0r keylogging technique on different OS.
+
+Export  functionality  to  different  formats is  provided,  including
+generation of web-ready code in HTML and Javascript.
 
 
 :::: TODO
