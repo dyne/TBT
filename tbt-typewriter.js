@@ -3,9 +3,10 @@
 // GNU GPL
 
 
-function TBT() { 
+function TBT() {
   this.setRowCarriageReturn = setRowCarriageReturn;
   this.setXhtml = setXhtml;
+  this.setSpeed = setSpeed;
   this.startTyping = startTyping;
   this.feed = feed;
   var currentChar;
@@ -23,7 +24,13 @@ function TBT() {
   var cc;
   var rowcr=0; // config option; do a CR (\r) when moving the cursor up/down
   var xhtml=0; // html or xhtml
+  var speed=1; // time factor. 
     
+  function setSpeed(s) {
+    if (s> 0.01 && s< 20) this.speed=s;
+    else speed=1.0;
+  }
+
   function setXhtml(onoff) {
     xhtml=onoff?true:false;
   }
@@ -55,7 +62,7 @@ function TBT() {
     // text render buffer
     render_text = "";    
 
-    setTimeout(this.feed, recording[currentChar][1] );
+    setTimeout(this.feed, speed*recording[currentChar][1] );
   }
 
   function feed() {
@@ -102,12 +109,12 @@ function TBT() {
 	case 257: // UP
 	    if(row <= 0) break;
 	    cur_y--; row--; 
-            if (rowcr) { col=0; cur_x=0; }
+	    if (rowcr) { col=0; cur_x=0; }
 	    break;
 	case 258: // DOWN
 	    if(row >= text.length) break;
 	    cur_y++; row++;
-            if (rowcr) { col=0; cur_x=0; }
+	    if (rowcr) { col=0; cur_x=0; }
 	    break;
 	case 259: // LEFT
 	    if(cur_x <= 0) break;
@@ -186,12 +193,12 @@ function TBT() {
 		delete text[cr];
 	    delete text;
 
-            // end of text
+	    // end of text
 	    
 	} else {
 	    
-           // RECURSION IS TIME  -jrml 31jan2007
-            setTimeout(feed, recording[currentChar][1] );
+	   // RECURSION IS TIME  -jrml 31jan2007
+	    setTimeout(feed, speed*recording[currentChar][1] );
 	}
     }
   }
