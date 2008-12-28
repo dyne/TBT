@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <meta http-equiv="Author" content="Robin Gareus, robin@gareus.org" />
+ <title>Time Based Text</title>
+ <script type="text/javascript"><!--
+
+  function show(foo) {
+    if((elem=document.getElementById(foo))) elem.style.display="block";
+  }
+  function hide(foo) {
+    if ((elem=document.getElementById(foo))) elem.style.display="none";
+  } 
+  function updateText (foo,val) {
+    document.getElementById(foo).replaceChild(document.createTextNode(val), document.getElementById(foo).firstChild);
+  } 
+  function delTree (parentnode,node) {
+    var i;
+    if (node.hasChildNodes()) {
+      for(i=node.childNodes.length-1;i>=0;i--) {
+	delTree(node, node.childNodes[i]);
+      }
+    }
+    if (node!=parentnode) { 
+        parentnode.removeChild(node); 
+    }
+  } 
+  function delTreeById (foo) {
+    delTree(document.getElementById(foo), document.getElementById(foo));
+  }
+  function addElem (foo,elem) {
+    document.getElementById(foo).appendChild(elem);
+  } 
+  function delElem (foo) {
+    document.getElementById(foo).removeChild(document.getElementById(foo).lastChild);
+  }
+  function addText (foo,val) {
+    addElem(foo,document.createTextNode(val));
+  }
+  function rmCursor (foo) {
+    document.getElementById(foo).removeChild(document.getElementById('cursor'));
+  }
+  function createCursor () {
+    var cur=document.createElement('u');
+    cur.id='cursor';
+  //cur.appendChild(document.createTextNode('|'));
+    cur.appendChild(document.createTextNode('\u00a0'));
+  //cur.appendChild(document.createEntityReference('nbsp'));
+    return cur;
+  }
+  function addCursor (foo) {
+    addElem(foo,createCursor());
+    addElem(foo,document.createElement('p')); // next sibling, delimiter
+  } 
+  function setCursor (foo,after) {
+    var pos=document.getElementById('tbt_'+row+'_'+col);
+    if (after && pos) pos=pos.nextSibling;
+    if (pos) {
+      document.getElementById(foo).insertBefore(createCursor(), pos);
+      return true;
+    } 
+    return false;
+  }
+  function moveCursor (foo,dir) {
+    var or= row;
+    var oc= col;
+    if      (dir==37) col--;
+    else if (dir==38) {col=0; row--;}
+    else if (dir==39) col++;
+    else if (dir==40) {col=0; row++;}
+    else return;
+
+    if (col<0) col=0;
+    if (row<0) row=0;
+    rmCursor(foo);
+    if (!setCursor(foo,0)) {
+     col=oc; row=or; 
+     if (!setCursor(foo,1)) { 
+      if (col>0) {
+        col--;
+        setCursor(foo,1);
+        col++;
+      } else 
+        addCursor(foo); // XXX 
+      return false;
+     } 
+     col++;
+    }
+    return true;
+  }
+  function addTBText  (foo,val) {
+    var node=document.createElement('span');
+    if (val == ' ') 
+      node.appendChild(document.createTextNode('\u00a0'));
+    else 
+      node.appendChild(document.createTextNode(val));
+    node.id='tbt_'+row+'_'+col;
+
+    var i=col; // re-name all chars after this in same column.
+    while (document.getElementById('tbt_'+row+'_'+i)) { i++; }
+    while (i>=col) {
+      var elem=document.getElementById('tbt_'+row+'_'+i);
+      if (elem) {
+        elem.id='tbt_'+row+'_'+(i+1);
+      }
+      i--;
+    }
+
+    document.getElementById(foo).insertBefore(node, document.getElementById('cursor'));
+    col++;
+  }
+  function delTBText (foo) {
+    if (col<1) return true;
+    var rv=true;
+    var rmc=document.getElementById('tbt_'+row+'_'+(col-1));
+    if (rmc){ 
+      if (rmc.tagName=='SPAN' || rmc.tagName=='span') {
+	document.getElementById(foo).removeChild(rmc);
+	var i=col; // re-name all elements after this.
+        var elem;
+	while ((elem=document.getElementById('tbt_'+row+'_'+i))) { 
+	  elem.id='tbt_'+row+'_'+(i-1);
+	  i++;
+	}
+	col--;
+
+	if (col==0) // XXX - allow no empty lines! - since we need to look..
+	  if (!document.getElementById('tbt_'+row+'_0')) 
+	    addTBText(foo, ' '); // .. up span with id col=0 for each row!
+        // TODO: replace this later or end up with lots of trailing whitespace.
+	rv=false;
+      }
+    }
+    return rv;
+  }
+  function addTBNewline (foo) {
+    if (col==0) // XXX - allow no empty lines! - since we need to look..
+      if (!document.getElementById('tbt_'+row+'_0')) 
+	addTBText(foo, ' '); // .. up span with id col=0 for each row!
+    // TODO: replace this later or end up with lots of trailing whitespace.
+
+    document.getElementById(foo).insertBefore(document.createElement('br'), document.getElementById('cursor'));
+    col=0; row++;
+  }
+
+  /* config */
+  var tbt_prefix = '{{tbt>[';
+  var tbt_postfix = ']}}';
+
+  /* globals */
+  var active = false;
+  var first = true;
+  var ds = new Date();
+  var dp = new Date();
+  var col=0;
+  var row=0;
+
+  /* startup */
+  document.onkeyup = KeyCheck;
+
+  /* major entry points */
+  function KeyCheck(e) {
+    if (!active) return false;
+    var now = new Date();
+    var kid=0;
+    if (!e) var e = window.event;
+    kid=e.keyCode;
+    if(document.layers) kid=e.which; 
+    if (kid==10 || kid==13) {                                /* newline */
+      addTBNewline('tbtdiv');
+    }
+    else if (kid==8 || kid==127 || kid==272 || kid==275) {   /* backspace */
+      if (delTBText('tbtdiv')) return true;
+    }
+    else if (!e.shiftKey && 
+             (kid==37 || kid==38 || kid==39 || kid==40)) {     /* arrows */
+      if (!moveCursor('tbtdiv', kid)) return false;
+
+      if      (kid==37) kid=259;  // left
+      else if (kid==38) kid=257;  // up
+      else if (kid==39) kid=260;  // right
+      else if (kid==40) kid=258;  // down
+    }
+    else if (kid==32) {
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+    else if ((kid>=65 && kid<92) || (kid>=97 && kid<127)) {  /* printable  */
+      if (kid>=65 && kid< 91 && !e.shiftKey) kid+=32;        /* lower-case */
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+/* hardcoded US-ASCII keyboard  - TODO use some string translation function */
+    else if (kid>=48 && kid<65 && !e.shiftKey) {             /* numbers + more*/
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+    else if (kid>=48 && kid<58 && e.shiftKey) {              /* above numbers */
+      if (kid==50) kid=64;                                   /* '"' -> '@' */
+      else kid-=16;                                          /* !@#$%^&*() */
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+    else if (e.shiftKey && kid==61) {                        /* + */
+      kid=43;
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+    else if (!e.shiftKey && (kid>=188 && kid<192)) {         /* ;,./ */
+      kid=kid-144;
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+    else if (!e.shiftKey && (kid==219 || kid==221)) {        /* {} */
+      kid=kid-96;
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+    else if ( e.shiftKey && ( (kid>=186 && kid<193) 
+                      || (kid>=210 && kid<222 && kid!=220))){/* ;<=>?@ */
+      kid=kid&0x7f;
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+    else if (e.shiftKey && kid==222) {                        /* ' */
+      kid=39;
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+    else if (e.shiftKey && kid==50) {                        /* : */
+      kid=58;
+      addTBText('tbtdiv', String.fromCharCode(kid));
+    }
+/* End of hardcoded US-ASCII keyboard  */
+    else return false;
+
+    var d =  now.getTime() - dp.getTime();
+    if (first) { 
+      first=false; 
+      addText('tbtdata',tbt_prefix);
+    } else {
+      addText('tbtdata', ',');
+    }
+    addText('tbtdata', '['+kid+','+d+']');
+    updateText('tbt_elapsed', 'elapsed: '+((now.getTime() - ds.getTime()) /1000)+' s - row:'+row+' col:'+col);
+    dp=now;
+    return true;
+  }
+  function tbtmode(m) {
+    if (m==1) {
+      hide('tbt_start');
+      show('tbt_stop');
+ 
+      show('tbtdiv');
+      show('tbtinfo');
+      delTreeById('tbtdata');
+      delTreeById('tbtdiv');
+      hide('tbtinfo');
+      col=0;row=0;
+      updateText('tbt_elapsed', 'elapsed: 0.000 s - row:'+row+' col:'+col);
+
+      ds = new Date();
+      dp = ds;
+      addCursor('tbtdiv');
+      first=true;
+      active=true;
+    } else {
+      active=false;
+      addText('tbtdata', tbt_postfix);
+      hide('tbt_stop');
+      show('tbt_start'); 
+      hide('tbtdiv');
+      show('tbtinfo');
+      //alert('recording finished.');
+    }
+  }
+ --></script>
+</head>
+<body>
+ <h2>Time Based Text Generator</h2>
+ <p>see <a href="http://tbt.dyne.org/">tbt.dyne.org</a> or <a href="http://robin.linuxaudio.org/wiki/tbt">dokuwiki tbt plugin</a> for informtion on <em>time-based-text</em>. This is a standalone (single-file) javascript/XHTML tool to author time-based-text and convert it into <em>copyable</em> JSON tbt format. Use in Terms of the GNU General Public License.</p> 
+ <hr/>
+ <div>
+  <form onsubmit="return false;" action="">
+   <div id="tbt_start" style="display:block;">
+    <button type="button" onclick="tbtmode(1);">Start Recording</button>
+   </div>
+   <div id="tbt_stop" style="display:none;">
+    <button type="button" onclick="tbtmode(2);">Finish</button>
+   </div>
+  </form>
+ </div>
+ <div>
+  <span id="tbt_elapsed">&nbsp;</span>
+ </div>
+ <hr/>
+ <div id="tbtdiv" style="display:block;"></div>
+ <div id="tbtinfo" style="display:none;">
+   <p>Copy/Paste the following data to you time-based-text viewer:</p>
+   <div id="tbtdata" style="font-family:monospace; font-size:70%; margin-left:1em;"></div>
+ </div>
+</body>
+</html>
