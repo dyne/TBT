@@ -1,3 +1,4 @@
+// TBT javascript extensions: rgareus 2008
 // TBT javascript prototype: Jaromil 2007
 // reference javascript typewriter documentation: F. Permadi 2002
 // GNU GPL
@@ -203,3 +204,4 @@ function TBT() {
     }
   }
 };
+//Setup VIM: ex: sw=4 ts=8 enc=utf-8 :
