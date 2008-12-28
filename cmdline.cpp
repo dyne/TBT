@@ -426,7 +426,6 @@ int main(int argc, char** argv)
 	
       case DOKU:
 	tbt.save_doku( filename );
-	act("TBT file %s rendered in dokuwiki format",filename);
 	break;
 
       case HTML:
@@ -500,7 +499,6 @@ int main(int argc, char** argv)
 	
       case DOKU:
 	tbt.save_doku( filename );
-	act("TBT file %s rendered in dokuwiki format",filename);
 	break;
       }
       
