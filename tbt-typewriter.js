@@ -3,11 +3,36 @@
 // GNU GPL
 
 
-
-function TBT() { };
-
+function TBT() { 
+  this.setRowCarriageReturn = setRowCarriageReturn;
+  this.setXhtml = setXhtml;
+  this.startTyping = startTyping;
+  this.feed = feed;
+  var currentChar;
+  var destination;
+  var cur_x;
+  var cur_y;
+  var row;
+  var col;
+  var text;
+  var render_text;
+  var rowsize;
+  var colsize;
+  var recording;
+  var cr;
+  var cc;
+  var rowcr=0; // config option; do a CR (\r) when moving the cursor up/down
+  var xhtml=0; // html or xhtml
     
-function startTyping(destinationParam, tbtrecord) {
+  function setXhtml(onoff) {
+    xhtml=onoff?true:false;
+  }
+
+  function setRowCarriageReturn(onoff) {
+    rowcr=onoff?true:false;
+  }
+
+  function startTyping(destinationParam, tbtrecord) {
     currentChar = 0;
     destination = destinationParam;
     recording   = tbtrecord;
@@ -30,11 +55,10 @@ function startTyping(destinationParam, tbtrecord) {
     // text render buffer
     render_text = "";    
 
-    setTimeout("feed()", recording[currentChar][1] );
-}
-TBT.prototype.startTyping = startTyping;
+    setTimeout(this.feed, recording[currentChar][1] );
+  }
 
-function feed()	{
+  function feed() {
     var dest = document.getElementById(destination);
     
     if (dest) {
@@ -77,11 +101,13 @@ function feed()	{
 
 	case 257: // UP
 	    if(row <= 0) break;
-	    cur_y--; row--;
+	    cur_y--; row--; 
+            if (rowcr) { col=0; cur_x=0; }
 	    break;
 	case 258: // DOWN
 	    if(row >= text.length) break;
 	    cur_y++; row++;
+            if (rowcr) { col=0; cur_x=0; }
 	    break;
 	case 259: // LEFT
 	    if(cur_x <= 0) break;
@@ -131,7 +157,7 @@ function feed()	{
 
 
 	    // newline
-	    render_text += "<br>";
+	    render_text += xhtml?"<br/>":"<br>";
 	}
 
 	// render_text += String.fromCharCode( recording[currentChar][0] );
@@ -165,10 +191,8 @@ function feed()	{
 	} else {
 	    
            // RECURSION IS TIME  -jrml 31jan2007
-	    setTimeout("feed()", recording[currentChar][1] );
-	    
+            setTimeout(feed, recording[currentChar][1] );
 	}
     }
-}
-TBT.prototype.feed = feed;
-
+  }
+};
