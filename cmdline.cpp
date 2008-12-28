@@ -111,6 +111,7 @@ int operation = 0x0;
 #define BIN        1
 #define ASCII      2
 #define HTML       3
+#define DOKU       4
 int render = BIN;
 
 
@@ -187,6 +188,8 @@ void cmdline(int argc, char **argv) {
 	      render = ASCII;
       else if( strcasecmp(optarg, "HTML") ==0)
 	      render = HTML;
+      else if( strncasecmp(optarg, "DOKU", 4) ==0)
+	      render = DOKU;
       else {
 	      error ("render format not recognized: %s", optarg);
 	      act ("using default binary format render");
@@ -403,7 +406,7 @@ int main(int argc, char** argv)
     status = new SLW_Text();
     
     switch(operation) {
-      
+    
     case REC:
       if( !record_console() ) break;
       
@@ -417,6 +420,11 @@ int main(int argc, char** argv)
 	tbt.save_ascii( filename );
 	break;
 	
+      case DOKU:
+	tbt.save_doku( filename );
+	act("TBT file %s rendered in dokuwiki format",filename);
+	break;
+
       case HTML:
 	tbt.save_html( filename );
 	break;
@@ -486,6 +494,10 @@ int main(int argc, char** argv)
 	tbt.save_html( filename );
 	break;
 	
+      case DOKU:
+	tbt.save_doku( filename );
+	act("TBT file %s rendered in dokuwiki format",filename);
+	break;
       }
       
       break;

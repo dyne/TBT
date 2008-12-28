@@ -255,7 +255,6 @@ void TBT::append(uint64_t key) {
 
 
 
-
 uint64_t TBT::getkey() {
   TBTEntry *ent;
   ent = (TBTEntry*) buffer->pick(position);
@@ -457,6 +456,47 @@ int TBT::save_ascii(char *filename) {
     ent = (TBTEntry*) ent->next;
   }
   
+  fflush(fd);
+  fclose(fd);
+
+  free(buf);
+
+  return c;
+}
+
+int TBT::save_doku(char *filename) {
+
+  int c, len;
+
+  void *buf;
+
+  FILE *fd;
+
+  fd = fopen(filename, "w");
+  if(!fd) return false;
+
+  fputs("{{tbt>[", fd);
+  // max bytes for an entry here
+  buf = malloc(512);
+  TBTEntry *ent;
+  ent = (TBTEntry*) buffer->begin();
+  // cycle thru with counter
+  c = 0;
+  while( ent ) {
+
+    if(c>0) // put a comma
+      fwrite(",",sizeof(char),1,fd);
+
+    len = ent->render_html(buf);
+
+    fwrite(buf, len, 1, fd);
+    
+    c++;
+	
+    ent = (TBTEntry*) ent->next;
+  }
+
+  fputs("]}}\n", fd);
   fflush(fd);
   fclose(fd);
 
