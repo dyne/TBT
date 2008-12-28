@@ -93,7 +93,7 @@ char convert[512];
 
 
 // act as commandline tool by default
-bool console = false;
+bool console = true;
 
 // timing modes
 #define POSIX 1
@@ -158,7 +158,11 @@ void cmdline(int argc, char **argv) {
       }
       break;
 
-    case 'c':
+    case 'C':
+      console = false;
+      break;
+
+    case 'c': /* deprecated */
       console = true;
       break;
 
