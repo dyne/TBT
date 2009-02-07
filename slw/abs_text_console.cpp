@@ -29,6 +29,7 @@
 #include <keycodes.h>
 #include <abs_text_console.h>
 
+#define ROWCHUNK 128 // chunk to add/sub when modifying the text line
 
 
 TextConsole::TextConsole() {

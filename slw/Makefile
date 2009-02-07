@@ -34,7 +34,8 @@ LIBS = -lslang
 #CXXFLAGS = -Wall -ggdb -I. -I$(SLANGPATH)/src
 #LIBS = $(SLANGPATH)/src/objs/libslang.a -ltermcap
 
-DEPS = slw_console.o slw.o slw_popup.o abs_text_console.o slw_text.o ../linklist.o ../jutils.o
+DEPS = slw_console.o slw.o slw_popup.o slw_log.o slw_prompt.o \
+       abs_text_console.o slw_text.o ../linklist.o ../jutils.o
 
 # generic make rules
 #%.o: %.cpp
@@ -42,7 +43,7 @@ DEPS = slw_console.o slw.o slw_popup.o abs_text_console.o slw_text.o ../linklist
 #%: %.cpp
 #	$(CXX) $(CXXFLAGS) -o $@ $< $(DEPS) $(LIBS)
 
-all: libslw.a testkey
+all: libslw.a 
 
 depend:
 	mkdep $(CXXFLAGS) linklist.cpp jutils.cpp slw.cpp slw_console.cpp slw_text.cpp slw_popup.cpp abs_text_console.cpp
@@ -50,9 +51,10 @@ depend:
 libslw.a: $(DEPS)
 	ar cru libslw.a $(DEPS)
 
-testkey: $(DEPS) testkey.o
+test: $(DEPS) testkey.o testlog.o
 	$(CXX) -o testkey $(DEPS) testkey.o $(LIBS)
+	$(CXX) -o testlog $(DEPS) testlog.o $(LIBS)
 
 clean:
-	rm -rf *.o *! libslw.a testkey
+	rm -rf *.o *! libslw.a testkey testlog
 
