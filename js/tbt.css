@@ -1,0 +1,33 @@
+.button
+{
+  border: 1px solid;
+  border-color: #fff #000 #000 #fff;
+  background: lightyellow;
+  color: lightgray;
+  font-size: 0.7em;
+  padding: 0.1em 0.3em;
+}
+
+.button a
+{
+  color: black;
+  text-decoration: none;
+}
+
+.button-bar
+{
+  padding: 0.1em 0 0.1em 0.2em;
+}
+
+.papers
+{
+  background: lightgreen;
+  margin: 1em;
+  width: 10em;
+}
+
+.poems
+{
+  padding: 1em;
+  font-family: monospace;
+}

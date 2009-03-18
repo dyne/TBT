@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>TBT.js 0.3</title>
+    <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="tbt.css">
+    <script type="text/javascript" src="prototype.js"></script>
+    <script type="text/javascript" src="tbt.js"></script>
+    <script type="text/javascript">
+      tbt = new TBT(document, 'poem', 'record', 'play', 'stop', 'tbt');
+      tbt2 = new TBT(document, 'poem2', 'record2', 'play2', 'stop2', 'tbt2');
+      tbt3 = new TBT(document, 'poem3', 'record3', 'play3', 'stop3', 'tbt3');
+    </script>
+  </head>
+  <body>
+
+    <div id="paper" class="papers">
+      <div class="button-bar">
+        <span id="record" class="button"><a href="javascript:tbt.record()">Record</a></span>
+        <span id="stop" class="button">Stop</span>
+        <span id="play" class="button">Play</span>
+      </div>
+      <div id="poem" class="poems"></div>
+    </div>
+
+    <div id="paper2" class="papers">
+      <div class="button-bar">
+        <span id="record2" class="button"><a href="javascript:tbt2.record()">Record</a></span>
+        <span id="stop2" class="button">Stop</span>
+        <span id="play2" class="button">Play</span>
+      </div>
+      <div id="poem2" class="poems"></div>
+    </div>
+
+    <div id="paper3" class="papers">
+      <div class="button-bar">
+        <span id="record3" class="button"><a href="javascript:tbt3.record()">Record</a></span>
+        <span id="stop3" class="button">Stop</span>
+        <span id="play3" class="button">Play</span>
+      </div>
+      <div id="poem3" class="poems"></div>
+    </div>
+
+  </body>
+</html>

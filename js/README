@@ -1,0 +1,28 @@
+== A TBT recorder/player implementation by meinhard at benn.org ==
+
+Currently only properly working on FF3/Linux
+
+=== TODO ===
+ * get running in msie7, opera9 (keydown instead of keypress?) -> write library for key grabbing?
+ * merge keycode and charcode in keys array
+ * display key sequence for copy and paste
+ * cursor key support + insert mode
+
+=== DEV LINKS ===
+ * http://unixpapa.com/js/key.html
+ * http://www.quirksmode.org/js/keys.html
+ * http://www.htmlgoodies.com/beyond/javascript/article.php/3471141
+ * http://www.bloggingdeveloper.com/post/KeyPress-KeyDown-KeyUp-The-Difference-Between-Javascript-Key-Events.aspx
+ * http://robin.linuxaudio.org/tbt-generator3.html ;)
+
+=== CHANGES ===
+ * 0.3 (18 Mar 2009)
+   * prototype.js rewrite
+   * OOP JS
+   * some CSS tweaks
+   * now on code.dyne.org :)
+ * 0.2 (Mar 2009)
+   * key recording and replaying
+ * 0.1 (8 Mar 2009)
+   * quick hack as proof of concept
+   * simple key grabbing via keypress event
