@@ -10,6 +10,8 @@ Currently only properly working on FF3/Linux
 
 === DEV LINKS ===
  * http://unixpapa.com/js/key.html
+ * http://ejohn.org/blog/keypress-in-safari-31/
+ * http://code.google.com/p/base2/source/browse/trunk/src/base2/DOM/events/EventTarget.js
  * http://www.quirksmode.org/js/keys.html
  * http://www.htmlgoodies.com/beyond/javascript/article.php/3471141
  * http://www.bloggingdeveloper.com/post/KeyPress-KeyDown-KeyUp-The-Difference-Between-Javascript-Key-Events.aspx
