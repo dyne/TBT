@@ -1,6 +1,8 @@
 function TBT(keyPressObject, textDisplayId, recordButtonId, replayButtonId, stopButtonId, instanceName) {
   // Methods
+  this.handleKeyDown = handleKeyDown;
   this.handleKeyPress = handleKeyPress;
+  this.keyDetect = keyDetect;
   this.keysToText = keysToText;
   this.record = record;
   this.recordKey = recordKey;
@@ -19,10 +21,21 @@ function TBT(keyPressObject, textDisplayId, recordButtonId, replayButtonId, stop
 
   // Properties
   this.currentKey = 0;
+  this.keyDownCodes = [8, 9];
   this.keys = new Array;
   this.lastDate = new Date;
   this.startDate = new Date;
   this.timeout = new Object;
+
+  // Static
+  function keyDetect(event) {
+    if (event.keyCode) {
+      keyCode = event.keyCode;
+    } else {
+      keyCode = event.charCode;
+    }
+    return keyCode;
+  }
 
   // Static
   function keysToText(keys) {
@@ -31,15 +44,29 @@ function TBT(keyPressObject, textDisplayId, recordButtonId, replayButtonId, stop
       if (key[0] > 0) {
         switch(key[0]) {
           // backspace
-          case 8:
+          case 8: // backspace
             outputText.pop();
             break;
-          case 13:
+          case 9: // tab
+            outputText.push('&nbsp;&nbsp;&nbsp;&nbsp;');
+            break;
+          case 13: // enter
             outputText.push('<br />');
             break;
+          case 32: // space
+            outputText.push('&nbsp;');
+            break;
+          case 37: // left
+            break;
+          case 38: // up
+            break;
+          case 39: // right
+            break;
+          case 40: // down
+            break;
+          default:
+            outputText.push(String.fromCharCode(key[0]));
         }
-      } else if (key[1] > 0) {
-        outputText.push(String.fromCharCode(key[1]));
       }
     })
     return outputText.join('');
@@ -49,6 +76,9 @@ function TBT(keyPressObject, textDisplayId, recordButtonId, replayButtonId, stop
     this.keys = new Array;
     this.startDate = new Date;
     this.lastDate = this.startDate;
+    // Some browsers do not fire keypress for special keys (e.g. backspace),
+    // so we need to listen for keydown, but we use keypress for characters
+    this.keyPressObject.observe('keydown', this.handleKeyDown.bind(this));
     this.keyPressObject.observe('keypress', this.handleKeyPress.bind(this));
     $(this.textDisplayId).update('_');
     $(this.recordButtonId).update('Record');
@@ -57,8 +87,9 @@ function TBT(keyPressObject, textDisplayId, recordButtonId, replayButtonId, stop
   }
 
   function recordStop() {
+    this.keyPressObject.stopObserving('keydown');
     this.keyPressObject.stopObserving('keypress');
-    this.recordKey(0, 0); // (Record time between last key and pressing Stop)
+    this.recordKey(0); // (Record time between last key and pressing Stop)
     $(this.recordButtonId).update('<a href="javascript:' + instanceName + '.record()">Record</a>');
     $(this.replayButtonId).update('<a href="javascript:' + instanceName + '.replay()">Play</a>');
     $(this.stopButtonId).update('Stop');
@@ -82,7 +113,7 @@ function TBT(keyPressObject, textDisplayId, recordButtonId, replayButtonId, stop
       return;
     }
     if (this.currentKey + 1 <= this.keys.length) {
-      this.timeout = this.replayKeys.bind(this).delay(this.keys[this.currentKey][2]/1000);
+      this.timeout = this.replayKeys.bind(this).delay(this.keys[this.currentKey][1]/1000);
       this.currentKey++;
     }
   }
@@ -94,15 +125,30 @@ function TBT(keyPressObject, textDisplayId, recordButtonId, replayButtonId, stop
     $(this.stopButtonId).update('Stop');
   }
 
-  function handleKeyPress(event) {
-    this.recordKey(event.keyCode, event.charCode);
-    $(this.textDisplayId).update(this.keysToText(this.keys) + '_');
+  function handleKeyDown(event) {
+    keyCode = this.keyDetect(event);
+    // Only handle special keys
+    if (this.keyDownCodes.indexOf(keyCode) != -1) {
+      this.recordKey(keyCode);
+      $(this.textDisplayId).update(this.keysToText(this.keys) + '_');
+      event.stop();
+    }
   }
 
-  function recordKey(keyCode, charCode) {
+  function handleKeyPress(event) {
+    keyCode = this.keyDetect(event);
+    // Do not handle special keys. Do not, I said!
+    if (this.keyDownCodes.indexOf(keyCode) == -1) {
+      this.recordKey(keyCode);
+      $(this.textDisplayId).update(this.keysToText(this.keys) + '_');
+    }
+    event.stop();
+  }
+
+  function recordKey(keyCode) {
     var currentDate = new Date;
     ms = currentDate.getTime() - this.lastDate.getTime();
     this.lastDate = currentDate;
-    this.keys.push(new Array(keyCode, charCode, ms));
+    this.keys.push(new Array(keyCode, ms));
   }
 }

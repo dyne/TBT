@@ -2,8 +2,8 @@
 {
   border: 1px solid;
   border-color: #fff #000 #000 #fff;
-  background: lightyellow;
-  color: lightgray;
+  background: #ffffe0;
+  color: #ccc;
   font-size: 0.7em;
   padding: 0.1em 0.3em;
 }
@@ -21,9 +21,8 @@
 
 .papers
 {
-  background: lightgreen;
+  background: #90ee90;
   margin: 1em;
-  width: 10em;
 }
 
 .poems
