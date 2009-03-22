@@ -74,8 +74,8 @@ static const char *help =
 "  -v   print version\n"
 "  -h   print this help\n"
 "Options:\n"
-"  -c   console interface mode\n"
-"  -s   save format in [ bin | ascii | html ]\n"
+"  -C   stdin/out commandline mode\n"
+"  -s   save format in [ bin | ascii | html | doku ]\n"
 #ifdef linux
 "  -t   timing mode    [ posix | rtc ]\n"
 #endif
@@ -555,7 +555,8 @@ int main(int argc, char** argv)
 	   (operation==CONV)?"converted":"***",
 	   (render==BIN)?"binary":
 	   (render==ASCII)?"ascii":
-	   (render==HTML)?"html":"unknown");
+	   (render==HTML)?"html":
+	   (render==DOKU)?"dokuwiki":"unknown");
     
   act("exiting TBT");
   act("%u entries streamed.", tbt.buffer->len());

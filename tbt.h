@@ -103,6 +103,9 @@ class TBT {
   //TODO: int load_html(char *filename);
   int save_html(char *filename); ///< save a .html page suitable for web browsers
 
+  int save_doku(char *filename); ///< save a dokuwiki page
+
+
   void clear(); ///< deletes all current keys and frees memory  
 
   /// @}
