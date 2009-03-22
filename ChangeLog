@@ -1,3 +1,10 @@
+TBT 1.0 - 22 Mar 2009 - meinhard, robin, jaromil
+	pure javascript TBT recorder
+	new docuwiki save format (JSON wrapped)
+	js typewriter improvements (now reentrant)
+	C++ API documented with doxygen
+	some improvements to slw library
+	
 TBT 0.9 - 7 Nov 2008 - jaromil
 	Fixed recording from <stdin>
 	Better organised command line switches
@@ -12,7 +19,7 @@ TBT 0.8 - 20 Oct 2008 - caedes, jaromil
 	Fixed the 100% cpu usage on some distros
 	Documentation updates
 
-TBT 0.7 - pallotron
+TBT 0.7 - 15 Apr 2007 - pallotron
 	New interactive website for TBT messaging (PHP)
 
 TBT 0.6 - 31 Jan 2007 - jaromil, alpt
