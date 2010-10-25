@@ -1,0 +1,428 @@
+/*
+   Jaromil's Journal stylesheet
+
+   originally from Michael Olson's tweaked Muse stylesheet
+
+   License: Modification and propagation of this document is
+   permitted.  Attribution of credit to us is optional.
+   */
+
+/* Normal elements */
+
+a.nonexistent {
+                background-color: white;
+                color: red;
+                font-weight: bold;
+                }
+
+a.nonexistent:visited {
+                        background-color: white;
+                        color: red;
+                        }
+
+a:link.top, a:visited.top {
+                            color: #F5DEB3;               /* wheat */
+                            line-height: 90%;
+                            position: relative;
+                            text-decoration: none;
+                            top: -13px;
+                            }
+
+a:link:hover {
+               text-decoration: underline;
+               }
+
+h1 a:link:hover, h1 a:visited:hover {
+                                      background-color: #708090;    /* slate gray */
+                                      }
+
+a:visited {
+            color: #884400;
+            text-decoration: none;
+            border:0;
+            }
+
+a:link {
+         font-weight: bold;
+         color: #AA6600;
+         text-decoration: none;
+         border:0;
+         }
+
+blockquote {
+             padding: 2px;
+             font-style: italic;
+             margin: 2px 1px;
+             }
+
+body {
+       font-family: Arial, Helvetica;
+       background: #ffeedd 
+       url(http://jaromil.dyne.org/journal/images/dyneheadbg.png) repeat-x;
+       color: black;
+       text-align: justify;
+       margin-left: 2%;
+       margin-right: 2%;
+       margin-top: 1%;
+       }
+
+code {
+       margin-left: 3px;
+       margin-right: 3px;
+       }
+
+dt {
+     font-weight: bold;
+     margin-top: .5em;
+     padding: 3px;
+     }
+
+em {
+     font-style: italic;
+     }
+
+h1 {
+     background: #ffeedd 
+     url(http://dyne.org/images/dynebggrl2r.png) repeat-y;
+     color: #222222;
+     overflow: hidden;             /* don't crowd the menu */
+     border: 0px;
+     border-left: 1px solid #AA8855;
+     border-bottom: 3px dotted #EECC99;
+     font-style: italic;
+     font-size: 22px;
+     width: 70%;
+     padding: 10px;
+     margin-bottom: 0px;
+     white-space: nowrap;
+     }
+
+h2 {
+     border-bottom: solid 2px #AA8855;
+     clear: left;
+     font-size: large;
+     margin-top: 2.5em;
+     margin-bottom: .5em;
+     overflow: hidden;             /* don't crowd the menu */
+     padding-right: 6px;
+     }
+
+h3 {
+     border-bottom: dotted 3px #EECC99; /* slate gray */
+     font-size: medium;
+     margin-top: 2em;
+     margin-bottom: .5em;
+     overflow: hidden;             /* don't crowd the menu */
+     padding-right: 6px;
+     }
+
+h4 {
+     border-bottom: dashed 1px #BEBEBE;    /* light gray */
+     margin-top: 1.5em;
+     margin-bottom: .7em;
+     overflow: hidden;             /* don't crowd the menu */
+     padding-right: 6px;
+     }
+
+hr {
+     clear: both;
+     color: #ffeedd;
+     background: #aa8855;
+     width: 88%;
+     }
+
+img {
+      border: 0;
+      clear: right;
+      text-align: center;
+      }
+
+.image-caption {
+                 font-style: italic;
+                 }
+
+p.image {
+          text-align: center;
+          }
+
+li {
+     line-height: 1.2em;
+     margin-top: .7em;
+     }
+
+p.verse {
+          clear: left;
+          line-height: 2em;
+          margin-left: 3%;
+          }
+
+p {
+    margin-left: 2%;
+    margin-right: 2%;
+    line-height: 1.2em;
+    text-align: justify;
+    }
+
+p.intro {
+          margin-left: 2%;
+          margin-right: 2%;
+          line-height: 1.2em;
+          text-align: justify;
+          font-style: italic;
+          }
+
+pre.example {
+              margin-left: 3%;
+              margin-top: 1.2em;
+              margin-bottom: 1.2em;
+              clear: left;
+              }
+
+pre.src {
+          margin-left: 5%;
+          margin-top: 1.2em;
+          margin-bottom: 1.2em;
+          clear: left;
+          }
+
+pre.verse {
+            font-family: inherit;
+            line-height: 2em;
+            margin-left: 3%;
+            }
+
+pre {
+      font-family: monospace;
+      margin-left: 3%;
+      white-space: pre;
+      }
+
+span.leftbox {
+            background: #ffeedd
+            url(http://dyne.org/images/dynebggrl2rsm.png) repeat-y;
+               
+               border: 0px;
+               border-left: dotted 1px #AA8855;
+               font-size: small;
+               text-align: left;
+               width: 25%;
+               font-family: Georgia, Arial, Helvetica, sans-serif;
+               display: compact;
+               float: left;
+               clear: left;
+               margin-right: 10px;
+               margin-bottom: 5px;
+               padding: 3px;
+               }
+
+span.rightbox {
+            background: #EECC99
+            url(http://dyne.org/images/dynebggrr2lsm.png) repeat-y;
+
+                border: 0px;
+                border-right: dotted 1px #AA8855;
+                font-size: small;
+                text-align: right;
+                float: right;
+                width: 25%;
+                font-family: Georgia, Arial, Helvetica, sans-serif;
+                display: compact;
+                clear: right;
+                margin-left: 10px;
+                margin-bottom: 5px;
+                padding: 3px;
+                }
+
+span.rightpic {
+                border: 0px;
+                border-left: dotted 1px #AA8855;
+                font-size: small;
+                text-align: right;
+                float: right;
+                font-family: Arial, sans-serif;
+                display: inline;
+                clear: right;
+                margin-left: 3px;
+                margin-bottom: 3px;
+		margin-top: 3px;
+                padding: 0px;
+               }
+
+span.leftpic {
+                border: 0px;
+                border-right: dotted 1px #AA8855;
+                font-size: small;
+                text-align: left;
+                float: left;
+                font-family: Arial, sans-serif;
+                display: inline;
+                clear: left;
+                margin-right: 3px;
+                margin-bottom: 3px;
+		margin-top: 3px;
+                padding: 0px;
+               }
+
+
+span.footdate {
+                text-align: center;
+                font-family: Helvetica, sans-serif;
+                color: #AA8855;
+                font-size: small;
+                margin: 0;
+                margin-bottom: 1.5em;
+                padding-top: 2px;
+                padding-bottom: 3px;
+                padding-left: 2px;
+                padding-right: 2px;
+                }
+
+span.footdate a:link { 
+                text-align: center;
+                       text-decoration: none;
+                       }
+span.footnote {
+                text-align: left;
+                color: black;
+                font-size: 9px;
+                line-height: 1px;
+                }
+
+span.headermenu {
+                  font-size: small;
+                  color: black;
+                  align: center;
+                  }
+
+span.date {
+            float: right;
+            display: inline;
+            overflow: hidden;
+            margin-top: .2em;
+            margin-right: 10px;
+            padding-right: 6px;
+            border-bottom: dotted 2px #AA8855;
+            border-right: solid 1px #AA8855;
+            }
+
+strong {
+         font-weight: bold;
+         }
+
+
+
+ul {
+     list-style-type: disc;
+     margin-bottom: 1.5em;
+     }
+
+/* Table of Contents */
+
+.contents {
+            float: left;
+            width: 60%;
+            background: #ffeedd 
+            url(http://dyne.org/images/dynebggrl2r.png) repeat-y;
+            border-left: 1px solid #AA8855;
+            border-right: 0;
+            margin-top: 6px;
+            margin-right: 5px;
+            margin-left: 15px;
+            margin-bottom: 15px;
+            padding: 3px;
+            }
+
+.contents dd dt dl { display: block; }
+
+.contents dl {
+  float: left;
+  font-size: small;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.contents dt {
+  clear: left;
+  padding-right: 5px;
+  padding-left: 5px;
+  text-align: left;
+}
+
+.contents a:hover { text-decoration: underline; }
+
+
+/* Menu */
+
+.menu {
+            background: #EECC99
+            url(http://dyne.org/images/dynebggrr2lsm.png) repeat-y;
+
+        border: 1px solid black;
+        border-top: 3px dotted #EECC99;
+        border-left: 0px;
+        display: inline;
+        float: right;
+        clear: both;
+        margin-left: 20px;
+        margin-bottom: 5px;
+        margin-top: 0px;
+        padding: 3px;
+        }
+
+.menu img {
+            text-align: center;
+            }
+.menutitle { 
+             font-style: italic;
+             text-align: center;
+/* float: center; */
+             margin: 3;
+             }
+
+.menuitem {
+            font-size: medium;
+            font-family: Helvetica, sans-serif;
+
+            background: #EECC99
+            url(http://dyne.org/images/dynebggrr2lsm.png) repeat-y;
+
+            margin: 0;
+            padding-top: 2px;
+            padding-bottom: 3px;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-align: left;
+            }
+
+.menuitem a:link, .menuitem a:visited {
+                                        font-size: 16px;
+                                        font-style: italic;
+                                        font-family: Helvetica, sans-serif;
+                                        text-decoration: none;
+                                        color: #884400;
+                                        display: block;
+                                        margin: 0;
+                                        padding-top: 2px;
+                                        padding-bottom: 3px;
+                                        padding-left: 2px;
+                                        padding-right: 2px;
+                                        }
+
+.menuitem a:link:hover, .menuitem a:visited:hover { 
+                                                    background-color: #FFEEDD;
+                                                    }
+
+.menuother {
+             padding-left: 2px;
+             padding-right: 2px;
+             }
+
+#tooltipbox {
+              float: right;
+              visibility: hidden;
+              }
+
+#tooltip {
+           color: #006400;               /* dark green */
+           }
+

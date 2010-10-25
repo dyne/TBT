@@ -1,0 +1,176 @@
+
+/* general */
+
+
+html {
+       width: 90%;
+       margin: 0 0 5% 5%;
+}
+
+body {
+  background-color: #ffeedd;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  margin: 0;
+  padding: 0;
+}
+
+a:link, a:visited { text-decoration: none; font-weight: bold }
+a:hover, a:focus, a:active { text-decoration: underline }
+a:link           { color: #a60 }
+a:visited        { color: #840 }
+a:hover, a:focus { color: #000 }
+a:active         { color: #fed }
+
+img { border: 0}
+
+
+/* header */
+
+header {
+  background: #fed url(http://dyne.org/images/bg.png) top left repeat-x;
+  margin-top: 10px;
+}
+
+header nav {
+  margin: 1em;
+}
+header nav ul {
+  list-style: none;
+  margin: 0 auto;
+  width: 50em;
+}
+header nav ul li {
+  display: inline;
+  font-weight: bold;
+}
+header nav ul li:first-child,
+header nav ul li:last-child
+{
+  font-weight: normal;
+  font-size: smaller;
+}
+header nav ul:first-child:before {
+  content: " - -( ";
+}
+header nav ul:first-child:after {
+  content: " )- - "
+}
+
+header div#file_types {
+                        float: right;
+                        list-style: none outside none;
+                        margin: 8 8 8 8;
+                        font-size: 0.8em;
+                       }
+header div#file_types img { vertical-align: middle; }
+
+
+header hgroup h1, header hgroup h2 {
+  font-family: monospace;
+}
+
+
+/* body */
+
+
+
+h1,h2,h3,h4,h5 { font-family: Georgia, "Times New Roman", serif; }
+
+h1 {
+  background: #fed url(/images/bg_gradient.png) top left repeat-y;
+  color: #222;
+  border-bottom: 2px dotted #ec9;
+  font-size: 32px;
+  font-style: italic;
+  margin: 10px 0 0 0;
+  padding: 0.5em;
+  white-space: nowrap;
+}
+#software h1,
+#events h1 {
+  font-size: 18pt;
+  margin: 0;
+}
+
+h2 {
+  background: #fed url(http://dyne.org/images/bg_gradient.png) top left repeat-y;
+  color: #222;
+  border-bottom: 2px dotted #ec9;
+  font-size: 28px;
+  font-style: italic;
+  margin: 10px 0 0 -3em;
+  padding: 0.5em;
+  white-space: nowrap;
+}
+p {
+  margin: 20px 2em -10px 2em;
+}
+
+/* footer */
+
+
+
+footer {
+         clear: both;
+         display: compact;
+         font-size: smaller;
+}
+footer hr {
+            background-color: #f0e0d0;
+            border: 1px;
+            height: 1px;
+            clear: both;
+            margin: 3em 0 1em;
+}
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+footer section {
+  width: 8em;
+  float: right;
+}
+footer section h2 {
+  text-align: center;
+  display: none; }
+#clustrMaps { width: 168px;
+              margin-top: 1em;
+              text-align: center; }
+#disclaimer {
+  font-size: smaller;
+  text-align: justify;
+  width: 18em; }
+#credits {
+  font-size: smaller;
+  margin-right: 1em;
+  text-align: right;
+  width: 140px; }
+#recognition { 
+  margin-top: 1em;
+  text-align: center; }
+#badges { 
+  margin-top: 2em;
+  text-align: center; }
+
+/**
+ * Google Search 
+**/
+
+#google_search fieldset {
+  border: 0;
+}
+#google_search input {
+  background-color: #fed;
+  border: 1px solid #a60;
+}
+#google_search input[type=submit] {
+  font-weight: bold;
+}
+#google_search input:hover,
+#google_search input:focus {
+  background-color: #fff;
+}
+

@@ -1,0 +1,146 @@
+#title TBT - Time Based Text
+#author Jaromil
+
+
+<contents>
+
+* TBT - Time Based Text
+** Introduction
+
+<class name="logo">
+[[images/tbt-wheel.png]]
+</class>
+
+*TBT is made to vehicle more human-input information in written text*
+
+This software application records performance time of written text and
+vehicles  it as  additional  information: saves  and reproduces  every
+single  action  during the  composition  of a  text,  so  that we  can
+circulate   an   additional   dimension   of   emphasis   in   written
+communication.
+
+As  this  simple  concept,   our  implementation  is  also  kept  very
+minimalistic while we welcome programmers to embed it in communication
+applications,  as in  *emails,  blogs, visual  poetry, wiki  websites,
+slides*, to  embed emotions in plain  text and open  new practices for
+literature and poetry.
+
+
+Beware this software is hacky :) u need to love text. A [[manual.html][manual page]] is
+provided  and commandline  formulas to  be  casted in  a terminal.   A
+python-GTK graphical interface is also present.
+
+Here is a [[http://tbt.dyne.org/impakt/][time based poetry website]]  that you can use also as your own
+gallery.
+
+*** How TBT does it
+
+This software is written in thread-safe POSIX C++ and can be ported to
+most  platforms, it  provides a  real-time recorder  for  serial timed
+data, recording  64bit tuples key/msec with  low-latency. Included are
+programs providing a text console interface for the user to experiment
+with the keyboard.
+
+
+In the .tbt format, text is saved with a timestamp for each letter:
+
+<example>
+     _________ ___________ 
+    |  u-int  |   u-int   |
+    |  64bit  |   64bit   |    m-seconds = 1/1000 of a second
+     --------- -----------
+    |  char   | m-seconds |    char = ASCII or higher bit char code
+     --------- -----------
+    |    Total: 128bit    |
+     ---------------------
+</example>
+
+Export  functionality  to  different  formats is  provided,  including
+generation of web-ready code in HTML and Javascript.
+
+The  distributed  sourcecode   includes  multiple  implementations:  a
+python-GTK  graphical application  and a  dokuwiki  plugin (javascript
+based), for instance. There is also  a CMS website written in PHP that
+lets you archive and display TBT poetry on the Internet.
+
+** Artworks
+** Get TBT
+
+This software  is free and open  source, you are free  to download it,
+use  it, study,  modify it  and redistribute  it, even  for commercial
+purposes, as long as you release your creations the same way, granting
+your "users" the same rights we grant to you. Share the Freedom! :)
+
+For more information see the [[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]].
+
+Below a list of formats you can download this application: ready to be
+run with some of the interfaces developed, as a library you can use to
+build your own application and as source code you can study.
+
+
+*** Source code
+
+Latest stable release is 1.0 (22  March 2009) more about it in the [[ftp://ftp.dyne.org/tbt/NEWS][NEWS]]
+and [[ftp://ftp.dyne.org/freej/ChangeLog][ChangeLog]].
+
+Source releases are checked and signed by [[http://rastasoft.org][Jaromil]] using [[http://www.gnupg.org][GnuPG]].
+
+On [[ftp://ftp.dyne.org/tbt][ftp.dyne.org/tbt]] you find all present and past TBT releases, source
+code for  extra plugins and  more binaries that we  occasionally build
+for various architectures.
+
+A mirror is kindly made available by the [[http://www.ljudmila.org/~jaromil/mirror/tbt/][Ljudmila medialab]]
+
+The bleeding edge version is developed on our [[http://git.dyne.org][code repository]] using *git*,
+you can clone the repository free and anonymously
+: git clone git://code.dyne.org/tbt.git
+please use this version when [[http://bugs.dyne.org][reporting bugs]] and getting in contact with us.
+
+*** Apple Darwin/OSX 10.5 / 10.6
+
+Download either the  [[http://www.xant.net/freej.dmg][i386/PPC]] or the [[http://www.xant.net/freej64.dmg][x86_64 (snow  leopard only)]] TBT
+with support for quicktime,  [[http://www.troikatronix.com/freeframe.html][freeframe]] and frei0r effect plugins here:
+this   version   includes    an   experimental   graphical   interface
+(Carbon/Cocoa) that shows functionalities.
+
+We  are looking  for designers  to help  make it  look  better! please
+contact one if you like to be the one ;)
+
+*** Winslows 
+
+If you are looking for a winslows version, boot [[http://dynebolic.org][dyne:bolic GNU/Linux]]!
+
+
+
+** Acknowledgments
+
+Time Based Text is a software.art application developed by [[http://jaromil.dyne.org][Jaromil]] and
+conceptualised with the contribution of [[http://jodi.org][JoDi]].
+
+Some of the theoretical background of TBT is documented in this
+[[http://www.nettime.org/Lists-Archives/nettime-l-0804/msg00022.html][interview published on nettime]]; this software is not just a technical
+realization, it constitutes an interactive (on-site) art installation
+by its author Jaromil, exhibited for the first time in [[http://transition.turbulence.org/blog/2008/10/07/speaking-out-loud-amsterdam/][SPEAK OUT LOUD]]
+at [[http://www.nimk.nl][NIMk]] in Amsterdam and permanently included in the
+[[http://www.runme.org/project/+tbt/][runme software art collection]].
+
+*** Contributors
+
+Development of TBT was supported by [[www.impakt.nl][Impakt.nl]].
+
+The TBT CMS  was designed by [[www.ok-parking.nl][O.K. Parking]] and its  PHP code written by
+[[http://www.pallotron.net/][Angelo  "Pallotron" Failla]].
+
+[[http://identi.ca/caedes][Pablo "Caedes" Martines]] contributed the Python-GTK graphical interface
+implementation for GNU/Linux and [[http://gareus.org/][Robin Gareus]] published a TBT dokuwiki
+plugin.
+
+[[http://benn.org][Meinhard Benn]] implemented a TBT recorder in pure javascript and
+[[http://freaknet.org/alpt/][Andrea "Alpt" Lo Pumo]] shared code perfectionements and suggestions,
+while [[http://www.xant.net][Xantar Majere]] helped bundling the Apple/OSX ported version of
+TBT.
+
+Additional  thanks for their  active support  and appreciation  go to:
+[[http://pleintekst.nl/][Florian Cramer]], Annet Dekker, Paul Hendriks and [[http://www.sujaschko.de/][Susanne Jaschko]]
+
+
