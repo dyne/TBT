@@ -24,25 +24,79 @@
 (require 'muse-wiki)     ; load Wiki support
 ;(require 'muse-ikiwiki)  ; load ikiwiki export support
 
-;;(require 'muse-message)  ; load message support (experimental)
-;;(require 'atom-api) ; atom api for muse
+;;; Skinning my Muse
+
+(custom-set-faces
+ '(muse-bad-link ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
+
+(custom-set-variables
+ '(muse-latex-permit-contents-tag t)
+ '(muse-colors-autogen-headings (quote outline))
+ '(muse-colors-inline-image-method (quote muse-colors-use-publishing-directory))
+ '(muse-mode-hook (quote (flyspell-mode footnote-mode)))
+ '(muse-publish-comments-p nil)
+
+; LINKS
+ ;; '(muse-publish-desc-transforms
+ ;;   (quote (muse-wiki-publish-pretty-title
+ ;; 	   muse-wiki-publish-pretty-interwiki
+ ;; 	   muse-publish-strip-URL)))
+ ;; '(muse-wiki-publish-small-title-words
+ ;;   (quote ("the" "and" "at" "on" "of" "for" "in" "an" "a" "page")))
+
+; HTML
+ '(muse-html-charset-default "utf-8")
+ '(muse-html-encoding-default (quote utf-8))
+ '(muse-html-meta-content-encoding (quote utf-8))
+ '(muse-html-footer (concat path "/views/footer.html"))
+ '(muse-html-header (concat path "/views/header.html"))
+ '(muse-html-style-sheet
+   "<link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"all\"
+          href=\"stylesheet/dyne.css\" />
+    <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"screen\"
+          href=\"stylesheet/screen.css\" />
+    <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"print\"
+          href=\"stylesheet/print.css\" />")
+ '(muse-html-table-attributes " class=\"muse-table\" border=\"0\" cellpadding=\"5\"")
+
+ ;; RSS should not summarize but include the whole entry
+ '(muse-journal-rss-summarize-entries nil)
+
+; LATEX
+ '(muse-latex-footer (concat path "/views/footer.tex"))
+ '(muse-latex-header (concat path "/views/header.tex"))
+ '(muse-latex-permit-contents-tag t)
+ '(muse-latex-twocolumn t)
+
+; XHTML
+ '(muse-xhtml-footer (concat path "/views/footer.html"))
+ '(muse-xhtml-header (concat path "/views/header.html"))
+ '(muse-xhtml-meta-content-encoding (quote utf-8))
+ '(muse-xhtml-style-sheet
+   "<link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"all\"
+          href=\"css/common.css\" />
+    <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"screen\"
+          href=\"css/screen.css\" />
+    <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"print\"
+          href=\"css/print.css\" />")
+
+
+)
 
 ;; -----------
 ;; Styles
 
 
-;; ---- jaromil's musings
+;; ---- webpage theme configuration 
 
 (muse-derive-style "tbt-webpage-html" "html"
-		   :author "Jaromil"
-		   :header "~/devel/tbt/dyne-web/templates/header.html"
-		   :footer "~/devel/tbt/dyne-web/templates/footer.html"
+		   :header (concat path "/views/header.html")
+		   :footer (concat path "/views/footer.html")
 		   :base-url "http://tbt.dyne.org")
 
 (muse-derive-style "tbt-webpage-pdf" "pdf"
-		   :author "Jaromil"
-		   :header "~/devel/tbt/dyne-web/templates/header.tex"
-		   :footer "~/devel/tbt/dyne-web/templates/footer.tex"
+		   :header (concat path "/views/header.tex")
+		   :footer (concat path "/views/footer.tex")
 		   :base-url "http://tbt.dyne.org")
 
 
@@ -51,7 +105,7 @@
       `(
 
 	("TBT"
-	 (,@(muse-project-alist-dirs "pages")
+	 (,@(muse-project-alist-dirs "views")
 	  )
          ;; Publish this directory and its subdirectories.  Arguments
          ;; are as follows.  The above `muse-project-alist-dirs' part
@@ -61,12 +115,12 @@
          ;;   3. Publishing style
          ;;   remainder: Other things to put in every generated style
 
-         ,@(muse-project-alist-styles "pages"
-                                      "pub"
+         ,@(muse-project-alist-styles "views"
+                                      "public"
                                       "tbt-webpage-html")
 
-         ,@(muse-project-alist-styles "pages"
-                                      "pub"
+         ,@(muse-project-alist-styles "views"
+                                      "public"
                                       "tbt-webpage-pdf")
 
 	 )
@@ -96,17 +150,6 @@
   (set (make-local-variable 'muse-publish-url-transforms)
        (cons 'cb-make-links-absolute muse-publish-url-transforms)))
 
-;; Use hires images in documents
-(defun cb-make-images-hires (str &res ignored)
-  "Make images hi resulution."
-  (when str
-    (save-match-data
-      (if (string-match "fotos/.*" str)
-	  (replace-match "fotos/hires/" nil t str)
-	str))))
-(defun make-images-hires()
-  (set (make-local-variable 'muse-publish-url-transforms)
-       (cons 'cb-make-images-hires muse-publish-url-transforms)))
        
 (defun muse-insert-reset-chapter ()
   (insert "\n\\setcounter{chapter}{1}\n"))
@@ -130,76 +173,6 @@
 )
 
 
-;;; Skinning my Muse
-
-(custom-set-faces
- '(muse-bad-link ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
-
-(custom-set-variables
- '(muse-latex-permit-contents-tag t)
- '(muse-colors-autogen-headings (quote outline))
- '(muse-colors-inline-image-method (quote muse-colors-use-publishing-directory))
- '(muse-mode-hook (quote (flyspell-mode footnote-mode)))
- '(muse-publish-comments-p nil)
-
-; LINKS
- ;; '(muse-publish-desc-transforms
- ;;   (quote (muse-wiki-publish-pretty-title
- ;; 	   muse-wiki-publish-pretty-interwiki
- ;; 	   muse-publish-strip-URL)))
- ;; '(muse-wiki-publish-small-title-words
- ;;   (quote ("the" "and" "at" "on" "of" "for" "in" "an" "a" "page")))
-
-; HTML
- '(muse-html-charset-default "utf-8")
- '(muse-html-encoding-default (quote utf-8))
- '(muse-html-meta-content-encoding (quote utf-8))
- '(muse-html-footer "templates/footer.html")
- '(muse-html-header "templates/header.html")
- '(muse-html-style-sheet
-   "<link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"all\"
-          href=\"stylesheet/dyne.css\" />
-    <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"screen\"
-          href=\"stylesheet/screen.css\" />
-    <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"print\"
-          href=\"stylesheet/print.css\" />")
- '(muse-html-table-attributes " class=\"muse-table\" border=\"0\" cellpadding=\"5\"")
-
- ;; RSS should not summarize but include the whole entry
- '(muse-journal-rss-summarize-entries nil)
-
-; RSS feed
-;  '(muse-journal-rss-entry-template "
-;     <item>
-;;       <title>%title%</title>
-;       <link>%link%#%anchor%</link>
-;       <author>Jaromil</author>
-;       <pubDate>%date%</pubDate>
-;       <guid>%link%#%anchor%</guid>
-;       %enclosure%
-;     </item>
-; ")
-
-; LATEX
- '(muse-latex-footer "templates/footer.tex")
- '(muse-latex-header "templates/header.tex")
- '(muse-latex-permit-contents-tag t)
- '(muse-latex-twocolumn t)
-
-; XHTML
- '(muse-xhtml-footer "templates/footer.html")
- '(muse-xhtml-header "templates/header.html")
- '(muse-xhtml-meta-content-encoding (quote utf-8))
- '(muse-xhtml-style-sheet
-   "<link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"all\"
-          href=\"css/common.css\" />
-    <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"screen\"
-          href=\"css/screen.css\" />
-    <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"print\"
-          href=\"css/print.css\" />")
-
-
-)
 
 ;;;; fixes to markup?
 ;(defvar muse-latex-markup-strings

@@ -11,7 +11,7 @@ body {
   background-color: #ffeedd;
   color: #333;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 10pt;
+  font-size: 9pt;
   margin: 0;
   padding: 0;
 }
@@ -95,17 +95,48 @@ h1 {
 }
 
 h2 {
-  background: #fed url(http://dyne.org/images/bg_gradient.png) top left repeat-y;
-  color: #222;
-  border-bottom: 2px dotted #ec9;
-  font-size: 28px;
-  font-style: italic;
-  margin: 10px 0 0 -3em;
-  padding: 0.5em;
-  white-space: nowrap;
+     background: #fed url(http://dyne.org/images/bg_gradient.png) top left repeat-y;
+     color: #222;
+     border-bottom: 2px dotted #ec9;
+     font-size: 28px;
+     font-style: italic;
+     margin: 10px 0 0 -3em;
+     padding: 0.5em;
+     white-space: nowrap;
+     text-align: center;
 }
+
+h3 {
+     color: #222;
+     border-bottom: 1px dotted #ec9;
+     font-size: 22px;
+     font-style: italic;
+     margin: 2em 0 0 7em;
+     padding: 0.5em;
+     white-space: nowrap;
+     text-align: left;
+     width: 20em;
+
+}
+
+h4 {
+     color: #222;
+     font-size: 18px;
+     font-style: italic;
+     margin: 1em 10em;
+     padding: 0.5em;
+     white-space: nowrap;
+     text-align: left;
+     width: 50%;
+
+}
+
 p {
-  margin: 20px 2em -10px 2em;
+  margin: 1em 0 0 10em;
+}
+pre {
+      font-size: 8pt;
+      margin: 1em 0 0 10em;
 }
 
 /* footer */
@@ -140,14 +171,18 @@ footer section h2 {
               margin-top: 1em;
               text-align: center; }
 #disclaimer {
-  font-size: smaller;
-  text-align: justify;
-  width: 18em; }
+              font-size: smaller;
+              text-align: justify;
+              margin-top: 1.5em;
+              width: 18em;
+              }
 #credits {
-  font-size: smaller;
-  margin-right: 1em;
-  text-align: right;
-  width: 140px; }
+           font-size: smaller;
+           margin-right: 1em;
+           margin-top: 1.5em;
+           text-align: right;
+           width: 140px;
+           }
 #recognition { 
   margin-top: 1em;
   text-align: center; }

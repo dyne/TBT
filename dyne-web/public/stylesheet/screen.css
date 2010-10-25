@@ -25,7 +25,11 @@
         }
 
 .contents { 
-            width: 13em;
+            font-family:Georgia,Arial,Helvetica,sans-serif;
+            font-size: 12px;
+
+            width: 11.5em;
+            height: 100%;
             float: left;
             clear: left;
             margin-top: 10em;
@@ -33,15 +37,10 @@
             margin-right: 3em;
             margin-bottom: 0.5em;
             padding: .5em 30px;
-            moz-background-clip:border;
-            moz-background-inline-policy:continuous;
-            moz-background-origin:padding;
-            background:#FFEEDD url(http://dyne.org/images/dynebggrl2rsm.png) repeat-y scroll 0 0;
-
-            font-family:Georgia,Arial,Helvetica,sans-serif;
-            font-size:small;
 
             display: compact;
+            position: fixed;
+            
             }
 
 blockquote { 
