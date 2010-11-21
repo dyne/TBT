@@ -1,7 +1,8 @@
-\documentclass[final,a4paper,10pt,onecolumn,twoside]{memoir}
+\documentclass[final,a4paper,10pt,onecolumn,twoside]{scrartcl}
 
 
 \usepackage[english]{babel}
+
 \usepackage{amsfonts, amsmath, amssymb}
 \usepackage{ucs}
 
@@ -20,8 +21,15 @@
 % define Unicode "white circle" to be TeX \circ
 \DeclareUnicodeCharacter{9675}{\ensuremath{\circ}}
 
+% A more PDF-friendly font
+\usepackage{lmodern}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
+
+% bibliography
+\usepackage[numbers]{natbib}
+\bibliographystyle{plainnat}
+
 \usepackage{textcomp}
 \usepackage{hyperref}
 \usepackage[pdftex]{graphicx}
@@ -38,8 +46,24 @@
 % One-inch margins
 \usepackage{fullpage}
 
-% A more PDF-friendly font
-\usepackage{lmodern}
+
+\usepackage{microtype}
+
+% \pagestyle{headings}
+% \pagenumbering{arabic}
+%% \usepackage{geometry}
+%% \usepackage{fancyhdr}
+%% \pagestyle{fancy}
+%% \fancyhf{}
+%% \newcommand{\tstamp}{\today}   
+%% \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%% \renewcommand{\sectionmark}[1]{\markright{#1}}
+%% \lhead[\fancyplain{}{\thepage}]         {\fancyplain{}{\rightmark}}
+%% \chead[\fancyplain{}{}]                 {\fancyplain{}{}}
+%% \rhead[\fancyplain{}{\rightmark}]       {\fancyplain{}{\thepage}}
+%% \lfoot[\fancyplain{}{}]                 {\fancyplain{\tstamp}{\tstamp}}
+%% \cfoot[\fancyplain{\thepage}{}]         {\fancyplain{\thepage}{}}
+%% \rfoot[\fancyplain{\tstamp} {\tstamp}]  {\fancyplain{}{}}
 
 
 % An alternate, blockier font, should I ever want it
