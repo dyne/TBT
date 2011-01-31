@@ -1,12 +1,7 @@
-see also http://mir.dnsalias.com/wiki/tbt
-
-tbt-generator.html :
-  standalone javascript/XHTML page to author tbt.
-
 tbt.pl : 
   perl script to record tbt. 
  (Note: cursor movements are recorded, but terminal-text is overwritten 
   rather than shifted to right)
 
-Both utilities write ASCII TBT files (identical to `../tbt -s doku`)
+writes ASCII TBT files (identical to `../tbt -s doku`)
 to be copy/pasted into a dokuwiki with tbt-plugin.

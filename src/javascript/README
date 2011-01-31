@@ -1,0 +1,4 @@
+tbt-generator.html :
+  standalone javascript/XHTML page to author tbt.
+  writes ASCII TBT files (identical to `../tbt -s doku`)
+  to be copy/pasted into a dokuwiki with tbt-plugin.
