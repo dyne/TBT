@@ -52,6 +52,7 @@ Makefile
 src/Makefile
 src/slw/Makefile
 doc/Makefile
+test/Makefile
 ])
 AC_OUTPUT
 
