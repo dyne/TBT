@@ -1,9 +1,13 @@
 SUBDIRS = slw
 
+
 AM_CXXFLAGS = -I$(top_srcdir)/src/slw
 
-SOURCES = tbt.cpp linklist.cpp jutils.cpp rtclock.cpp
-LIBS = -lpthread -lslang $(top_srcdir)/src/slw/libslw.la
+SOURCES = tbt.cpp rtclock.cpp
+
+noinst_HEADERS = tbt.h rtclock.h
+
+LIBS = -lpthread -lslang $(top_builddir)/src/slw/libslw.a
 
 
 bin_PROGRAMS = tbt recmail tbtcheck rtctest

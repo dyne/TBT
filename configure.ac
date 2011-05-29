@@ -32,13 +32,7 @@ dnl Checks for required programs.
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
-
-dnl compatibility with older libtool
-m4_ifdef([LT_INIT],
-  [LT_INIT([disable-static dlopen])],
-  [AC_LIBTOOL_DLOPEN
-   AC_DISABLE_STATIC
-   AC_PROG_LIBTOOL])
+AC_PROG_RANLIB
 
 dnl Check for slang
 PKG_CHECK_MODULES([SLANG], [slang], [have_slang=yes], [have_slang=no])
@@ -57,6 +51,7 @@ AC_CONFIG_FILES([
 Makefile
 src/Makefile
 src/slw/Makefile
+doc/Makefile
 ])
 AC_OUTPUT
 
