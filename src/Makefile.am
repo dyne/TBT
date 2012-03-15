@@ -1,3 +1,6 @@
+INCLUDES = -I /opt/local/include
+AM_LDFLAGS = -L /opt/local/lib
+
 SUBDIRS = slw
 
 

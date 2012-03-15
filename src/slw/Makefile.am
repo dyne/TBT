@@ -1,3 +1,4 @@
+INCLUDES = -I /opt/local/include
 
 noinst_HEADERS = abs_text_console.h keycodes.h slw_console.h slw_log.h	\
 			slw_prompt.h jutils.h linklist.h slw.h		\
