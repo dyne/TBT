@@ -1,13 +1,46 @@
+// TBT javascript extensions: rgareus 2008
 // TBT javascript prototype: Jaromil 2007
 // reference javascript typewriter documentation: F. Permadi 2002
 // GNU GPL
 
 
-
-function TBT() { };
-
+function TBT() {
+  this.setRowCarriageReturn = setRowCarriageReturn;
+  this.setXhtml = setXhtml;
+  this.setSpeed = setSpeed;
+  this.startTyping = startTyping;
+  this.feed = feed;
+  var currentChar;
+  var destination;
+  var cur_x;
+  var cur_y;
+  var row;
+  var col;
+  var text;
+  var render_text;
+  var rowsize;
+  var colsize;
+  var recording;
+  var cr;
+  var cc;
+  var rowcr=0; // config option; do a CR (\r) when moving the cursor up/down
+  var xhtml=0; // html or xhtml
+  var speed=1; // time factor. 
     
-function startTyping(destinationParam, tbtrecord) {
+  function setSpeed(s) {
+    if (s> 0.01 && s< 20) this.speed=s;
+    else speed=1.0;
+  }
+
+  function setXhtml(onoff) {
+    xhtml=onoff?true:false;
+  }
+
+  function setRowCarriageReturn(onoff) {
+    rowcr=onoff?true:false;
+  }
+
+  function startTyping(destinationParam, tbtrecord) {
     currentChar = 0;
     destination = destinationParam;
     recording   = tbtrecord;
@@ -30,11 +63,10 @@ function startTyping(destinationParam, tbtrecord) {
     // text render buffer
     render_text = "";    
 
-    setTimeout("feed()", recording[currentChar][1] );
-}
-TBT.prototype.startTyping = startTyping;
+    setTimeout(this.feed, speed*recording[currentChar][1] );
+  }
 
-function feed()	{
+  function feed() {
     var dest = document.getElementById(destination);
     
     if (dest) {
@@ -49,6 +81,7 @@ function feed()	{
 	
 	// get the next char
 	switch( recording[currentChar][0] ) {
+	case 10:  // NEWLINE
 	case 13:  // RETURN
 	    cur_y++; row++;
 	    cur_x = 0; col = 0;
@@ -57,9 +90,10 @@ function feed()	{
 	    }
 	    break;
 
-	case 127: // BACKSPACE
-	case 272: // =
-	case 275: // =
+	case 8: // standard ASCII BACKSPACE
+	case 127: // other low level BACKSPACE codes
+	case 272: // (APPLE BACKSPACE)
+	case 275: // (SOMETIMES!?)
 
 	    if(col > 0) // delete if not at the beginning of line
 		text[row].splice(col-1,1);
@@ -75,11 +109,13 @@ function feed()	{
 
 	case 257: // UP
 	    if(row <= 0) break;
-	    cur_y--; row--;
+	    cur_y--; row--; 
+	    if (rowcr) { col=0; cur_x=0; }
 	    break;
 	case 258: // DOWN
 	    if(row >= text.length) break;
 	    cur_y++; row++;
+	    if (rowcr) { col=0; cur_x=0; }
 	    break;
 	case 259: // LEFT
 	    if(cur_x <= 0) break;
@@ -93,6 +129,7 @@ function feed()	{
 	    break;
 
 	default:
+		if (!text[row]) text[row] = new Array();
 	    text[row].splice(col,0,recording[currentChar][0]);
 	    cur_x++; col++;
 	    break;
@@ -128,7 +165,7 @@ function feed()	{
 
 
 	    // newline
-	    render_text += "<br>";
+	    render_text += xhtml?"<br/>":"<br>";
 	}
 
 	// render_text += String.fromCharCode( recording[currentChar][0] );
@@ -156,18 +193,15 @@ function feed()	{
 	    for(cr=0; cr < text.length; cr++)
 		delete text[cr];
 	    delete text;
-		//at the end make text link
-		//newLink = "<a href='link'>"+document.getElementById("textDestination").innerHTML+"</a>";
-		//document.getElementById("textDestination").innerHTML = newLink;
-            // end of text
+
+	    // end of text
 	    
 	} else {
 	    
-           // RECURSION IS TIME  -jrml 31jan2007
-	    setTimeout("feed()", recording[currentChar][1] );
-	    
+	   // RECURSION IS TIME  -jrml 31jan2007
+	    setTimeout(feed, speed*recording[currentChar][1] );
 	}
     }
-}
-TBT.prototype.feed = feed;
-
+  }
+};
+//Setup VIM: ex: sw=4 ts=8 enc=utf-8 :
