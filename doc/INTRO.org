@@ -1,0 +1,7 @@
+The gesture in computer art
+
+"Thinking about gesture in art, people usually refer to choreography. If the topic is related to IT, instead, usability becomes the issue. But, what about gesture in computer art? Does it mean natural interaction or is it just a matter of performance? Certainly, a gesture is a way for emphasizing communication. Based on this concept, pioneers of net.art (or as we should better say 'net.art is dead') such as Jaromil and Jodi are exploring this area with a project called Time Based Text (TBT). TBT is a free software that records performances of written text and vehicle it as additional information. This is both a command line and console tool that records and playback keyboard strokes with a millisecond precision. As a command line tool it can record from standard input or playback to standard output (from and to a file or pipeline), so it can be interfaced with other software reproducing a sequence of actions.
+
+As a console tool it offers a simple typing interface to record and playback text exactly as it is typed, including all corrections and hesitations. This'd be a unique possibility in electronic poetry, literature, and even daily email. The authors simply describe this process as: saving and reproducing every single action during the composition of a text let us vehicle emphasis in written communication. But, this 'recorded' gesture is then a new time-based medium." Valentina Culatti, Neural
+
+

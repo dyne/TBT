@@ -1,7 +1,6 @@
 /*  Time Based Text - Recorder
  *
- *  (C) Copyright 2006 - 2007 Denis Rojo <jaromil@dyne.org>
- *      Idea shared with Joan & Dirk <jodi@jodi.org>
+ *  (C) Copyright 2006 - 2012 Denis Roio <jaromil@dyne.org>
  *
  * This source code is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Public License as published 
@@ -33,9 +32,6 @@
 #include <sys/time.h>
 
 #include <linklist.h>
-
-// #define VERSION "v0.9 - tbt.dyne.org"
-
 
 class RTClock; // ghost pointer for rtclock.h
 

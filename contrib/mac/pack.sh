@@ -42,3 +42,4 @@ install_name_tool -change \
 	@executable_path/../Frameworks/libslang.2.dylib \
 	TBT.app/Contents/MacOS/tbt
 
+cp ../../src/tbt-typewriter.js TBT.app/Contents/Resources/

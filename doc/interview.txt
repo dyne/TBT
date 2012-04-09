@@ -1,0 +1,181 @@
+<nettime> TBT [Time Based Text]: an experiment(al) (in) writing
+
+To: nettime-l {AT} kein.org
+Subject: <nettime> TBT [Time Based Text]: an experiment(al) (in) writing
+From: annet <annet {AT} virtueelplatform.nl>
+Date: Sat, 19 Apr 2008 18:36:27 +0200
+
+*TBT [Time Based Text]: an experiment(al) (in) writing*
+
+Time Based Text can be considered software art, but above all it is
+a new form of digital poetics. Time Based Text offers a creative,
+experimental, joyful and critical way of handling digital text by
+implementing interactivity, new software and network communications.
+Time Based Text is a type-performance that illustrates feelings.
+
+The emphasis of the software is on the process of writing/typing.
+TBT is a tool for time-based recording and playback of the process
+of typing a message, with the accuracy of milliseconds. The basic
+interface for typing records all typing and plays it back exactly the
+way the text was typed the first time, including all hesitations and
+misspellings. It reveals additional information on digital poetry,
+because the speed of typing and reading it, are visualised. E-mail,
+blogs, all kinds of digital media can be given a “human touch” by TBT.
+The software has been kept as basic as possible, is free to use and
+users are encouraged to add functionalities. The special TBT website
+offers space for TBT-created messages, haiku’s and poetry, so that
+visitors can admire each other work.
+
+TBT was made by Jaromil and conceived by Jaromil and JoDi. Following
+is a short interview with Jaromil about this new tool.
+
+AD: TBT was born as an idea formulated by you and JoDi. An interesting
+relation, a computer programmer/artist and an artist couple who like
+nothing more than to deconstruct soft -and hardwares. Could you
+describe your relation and your shared interest?
+
+J: It is definitely a result and very much inspired by JoDi. What
+brought us together, besides the curiosity we nurtured about each
+other, was this commission for "Net art is dead" by Impakt. So we
+spent two weekends together. JoDi initially thought of taking the
+dyne:bolic operating system and subverting its functionalities, but
+the perspective of working further to subvert something I already
+invested a lot of effort on building was really discouraging for me.
+So I opposed their intention and argued that, if we have something in
+common, surely it is a minimalist aesthetic and a passion for text
+and inner processes. At that point JoDi mentioned their interest in
+building a "key logger" that would record keys typed in any program
+running, in particular word processors. I insisted in focusing on
+the aspect of literary production, stripping down the approach to a
+reference implementation of a time-based text protocol for recording
+time-based literature - I was extremely excited about developing
+a software tool for literature. We all realized we like literary
+experiments in automatic writing and we would be interested in a
+tool to publish online time-based poetry as well to be used in email
+communication, where hesitations in writing can be a vehicle for
+sentiments…
+
+AD: One of the important changes in the way of thinking about
+language, typography and poetry came from Italy, Marinetti said "my
+revolution is directed against the so-called typographical harmony of
+the page, instead I want to grasp words brutally and hurl them in the
+reader's face." is this something you can relate to? Does your own
+background, also coming from Italy has been of influence in your work?
+
+J: Yes, I was born in Italy, but I'm part of a generation that starts,
+for necessity and virtue, to think about a common European heritage
+rather than a restricted (and in case of Italy over-celebrated)
+national identity. I guess this opens even more ways to play with
+language than Italians used to do in Italy anyway. My education was
+as classical as it can get in the south of Italy, mostly focusing on
+literature and philosophy, in particular ancient Latin and Greek; such
+traditions of written poetry respect metrical schemes and sometimes
+adopts a richer punctuation than the modern one we are used to. This
+is certainly a point of contact with the concept of Time Based Text,
+but by now I'd say my frequentation of digital haiku circles as the
+'five7five' mailing list played a more important role in this project.
+I find it very difficult to relate to Futurism, which I consider
+a decadent re-use of Symbolism. While it might be considered true
+that Marinetti's furor has contributed to syntactical innovation and
+modern design, I do believe that was too functional to the mission of
+the industry to be considered art. Furthermore I fear the aggressive
+attitude of futurists, but that has more to do with personal taste
+I guess? My inspiration is coming from writers as James Joyce, Jack
+Kerouac and William Burroughs, to name just a few that challenged in
+various ways the performative act of what used to be called "automatic
+writing".
+
+AD: As the title indicates an important aspect of TBT is that it is
+time based, something that seems almost paradoxical when linked with a
+computer. How do you see this relation?
+
+J: TBT is about the dimension of time in literature. The act of
+writing a flow of consciousness discards information. Such information
+is very abstract when compared to words and concepts, it can
+intimately describe the writer's thoughts with all the hesitations
+occurring in the creative act. TBT offers also to preserve all the
+sentimental information that is related to the mediation of text in
+human communication. With TBT we preserve the emotional information
+produced when writing, at the same time opening the media art domain
+to the world of literature. The existence of a software as TBT draws
+complex relationships between code and language: it softly unveils
+the mutual influence between literary art and computer programming
+suggesting they can benefit from each other not just in terms of
+productivity.
+
+AD: TBT reflects much the Japanese haiku's or dada experiments. Most
+of these actions in poetry have a strong relation with the human,
+organic and emotions. Very little do they relate it seems with the
+'hard' and 'cold' language and command lines of computers. How do
+you view this difference or better, change? Can we finally start to
+emotionally engage and understand our mechanics?
+
+J: I guess the exploration of our mechanics (as opposed to the
+mechanics of machines) is always doomed to a sweet failure, the
+one that poetry celebrates with the best tears one can cry. The
+literary approach shifts the analysis to a produced fact, which
+reflects our inner sentiments: a production that is written out of
+our inner emotions but still sub-consciously shaped by them. Today
+the act of writing is arguably the most natural act of creation human
+kind engages on a regular basis, so there are chances to access a
+precedented undisclosed intimacy of thoughts there, in everyone who
+writes, between the lines.
+
+AD: What do you think is more artistic the TBT software, as being
+software art, or the poetry that can be made by using it?
+
+J: I think what is most artistic is the concept of TBT. The software
+itself and the poetry that can be made by using TBT are also a
+propagation of the artistic value of this exploration, but the
+artistic value is rather conceptual, probably definable media art.
+There is a formal approach in the realization that also can be argued
+as artistic: it is not by coincidence that both from a programmer's
+and user's point of view TBT will result minimalistic and, when
+adopted, extremely flexible. At least I refuse the usual rhetoric of
+presentation for "artistic software", instead caring very much for
+functionality and a design that is faithful to text.
+
+AD: In the past you have also talked about making the net more
+'organic' by devising 'new ways for information', is TBT a step in the
+right direction?
+
+J: Hopefully yes, at least it is an attempt. I hope that it can work
+in a natural and spontaneous way. That is why the work consists of a
+portable source code that works as a clean reference implementation
+and can be included in any other software (being open source and
+licensed GNU GPL), rather than building a TBT software that does
+it all for you, that would probably limit its usefulness on the
+long term. I also expect it to inspire people to think about less
+superficial ways of communication: right in a time in which our
+media-scape is getting polluted by opportunist automatas abusing
+our attention, the difference between us and them might be just...
+sentiments.
+
+AD: How can you use TBT in your email program?
+
+J: As an external editor: it can be called when the message needs to
+be written, once done will quit giving back the TBT message, which can
+be sent in an attachment. The reference implementation is working with
+the mail client Mutt, but hopefully some mail client will implement
+TBT natively in future.
+
+/Jaromil is a free software programmer, a media artist and activist.
+He has made significant contributions to the development of multimedia
+and streaming applications on the GNU/Linux platform (the free
+counterpart of commercial brands like Microsoft and Macintosh). He
+was born in Pescara, Italy, but now lives in Amsterdam, Netherlands.
+He is author of the dyne:bolic GNU/Linux liveCD, and of various free
+software projects, including MuSE (a streaming server) and FreeJ (a
+free VJ software to live mix and adjust images and sounds). As an
+artist, he has created performances and netart works as the :(){ :|:&
+};: forkbomb (when typed in the command line of a Unix system the
+computer crashes). He also founded dyne.org in 2000 under the flag of
+Freedom of Creation, playing hybrid between the fields of politics,
+art and technology./
+
+/Annet Dekker is program manager at Virtueel Platform and freelance
+curator and researcher based in Amsterdam. / Follow this link to the
+TBT project: http://tbt.dyne.org
+
+TBT was a commission of Impakt Online – www.impakt.nl
+

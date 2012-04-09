@@ -1,4 +1,4 @@
-.TH tbt 1 "November 7, 2008" "tbt"
+.TH tbt 1 "April 9, 2012" "tbt"
 
 .SH NAME
 TBT \- Time Based Text
@@ -81,7 +81,7 @@ The following switches are optional:
 
 .B
 .IP "-s \fI<format_name>\fR"
-save format in [ bin | ascii | html ]. Default is bin (see -x command)
+save format in [ bin | ascii | html | doku ]. Default is bin (see -x command)
 
 The \fIbin\fR  mode will  store a  binary file you  can play  with the
 playtext command.
@@ -94,6 +94,9 @@ README.html file.
 
 The \fIascii\fR mode produces pure  ascii text file, one character per
 line, with the information about the key pressed, and the timestamp.
+
+The \fIdocu\fR mode produces output ready to be used in dokuwiki, in
+case the TBT dokuwiki plugin is installed on the webserver.
 
 .B
 .IP "-c"
@@ -161,7 +164,7 @@ Thanks to: Florian Cramer, Annet Dekker, Paul Hendriks
 
 .SH COPYING
 
-This manual is Copyleft (c) 2007-2008 Denis Roio <\fIjaromil@dyne.org\fR>
+This manual is Copyleft (c) 2007-2012 Denis Roio <\fIjaromil@dyne.org\fR>
 
 Permission is  granted to copy,  distribute and/or modify  this manual
 under the terms of the  GNU Free Documentation License, Version 1.1 or
@@ -175,7 +178,3 @@ this permission notice are preserved on all copies.
 The most recent version of tbt sourcecode and up to date documentation
 is always available for download from \fIhttp://tbt.dyne.org\fR.
 
-.SH SEE ALSO
-
-* README.mutt
-* README.html

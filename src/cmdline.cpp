@@ -127,6 +127,7 @@ void cmdline(int argc, char **argv) {
   filename[0] = 0x0;
 
   fprintf(stderr, "TBT - Time Based Text - %s\n", VERSION);
+  fprintf(stderr, "Software by Jaromil @ Dyne.org\n\n");
 
   /// adjust the operation to the way the binary is called
   if ( ! strstr(argv[0], "tbt") )

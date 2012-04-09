@@ -5,13 +5,10 @@
 	    888	     888    888	    888
 	   o888o    o888ooo888	   o888o
 
-		Time Based Text    v1.0
+		Time Based Text    v1.1
 
                http://tbt.dyne.org
 
-
-  finger[k].start = j+2^{o+1} % (2^y);
-  finger[k].interval = finger[k+1].flick - finger[k].flick;
 
 Our objective here is to carry more information in written text.
 
@@ -57,11 +54,8 @@ requirements are:
 - Educational purposes
 - Multipurpose granular time based protocol
 
-TBT will be used in an on-site installation for art exhibition
-SPEAKING OUT LOUD - hosted by the Netherlands Media Art Institute 
-in November 2008, Amsterdam - Montevideo - Time Based Arts
-http://transition.turbulence.org/blog/2008/10/07/speaking-out-loud-amsterdam/
-
+TBT is used in an on-site interactive art installation
+If interested, please don't hesitate to contact us.
 
 ::::: PROTOCOL
 
@@ -96,13 +90,7 @@ the protocol will be an aim for the development of TBT 2.0 .
 
 ::::: DISCLAIMER
 
-TBT is Copyleft 2006 - 2009 by Jaromil & JoDi
-
-with contributions by Angelo  Failla, Pablo Martines, Robin Gareus and
-Meinhard Benn among  the others, please refer to  the included AUTHORS
-file for complete information.
-
-artwork commissioned by the Impakt.nl festival
+TBT - Time Based Text is Copyright (C) 2006 - 2012 by Jaromil
 
 
 This  source code  is free  software; you  can redistribute  it and/or
@@ -118,3 +106,10 @@ the GNU Public License for more details.
 You should have  received a copy of the GNU  Public License along with
 this source  code; if not,  write to: Free Software  Foundation, Inc.,
 675 Mass Ave, Cambridge, MA 02139, USA.
+
+Distributed code includes contributions by:
+ JoDi, Angelo Failla, Pablo Martines, Robin Gareus and Meinhard Benn
+please refer to the included AUTHORS file for complete information.
+
+Artwork commissioned by the Impakt.nl festival.
+
