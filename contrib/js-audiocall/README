@@ -1,0 +1,17 @@
+= Adding audio to your typing =
+
+This adds audio playback for several of the different keystrokes.
+Replace the files with your own audio-samples.
+
+Syncing works great with Chromium, in Firefox not entirely but still effective.
+
+= Callback =
+
+Also can use a callback to execute a new command after the tbt-file is finished:
+
+Example:
+
+var tbt = new TBT();
+tbt.startTyping("textDestination", TimeBasedText, function(){
+    alert("hello there");
+});
