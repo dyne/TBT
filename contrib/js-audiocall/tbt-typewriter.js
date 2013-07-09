@@ -30,6 +30,7 @@ function TBT() {
   var audioback = new Audio('back.ogg');
   var audioreturn = new Audio('return.ogg');
   var audiokey = new Audio('key.ogg');
+  var callback;
 
   function setSpeed(s) {
     if (s> 0.01 && s< 20) this.speed=s;
@@ -44,7 +45,7 @@ function TBT() {
     rowcr=onoff?true:false;
   }
 
-  function startTyping(destinationParam, tbtrecord) {
+  function startTyping(destinationParam, tbtrecord, tocall) {
     currentChar = 0;
     destination = destinationParam;
     recording   = tbtrecord;
@@ -68,6 +69,8 @@ function TBT() {
     render_text = "";
 
     setTimeout(this.feed, speed*recording[currentChar][1] );
+
+    callback = tocall;
   }
 
   function feed() {
@@ -205,6 +208,10 @@ function TBT() {
 	    delete text;
 
 	    // end of text
+
+            if (callback && typeof(callback) === "function"){
+                callback(); //execute callback
+            }
 
 	} else {
 
