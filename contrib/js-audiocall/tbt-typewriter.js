@@ -138,7 +138,6 @@ function TBT() {
 	    break;
         case 32: // SPACE
             audiospace.play();
-            break;
 
 	default:
 		if (!text[row]) text[row] = new Array();
