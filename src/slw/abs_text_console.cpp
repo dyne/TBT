@@ -256,7 +256,7 @@ bool TextConsole::refresh() {
   // this is a pure virtual function here
   blank();
 
-  for(c = 0; c < h; c++ ) {
+  for(c = 0; c <= h; c++ ) {
     
     if(r->text)
       putnch(r->text, 0, c, r->len);
@@ -276,7 +276,7 @@ void TextConsole::refresh_current() {
   if(!vis_row_in) return;
   else r = vis_row_in;
 
-  for( c = 0; c < h ; c++ ) {
+  for( c = 0; c <= h ; c++ ) {
 
     if(r == cur_row) {
 
