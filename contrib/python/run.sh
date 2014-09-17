@@ -1,5 +1,5 @@
 #!/bin/sh
 
 echo "Starting TBT GUI (python-GTK)"
-python gtbt.py $@
+python2.7 gtbt.py $@
 
