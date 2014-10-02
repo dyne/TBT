@@ -101,9 +101,16 @@ function TBT() {
 	    if(cur_x > 0) {
 		cur_x--;
 		col--;
-	    } else { // backspace at the beginning of a line
-		     // move everything up one line
-		// TODO
+	    } else {
+	    	 // backspace at the beginning of a line
+	    	 cur_y--; row--;
+	    	 cur_x = col = text[row].length;
+	     	 // move everything up one line
+	     	 var max = text.length;
+	     	 for (var r = row+1; r < max; r++) {
+	     	 	text[r] = text[r+1];
+	     	 }
+	     	 text[max-1] = [];
 	    }
 	    break;
 
